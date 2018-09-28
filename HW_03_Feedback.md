@@ -1,6 +1,6 @@
 ### Feedback for Homework 03
 
-Run on September 27, 10:32:37 AM.
+Run on September 28, 09:47:36 AM.
 
 
 #### System Files and HW Directory Structure
@@ -40,50 +40,50 @@ date is: January 1, 1993
 date is: January 1, 1992
 date is: January 1, 1991
 date is: January 1, 1990
-*** Error in `./date': free(): invalid next size (normal): 0x0000000001e8cc70 ***
+*** Error in `./date': free(): invalid next size (normal): 0x00000000014e6c70 ***
 ======= Backtrace: =========
-/lib/x86_64-linux-gnu/libc.so.6(+0x777e5)[0x7fcf929977e5]
-/lib/x86_64-linux-gnu/libc.so.6(+0x8037a)[0x7fcf929a037a]
-/lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7fcf929a453c]
-/usr/lib/x86_64-linux-gnu/libstdc++.so.6(_ZNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEED1Ev+0x3b)[0x7fcf9301330b]
+/lib/x86_64-linux-gnu/libc.so.6(+0x777e5)[0x7f73939457e5]
+/lib/x86_64-linux-gnu/libc.so.6(+0x8037a)[0x7f739394e37a]
+/lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f739395253c]
+/usr/lib/x86_64-linux-gnu/libstdc++.so.6(_ZNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEED1Ev+0x3b)[0x7f7393fc130b]
 ./date[0x401cfa]
 ./date[0x40167b]
 ./date[0x40180c]
-/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7fcf92940830]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7f73938ee830]
 ./date[0x401129]
 ======= Memory map: ========
-00400000-00403000 r-xp 00000000 00:38 8386809                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
-00602000-00603000 r--p 00002000 00:38 8386809                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
-00603000-00604000 rw-p 00003000 00:38 8386809                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
-01e7a000-01eac000 rw-p 00000000 00:00 0                                  [heap]
-7fcf8c000000-7fcf8c021000 rw-p 00000000 00:00 0 
-7fcf8c021000-7fcf90000000 ---p 00000000 00:00 0 
-7fcf92617000-7fcf9271f000 r-xp 00000000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
-7fcf9271f000-7fcf9291e000 ---p 00108000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
-7fcf9291e000-7fcf9291f000 r--p 00107000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
-7fcf9291f000-7fcf92920000 rw-p 00108000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
-7fcf92920000-7fcf92ae0000 r-xp 00000000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
-7fcf92ae0000-7fcf92ce0000 ---p 001c0000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
-7fcf92ce0000-7fcf92ce4000 r--p 001c0000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
-7fcf92ce4000-7fcf92ce6000 rw-p 001c4000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
-7fcf92ce6000-7fcf92cea000 rw-p 00000000 00:00 0 
-7fcf92cea000-7fcf92d00000 r-xp 00000000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
-7fcf92d00000-7fcf92eff000 ---p 00016000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
-7fcf92eff000-7fcf92f00000 rw-p 00015000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
-7fcf92f00000-7fcf93072000 r-xp 00000000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
-7fcf93072000-7fcf93272000 ---p 00172000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
-7fcf93272000-7fcf9327c000 r--p 00172000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
-7fcf9327c000-7fcf9327e000 rw-p 0017c000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
-7fcf9327e000-7fcf93282000 rw-p 00000000 00:00 0 
-7fcf93282000-7fcf932a8000 r-xp 00000000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
-7fcf9344b000-7fcf93451000 rw-p 00000000 00:00 0 
-7fcf934a6000-7fcf934a7000 rw-p 00000000 00:00 0 
-7fcf934a7000-7fcf934a8000 r--p 00025000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
-7fcf934a8000-7fcf934a9000 rw-p 00026000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
-7fcf934a9000-7fcf934aa000 rw-p 00000000 00:00 0 
-7ffc22439000-7ffc2245b000 rw-p 00000000 00:00 0                          [stack]
-7ffc22469000-7ffc2246c000 r--p 00000000 00:00 0                          [vvar]
-7ffc2246c000-7ffc2246e000 r-xp 00000000 00:00 0                          [vdso]
+00400000-00403000 r-xp 00000000 00:38 8457815                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
+00602000-00603000 r--p 00002000 00:38 8457815                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
+00603000-00604000 rw-p 00003000 00:38 8457815                            /class/grades/Fall-2018/csci3081/student-repos/HW_03_Feedback/repo-weber767/HW/HW03/date
+014d4000-01506000 rw-p 00000000 00:00 0                                  [heap]
+7f738c000000-7f738c021000 rw-p 00000000 00:00 0 
+7f738c021000-7f7390000000 ---p 00000000 00:00 0 
+7f73935c5000-7f73936cd000 r-xp 00000000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f73936cd000-7f73938cc000 ---p 00108000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f73938cc000-7f73938cd000 r--p 00107000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f73938cd000-7f73938ce000 rw-p 00108000 08:01 523284                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f73938ce000-7f7393a8e000 r-xp 00000000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f7393a8e000-7f7393c8e000 ---p 001c0000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f7393c8e000-7f7393c92000 r--p 001c0000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f7393c92000-7f7393c94000 rw-p 001c4000 08:01 523292                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f7393c94000-7f7393c98000 rw-p 00000000 00:00 0 
+7f7393c98000-7f7393cae000 r-xp 00000000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f7393cae000-7f7393ead000 ---p 00016000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f7393ead000-7f7393eae000 rw-p 00015000 08:01 523330                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f7393eae000-7f7394020000 r-xp 00000000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f7394020000-7f7394220000 ---p 00172000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f7394220000-7f739422a000 r--p 00172000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f739422a000-7f739422c000 rw-p 0017c000 fc:00 1715834                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f739422c000-7f7394230000 rw-p 00000000 00:00 0 
+7f7394230000-7f7394256000 r-xp 00000000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f73943f9000-7f73943ff000 rw-p 00000000 00:00 0 
+7f7394454000-7f7394455000 rw-p 00000000 00:00 0 
+7f7394455000-7f7394456000 r--p 00025000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f7394456000-7f7394457000 rw-p 00026000 08:01 523286                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f7394457000-7f7394458000 rw-p 00000000 00:00 0 
+7ffefbc3a000-7ffefbc5c000 rw-p 00000000 00:00 0                          [stack]
+7ffefbcb6000-7ffefbcb9000 r--p 00000000 00:00 0                          [vvar]
+7ffefbcb9000-7ffefbcbb000 r-xp 00000000 00:00 0                          [vdso]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
 
 
