@@ -12,14 +12,24 @@ class DateTest : public ::testing::Test {
     // code here will execute just before the test ensues 
 	first_day = Date(2018, 9, 4);
 	last_day = Date(2018, 12, 11);
+	first_day_month = Date(2018,10,1);
+	last_day_month = Date(2018,10,31);
+	first_day_year = Date(2018,1,1);
+	last_day_year = Date(2018,12,31);
+
   }
  protected:
   Date first_day;          // first day of classes
   Date last_day;           // last day of classes
+  Date first_day_month;    // First day of a month
+  Date last_day_month;     // Last day of a month
+  Date first_day_year;    // First day of a year
+  Date last_day_year;     // Last day of a year
+
 };
 
 
-
+//Testing the PrintDate method with newline
 TEST_F(DateTest, PrintDateTests) {
   Date y2k(1999, 12, 31);              // y2k
   Date ind_day(1776, 7, 4);            // US Independence
@@ -46,6 +56,7 @@ TEST_F(DateTest, PrintDateTests) {
   EXPECT_EQ(output3, expected_out_3);
 }
 
+//Testing the PrintDate w/o newline
 TEST_F(DateTest, PrintDateTestsWithoutNewline) {
   Date y2k(1999, 12, 31);              // y2k
   Date ind_day(1776, 7, 4);            // US Independence
@@ -72,6 +83,61 @@ TEST_F(DateTest, PrintDateTestsWithoutNewline) {
   EXPECT_EQ(output3, expected_out_3);
 }
 
+//Testing PrintUSdates with Newline
+TEST_F(DateTest, PrintUSDateTests) {
+  Date y2k(1999, 12, 31);              // y2k
+  Date ind_day(1776, 7, 4);            // US Independence
+  Date best_holiday(2018, 10, 31);     // Halloween
+  
+  std::string expected_out_1 = "12-31-1999\n";
+  std::string expected_out_2 = "07-04-1776\n";
+  std::string expected_out_3 = "10-31-2018\n";
+  
+  testing::internal::CaptureStdout();
+  y2k.PrintUsDate(true);
+  std::string output1 = testing::internal::GetCapturedStdout();
+  
+  testing::internal::CaptureStdout();
+  ind_day.PrintUsDate(true);
+  std::string output2 = testing::internal::GetCapturedStdout();
+  
+  testing::internal::CaptureStdout();
+  best_holiday.PrintUsDate(true);
+  std::string output3 = testing::internal::GetCapturedStdout();
+  
+  EXPECT_EQ(output1, expected_out_1);
+  EXPECT_EQ(output2, expected_out_2);
+  EXPECT_EQ(output3, expected_out_3);
+}
+
+//Testing the PrintDate w/o newline
+TEST_F(DateTest, PrintDateUsTestsWithoutNewline) {
+  Date y2k(1999, 12, 31);              // y2k
+  Date ind_day(1776, 7, 4);            // US Independence
+  Date best_holiday(2018, 10, 31);     // Halloween
+  
+  std::string expected_out_1 = "12-31-1999";
+  std::string expected_out_2 = "07-04-1776";
+  std::string expected_out_3 = "10-31-2018";
+  
+  testing::internal::CaptureStdout();
+  y2k.PrintUsDate(false);
+  std::string output1 = testing::internal::GetCapturedStdout();
+  
+  testing::internal::CaptureStdout();
+  ind_day.PrintUsDate(false);
+  std::string output2 = testing::internal::GetCapturedStdout();
+  
+  testing::internal::CaptureStdout();
+  best_holiday.PrintUsDate(false);
+  std::string output3 = testing::internal::GetCapturedStdout();
+  
+  EXPECT_EQ(output1, expected_out_1);
+  EXPECT_EQ(output2, expected_out_2);
+  EXPECT_EQ(output3, expected_out_3);
+}
+
+
 /**
   *
   * Note, this is the only provided test case which actually uses our test fixture
@@ -79,13 +145,28 @@ TEST_F(DateTest, PrintDateTestsWithoutNewline) {
   * However, it is illegal to mix TEST() and TEST_F() in the same test case (file).
   *
   */
-  
+
+// testing datebetween
 TEST_F(DateTest, DaysBetweenTests) {
   EXPECT_EQ(first_day.GetUsDate(), "09-04-2018") << "First day of class not setup properly";
   EXPECT_EQ(last_day.GetUsDate(), "12-11-2018") << "Last day of class not setup properly";
   EXPECT_EQ(first_day.DaysBetween(last_day), 98) << "Days between is not calculated properly";
+  EXPECT_EQ(first_day.DaysBetween(first_day), 0) << "Days between is not calculated properly";
 }
 
+//testing Getdate
+TEST_F(DateTest, GetDateTests) {
+  EXPECT_EQ(first_day.GetDate(), "2018-09-04") << "Get date is not accessing date correctly";
+}
+
+// testing GetUsDate
+TEST_F(DateTest, GetusDateTests) {
+  EXPECT_EQ(first_day.GetUsDate(), "09-04-2018") << "Get US date is not accessing date correctly";
+}
+
+TEST_F(DateTest, OverloadedSubOperTests) {
+  
+}
 /**
   *
   * NOPE!  Can't test PRIVATE methods
