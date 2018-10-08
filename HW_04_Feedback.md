@@ -1,6 +1,6 @@
 ### Feedback for Homework 04
 
-Run on October 08, 13:58:13 PM.
+Run on October 08, 14:07:51 PM.
 
 
 #### System Files and HW Directory Structure
@@ -49,30 +49,20 @@ Run on October 08, 13:58:13 PM.
     Make compile fails with errors:.
 g++ -isystem ../../googletest/include -g -Wall -Wextra -pthread -c ./date.cc
 g++ -isystem ../../googletest/include -g -Wall -Wextra -pthread -c ./date_unittest.cc
-./date_unittest.cc: In member function ‘virtual void DateTest_PrintDateUsTestsWithoutNewline_Test::TestBody()’:
-./date_unittest.cc:133:23: error: ‘to_string’ is not a member of ‘std’
-   std::string date =  std::to_string(month) + "-" + std::to_string(day) + "-"
-                       ^
-./date_unittest.cc:133:53: error: ‘to_string’ is not a member of ‘std’
-   std::string date =  std::to_string(month) + "-" + std::to_string(day) + "-"
-                                                     ^
-./date_unittest.cc:134:27: error: ‘to_string’ is not a member of ‘std’
-                         + std::to_string(year);
-                           ^
 ./date_unittest.cc: In member function ‘virtual void DateTest_ConstructorVoidTests_Test::TestBody()’:
-./date_unittest.cc:245:20: error: ‘to_string’ is not a member of ‘std’
+./date_unittest.cc:235:20: error: ‘to_string’ is not a member of ‘std’
     day_str = "0" + std::to_string(day);
                     ^
-./date_unittest.cc:247:13: error: ‘to_string’ is not a member of ‘std’
+./date_unittest.cc:237:13: error: ‘to_string’ is not a member of ‘std’
    day_str = std::to_string(day);
              ^
-./date_unittest.cc:250:22: error: ‘to_string’ is not a member of ‘std’
+./date_unittest.cc:240:22: error: ‘to_string’ is not a member of ‘std’
     month_str = "0" + std::to_string(month);
                       ^
-./date_unittest.cc:252:15: error: ‘to_string’ is not a member of ‘std’
+./date_unittest.cc:242:15: error: ‘to_string’ is not a member of ‘std’
    month_str = std::to_string(month);  
                ^
-./date_unittest.cc:255:49: error: ‘to_string’ is not a member of ‘std’
+./date_unittest.cc:245:49: error: ‘to_string’ is not a member of ‘std’
    curr_date = month_str + "-" + day_str + "-" + std::to_string(year);
                                                  ^
 Makefile:85: recipe for target 'date_unittest.o' failed
