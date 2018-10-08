@@ -1,6 +1,6 @@
 ### Feedback for Homework 04
 
-Run on October 08, 10:13:59 AM.
+Run on October 08, 10:57:22 AM.
 
 
 #### System Files and HW Directory Structure
@@ -101,7 +101,7 @@ Run on October 08, 10:13:59 AM.
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: DateTest.EpochTests.
+    passes the test: DateTest.EpochConstructorTests.
 
 
 
@@ -131,8 +131,7 @@ Run on October 08, 10:13:59 AM.
 
 #### Testing Mutant 5 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - 1/1/2016 to 3/1/2016 is 60 days, but this version returns 59
++ Pass: At least one test failed for Mutant 5
 
 
 #### Testing Mutant 6 for failure
