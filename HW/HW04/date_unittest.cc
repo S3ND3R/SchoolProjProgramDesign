@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <math.h>
+#include <time.h>
+#include <string>
 
 #include "date.h"
 
@@ -16,9 +18,10 @@ class DateTest : public ::testing::Test {
 	last_day_month = Date(2018,10,31);
 	first_day_year = Date(2018,1,1);
 	last_day_year = Date(2018,12,31);
-	epoch_date = (1539010880);	// 10-08-2018
+	epoch_date = (1539010880);        // 10-08-2018
         leap_day_pre = Date(2016, 2, 28);	
 	leap_day_post = Date(2016, 3, 1);
+	current_day = Date();
   }
  protected:
   Date first_day;          // first day of classes
@@ -30,6 +33,7 @@ class DateTest : public ::testing::Test {
   Date epoch_date;	 // epoch constructed day
   Date leap_day_pre;	// second to last day in feb during a leap year
   Date leap_day_post;	// first day in march during a leap year
+  Date current_day;    // current date
 };
 
 
@@ -116,7 +120,19 @@ TEST_F(DateTest, PrintUSDateTests) {
 
 //Testing the PrintDate w/o newline
 TEST_F(DateTest, PrintDateUsTestsWithoutNewline) {
-  Date y2k(1999, 12, 31);              // y2k
+    time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  int day = timeinfo->tm_mday;
+  int month = timeinfo->tm_mon + 1;
+  int year = timeinfo->tm_year + 1900;
+
+  std::string date =  std::to_string(month) + "-" + std::to_string(day) + "-"
+                        + std::to_string(year);
+Date y2k(1999, 12, 31);              // y2k
   Date ind_day(1776, 7, 4);            // US Independence
   Date best_holiday(2018, 10, 31);     // Halloween
   
@@ -211,7 +227,37 @@ TEST_F(DateTest, EpochConstructorTests) {
 
 }
 
-//TEST_F(DateTest, ConstructorTests){}
+TEST_F(DateTest, ConstructorVoidTests){
+
+  time_t rawtime;
+  struct tm* timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  int day = timeinfo->tm_mday;
+  int month = timeinfo->tm_mon + 1;
+  int year = timeinfo->tm_year + 1900;
+  int double_digit = 10;
+  std::string day_str;
+  std::string month_str;
+  if (day < double_digit)
+	  day_str = "0" + std::to_string(day);
+  else
+	 day_str = std::to_string(day);
+
+  if (month < double_digit)
+	  month_str = "0" + std::to_string(month);
+  else
+	 month_str = std::to_string(month);  
+
+  std::string curr_date;
+  curr_date = month_str + "-" + day_str + "-" + std::to_string(year);
+
+  EXPECT_EQ(current_day.GetUsDate(), curr_date) << "Date constructor passed void"
+	 					 << " is not assigning current date correctly"; 
+	  					
+}
 /**
  *
   *
