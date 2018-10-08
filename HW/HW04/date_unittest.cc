@@ -120,19 +120,7 @@ TEST_F(DateTest, PrintUSDateTests) {
 
 //Testing the PrintDate w/o newline
 TEST_F(DateTest, PrintDateUsTestsWithoutNewline) {
-    time_t rawtime;
-  struct tm * timeinfo;
-
-  time ( &rawtime );
-  timeinfo = localtime ( &rawtime );
-
-  int day = timeinfo->tm_mday;
-  int month = timeinfo->tm_mon + 1;
-  int year = timeinfo->tm_year + 1900;
-
-  std::string date =  std::to_string(month) + "-" + std::to_string(day) + "-"
-                        + std::to_string(year);
-Date y2k(1999, 12, 31);              // y2k
+  Date y2k(1999, 12, 31);              // y2k
   Date ind_day(1776, 7, 4);            // US Independence
   Date best_holiday(2018, 10, 31);     // Halloween
   
@@ -185,7 +173,7 @@ TEST_F(DateTest, GetDateTests) {
 TEST_F(DateTest, GetusDateTests) {
   EXPECT_EQ(first_day.GetUsDate(), "09-04-2018") << "Get US date is not accessing date correctly";
 }
-
+//testing subtraction overloaded operator
 TEST_F(DateTest, OverloadedSubOperTests) {
   Date minus_date = last_day - 5;
   Date minus_month_border_date = first_day_month - 5;
@@ -203,7 +191,7 @@ TEST_F(DateTest, OverloadedSubOperTests) {
 						  << " not calculating for leap year"; 
 }
 
-
+//testing overloaded additiion operator
 TEST_F(DateTest, OverloadedAddOperTests) {
   Date add_date = first_day + 5;
   Date add_month_border_date = last_day_month + 5;
@@ -221,12 +209,14 @@ TEST_F(DateTest, OverloadedAddOperTests) {
 						  << " not calculating for leap year"; 
 }
 
+//testing the epoch constructor
 TEST_F(DateTest, EpochConstructorTests) {
   EXPECT_EQ(epoch_date.GetUsDate(), "10-08-2018") << "Epoch constructor is not creating"
 	  					<<" date correctly";
 
 }
 
+//testing the default constructor
 TEST_F(DateTest, ConstructorVoidTests){
 
   time_t rawtime;
