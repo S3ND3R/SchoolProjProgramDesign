@@ -1,15 +1,15 @@
 ### Feedback for Homework 04
 
-Run on October 06, 18:44:11 PM.
+Run on October 08, 10:13:59 AM.
 
 
 #### System Files and HW Directory Structure
 
-+ Pass: Check that directory "/classes/grades/Fall-2018/csci3081/dtorban/grading-scripts/_hw_materials" exists.
++ Pass: Check that directory "/lhome/gitbot/umn-csci-3081-F18/grading-scripts/_hw_materials" exists.
 
-+ Pass: Check that directory "/classes/grades/Fall-2018/csci3081/dtorban/grading-scripts/_hw_materials/googletest" exists.
++ Pass: Check that directory "/lhome/gitbot/umn-csci-3081-F18/grading-scripts/_hw_materials/googletest" exists.
 
-+ Pass: Check that directory "/classes/grades/Fall-2018/csci3081/dtorban/grading-scripts/_hw_materials/HW04" exists.
++ Pass: Check that directory "/lhome/gitbot/umn-csci-3081-F18/grading-scripts/_hw_materials/HW04" exists.
 
 + Pass: Check that directory "HW" exists.
 
@@ -51,7 +51,7 @@ Run on October 06, 18:44:11 PM.
 + Pass: Check that file "date_unittest" exists.
 
 + Pass: Get all google tests.
-    8 tests found.
+    10 tests found.
 
 
 
@@ -95,13 +95,22 @@ Run on October 06, 18:44:11 PM.
 
 
 
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.OverloadedAddOperTests.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.EpochTests.
+
+
+
 + Pass: All tests passed.
 
 
 #### Testing Mutant 1 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - Dates constructed with epoch are about 70 years in the future
++ Pass: At least one test failed for Mutant 1
 
 
 #### Testing Mutant 2 for failure
@@ -133,8 +142,7 @@ Run on October 06, 18:44:11 PM.
 
 #### Testing Mutant 7 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - operator-: Probably a copy paste error
++ Pass: At least one test failed for Mutant 7
 
 
 #### Testing Mutant 8 for failure
