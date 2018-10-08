@@ -16,6 +16,7 @@ class DateTest : public ::testing::Test {
 	last_day_month = Date(2018,10,31);
 	first_day_year = Date(2018,1,1);
 	last_day_year = Date(2018,12,31);
+	epoch_date = (1539010880);	// 10-08-2018 
 
   }
  protected:
@@ -25,6 +26,7 @@ class DateTest : public ::testing::Test {
   Date last_day_month;     // Last day of a month
   Date first_day_year;    // First day of a year
   Date last_day_year;     // Last day of a year
+  Date epoch_date;	 // epoch constructed day
 
 };
 
@@ -69,7 +71,7 @@ TEST_F(DateTest, PrintDateTestsWithoutNewline) {
   testing::internal::CaptureStdout();
   y2k.PrintDate(false);
   std::string output1 = testing::internal::GetCapturedStdout();
-  
+
   testing::internal::CaptureStdout();
   ind_day.PrintDate(false);
   std::string output2 = testing::internal::GetCapturedStdout();
@@ -165,9 +167,40 @@ TEST_F(DateTest, GetusDateTests) {
 }
 
 TEST_F(DateTest, OverloadedSubOperTests) {
-  
+  Date minus_date = last_day - 5;
+  Date minus_month_border_date = first_day_month - 5;
+  Date minus_year_border_date = first_day_year - 5;
+  EXPECT_EQ(minus_date.GetUsDate(), "12-06-2018") << "overloaded subtraction operator is"
+						  << " not functioning properly";  
+  EXPECT_EQ(minus_month_border_date.GetUsDate(), "09-26-2018") << "overloaded subtraction"
+	  					<< " operator is not correctly handling"
+						<<" month border";
+  EXPECT_EQ(minus_year_border_date.GetUsDate(), "12-27-2017") << "overloaded subtraction"
+	  					<< " operator is not correctly handling"
+						<<" year border";
+}
+
+TEST_F(DateTest, OverloadedAddOperTests) {
+  Date add_date = first_day + 5;
+  Date add_month_border_date = last_day_month + 5;
+  Date add_year_border_date = last_day_year + 5;
+  EXPECT_EQ(add_date.GetUsDate(), "09-09-2018") << "overloaded addition operator is"
+						  << " not functioning properly";  
+  EXPECT_EQ(add_month_border_date.GetUsDate(), "11-05-2018") << "overloaded addition"
+	  					<< " operator is not correctly handling"
+						<<" month border";
+  EXPECT_EQ(add_year_border_date.GetUsDate(), "01-05-2019") << "overloaded addition"
+	  					<< " operator is not correctly handling"
+						<<" year border";
+}
+
+TEST_F(DateTest, EpochTests) {
+  EXPECT_EQ(epoch_date.GetUsDate(), "10-08-2018") << "Epoch constructor is not creating"
+	  					<<" date correctly";
+
 }
 /**
+ *
   *
   * NOPE!  Can't test PRIVATE methods
   *
