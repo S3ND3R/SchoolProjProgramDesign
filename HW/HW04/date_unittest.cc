@@ -3,6 +3,7 @@
 #include <iostream>
 #include <math.h>
 #include <time.h>
+#include <ctime>
 #include <string>
 
 #include "date.h"
@@ -229,25 +230,21 @@ TEST_F(DateTest, ConstructorVoidTests){
   int month = timeinfo->tm_mon + 1;
   int year = timeinfo->tm_year + 1900;
   int double_digit = 10;
-  std::string day_str;
-  std::string month_str;
+  std::string day_str = std::to_string(day);
+  std::string month_str = std::to_string(month);
+  std::string year_str = std::to_string(year);
   if (day < double_digit)
-	  day_str = "0" + std::to_string(day);
-  else
-	 day_str = std::to_string(day);
+	  day_str = "0" + day_str;
 
   if (month < double_digit)
-	  month_str = "0" + std::to_string(month);
-  else
-	 month_str = std::to_string(month);  
+	  month_str = "0" + month_str;  
 
   std::string curr_date;
-  curr_date = month_str + "-" + day_str + "-" + std::to_string(year);
+  curr_date = month_str + "-" + day_str + "-" + year_str;
 
   EXPECT_EQ(current_day.GetUsDate(), curr_date) << "Date constructor passed void"
 	 					 << " is not assigning current date correctly"; 
-	  					
-}
+}	  					
 /**
  *
   *
