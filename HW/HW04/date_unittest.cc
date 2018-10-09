@@ -21,7 +21,7 @@ class DateTest : public ::testing::Test {
 	first_day_year = Date(2018,1,1);
 	last_day_year = Date(2018,12,31);
 	epoch_date = (1539010880);        // 10-08-2018
-        leap_day_pre = Date(2016, 2, 28);	
+    leap_day_pre = Date(2016, 2, 28);	
 	leap_day_post = Date(2016, 3, 1);
 	current_day = Date();
   }
