@@ -5,6 +5,7 @@
 #include <time.h>
 #include <ctime>
 #include <string>
+#include <sstream>
 
 #include "date.h"
 
@@ -12,7 +13,7 @@
 class DateTest : public ::testing::Test {
  public:
   void SetUp( ) { 
-    // code here will execute just before the test ensues 
+  // code here will execute just before the test ensues 
 	first_day = Date(2018, 9, 4);
 	last_day = Date(2018, 12, 11);
 	first_day_month = Date(2018,10,1);
@@ -222,29 +223,36 @@ TEST_F(DateTest, ConstructorVoidTests){
 
   time_t rawtime;
   struct tm* timeinfo;
-
+  
   time ( &rawtime );
   timeinfo = localtime ( &rawtime );
-
+  // builds a time_t object that holds the current time 
+  // sets timeinfo to point to the tm struct
   int day = timeinfo->tm_mday;
   int month = timeinfo->tm_mon + 1;
   int year = timeinfo->tm_year + 1900;
+
+  std::stringstream ss;
+  // opens a string stream
   int double_digit = 10;
-  std::string day_str = std::to_string(day);
-  std::string month_str = std::to_string(month);
-  std::string year_str = std::to_string(year);
-  if (day < double_digit)
-	  day_str = "0" + day_str;
-
   if (month < double_digit)
-	  month_str = "0" + month_str;  
+	  ss << "0" << month << "-";  
+  else 
+      ss << month << "-";
+  if (day < double_digit)
+     ss << "0" << day << "-";
+  else
+     ss << day << "-";
 
-  std::string curr_date;
-  curr_date = month_str + "-" + day_str + "-" + year_str;
+  ss << year;
+  
+  std::string today = ss.str();
+  
+  EXPECT_EQ(current_day.GetUsDate(), today) << "Date constructor passed void"
+	 					 << " is not assigning current date correctly";
 
-  EXPECT_EQ(current_day.GetUsDate(), curr_date) << "Date constructor passed void"
-	 					 << " is not assigning current date correctly"; 
-}	  					
+}
+	  					
 /**
  *
   *
