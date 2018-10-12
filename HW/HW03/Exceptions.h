@@ -10,7 +10,7 @@
 
 class InvalidData {
  public:
-     InvalidData explicit (std::string);
+     InvalidData explicit(std::string);
     ~InvalidData();
 
     std::string get_msg();
