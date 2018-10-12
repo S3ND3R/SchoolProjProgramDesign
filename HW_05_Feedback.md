@@ -1,6 +1,6 @@
 ### Feedback for Homework 05
 
-Run on October 12, 14:30:33 PM.
+Run on October 12, 14:32:20 PM.
 
 
 #### System Files and HW Directory Structure
@@ -225,12 +225,9 @@ Run on October 12, 14:30:33 PM.
 
 
 
-+ Fail: Check Style for Exceptions.h.
++ Pass: Check Style for Exceptions.h.
 
-<pre>Exceptions.h:13:  Extra space before ( in function call  [whitespace/parens] [4]
-Done processing Exceptions.h
-Total errors found: 1
-</pre>
+    Complete.
 
 
 
