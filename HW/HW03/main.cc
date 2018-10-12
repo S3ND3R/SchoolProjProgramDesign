@@ -4,12 +4,14 @@
  * @copyright 2018 3081 Staff, All rights reserved.
  */
 
-#include "Date.h"
-
 #include <iostream>
 #include <string>
 
-using namespace std;
+#include "HW/HW03/Date.h"
+
+using std::string;
+using std::cout;
+using std::endl;
 
 void doInterestingThing(int yr) {
   // variables used in this method

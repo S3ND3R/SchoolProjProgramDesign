@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Seth Johnson. All rights reserved.
 //
 
-#include "Squeak.h"
+#include "HW/HW02/Squeak.h"
 
 #include <iostream>
 

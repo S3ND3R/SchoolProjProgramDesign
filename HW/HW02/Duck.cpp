@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Sarit Ghildayal. All rights reserved.
 //
 
-#include "Duck.h"
+#include "HW/HW02/Duck.h"
 
 #include <iostream>
 
@@ -28,6 +28,7 @@ void Duck::performQuack() {
 void Duck::setQuackBehavior(QuackBehavior* behavior) {
     if (m_quackBehavior != NULL)
         delete m_quackBehavior;
-    
+
     m_quackBehavior = behavior;
 }
+
