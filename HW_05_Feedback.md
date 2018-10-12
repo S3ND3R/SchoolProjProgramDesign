@@ -1,6 +1,6 @@
 ### Feedback for Homework 05
 
-Run on October 12, 08:40:56 AM.
+Run on October 12, 10:00:22 AM.
 
 
 #### System Files and HW Directory Structure
@@ -54,55 +54,15 @@ Total errors found: 9
 
 
 
-+ Fail: Check Style for point2.h.
++ Pass: Check Style for point2.h.
 
-<pre>point2.h:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
-point2.h:2:  #ifndef header guard has wrong style, please use: HW01_POINT2_H_  [build/header_guard] [5]
-point2.h:24:  #endif line should be "#endif  // HW01_POINT2_H_"  [build/header_guard] [5]
-point2.h:6:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
-point2.h:7:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:8:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:9:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:10:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:11:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:12:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:13:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:14:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:15:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:16:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:17:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:19:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:20:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:21:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.h:24:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-point2.h:24:  Should have a space between // and comment  [whitespace/comments] [4]
-Done processing point2.h
-Total errors found: 20
-</pre>
+    Complete.
 
 
 
-+ Fail: Check Style for point2.cc.
++ Pass: Check Style for point2.cc.
 
-<pre>point2.cc:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
-point2.cc:2:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.cc:2:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-point2.cc:2:  Should have a space between // and comment  [whitespace/comments] [4]
-point2.cc:2:  Found C system header after C++ system header. Should be: point2.h, c system, c++ system, other.  [build/include_order] [4]
-point2.cc:4:  Include the directory when naming .h files  [build/include] [4]
-point2.cc:6:  Missing space before {  [whitespace/braces] [5]
-point2.cc:8:  Missing space before {  [whitespace/braces] [5]
-point2.cc:10:  Missing space before {  [whitespace/braces] [5]
-point2.cc:11:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.cc:12:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.cc:12:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-point2.cc:13:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.cc:14:  Tab found; better to use spaces  [whitespace/tab] [1]
-point2.cc:16:  Missing space before {  [whitespace/braces] [5]
-point2.cc:18:  Missing space before {  [whitespace/braces] [5]
-Done processing point2.cc
-Total errors found: 16
-</pre>
+    Complete.
 
 
 
