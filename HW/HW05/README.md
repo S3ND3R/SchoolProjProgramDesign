@@ -1,5 +1,7 @@
 ## Lab 5 - Google Style Guide Compliance
 
+**_Note: cpplint.py is a bit slow on some of the CSE Lab machines.  Please refer to [Option #3 below](https://github.umn.edu/umn-csci-3081-F18/csci3081-shared-upstream/blob/support-code/HW/HW05/README.md#alternative-options-for-running-cpplintpy) for a solution._**
+
 ### Google Style Compliance: Linting
 
 https://google.github.io/styleguide/cppguide.html
@@ -57,10 +59,10 @@ scroll back up through screenfulls of text to see where they are. For all-in-one
 do:
 
 ```
-cpplint.py --root=. *.h *.cc
+cpplint.py --root=.. *.h *.cc
 ```
 
-**_What does "--root=." mean?_** Header guards must always be in place for header 
+**_What does "--root=.." mean?_** Header guards must always be in place for header 
 files. During compilation, particularly when you have circular references in your 
 code, a header file might be included multiple times from multiple header files. 
 If you have already included the header during compilation, you don't want the 
