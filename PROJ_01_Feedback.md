@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 01
 
-Run on October 18, 11:05:34 AM.
+Run on October 26, 08:45:35 AM.
 
 
 #### System Files and PROJ Directory Structure
@@ -26,6 +26,70 @@ Run on October 18, 11:05:34 AM.
 
 
 + Pass: Copy directory "Copy Dependencies".
+
+
+
+
+#### Set up Project
+
++ Pass: Change into directory "PROJ".
+
++ Pass: Setup grading environment.
+
+
+
++ Pass: Copy directory "Copy Tests".
+
+
+
++ Pass: Check that make compiles.
+
+
+
+
+#### Run Student Tests
+
++ Pass: Running Student Tests.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: FlashPhotoAppTest.GetToolTest.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: ToolPenTest.HasCorrectName.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolChalkTest.HasCorrectName.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolEraserTest.HasCorrectName.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolSprayCanTest.HasCorrectName.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolSprayCanTest.CanSpray.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolSprayCanTest.ContinuesToSprayOnDrag.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstructorToolSprayCanTest.ContinuesToSprayStationary.
 
 
 
