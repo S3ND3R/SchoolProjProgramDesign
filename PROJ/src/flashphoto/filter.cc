@@ -9,21 +9,27 @@ Original Author(s) of this File:
 #include "flashphoto/color_data.h"
 #include "flashphoto/pixel_buffer.h"
 
-Filter::ApplyToBuffer(PixelBuffer *buffer) {
- // in the case that you can calculate in place 
-  for (i = 0; i < buffer->height(); i++){
-   for (j = 0; j < buffer->width(); j++) {
-    ColorData filter_color = CalculateFilteredPixel(buffer, i, j);
-    buffer->set_pixel(i, j, filter_color) 
+namespace image_tools {
+
+void Filter::ApplyToBuffer(PixelBuffer *buffer) {
+ int height = buffer->height();
+ int width = buffer->width();
+ if (can_calculate_in_place()) {
+ // in the case that you can calculate in place  
+  for (int i = 0; i < height; i++) {
+   for (int j = 0; j < width; j++) {
+    // currently should be dereferencing the buffer to calculate the pixel val
+    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
+    buffer->set_pixel(i, j, filter_color); 
    }
   }
- } 
+ }
  // in the case that the pixel cannot be calculated in place
  else {
   SetupFilter();
-  for (i = 0; i < buffer->height(); i++){
-   for (j = 0; j < buffer->width(); j++) {
-    ColorData filter_color = CalculateFilteredPixel(buffer, i, j);
+  for (int i = 0; i < height; i++) {
+   for (int j = 0; j < width; j++) {
+    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
     buffer->set_pixel(i, j, filter_color); 
    }
   }
@@ -31,8 +37,4 @@ Filter::ApplyToBuffer(PixelBuffer *buffer) {
  }
 }  // End ApplyToBuffer
 
-Filter::SetupFilter() {} 
-
-Filter::CleanupFilter() {}
-
-ColorData Filter::CalculateFilteredPixel(PixelBuffer buffer, int x, int y) {}
+}  // namespace image_tools

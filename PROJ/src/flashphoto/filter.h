@@ -11,17 +11,23 @@ Original Author(s) of this File:
 #include "flashphoto/pixel_buffer.h"
 #include "flashphoto/color_data.h"
 
+namespace image_tools {
+
 class Filter {
  public:
   /** template that defines the key recipe for filtering*/
-  ApplyToBuffer(PixelBuffer *buffer);
+  void ApplyToBuffer(PixelBuffer *buffer);
 
-  virtual SetupFilter();
+  virtual void SetupFilter() = 0;
 
-  virtual ColorData CalculateFilteredPixel(PixelBuffer buffer, int x, int y);
+  virtual ColorData CalculateFilteredPixel(PixelBuffer buffer,
+                                           int x, int y) = 0;
 
-  virtual CleanupFilter();
+  virtual void CleanupFilter() = 0;
 
   virtual bool  can_calculate_in_place() {return true;}
-}
+};
+
+}  // namespace image_tools
+
 #endif  // FLASHPHOTO_FILTER_H_
