@@ -70,9 +70,9 @@ void FlashPhotoApp::InitNanoGUI() {
   nanogui::Button *b;
 
   // EDIT Section
-  
+
   new nanogui::Label(window, "Edit", "sans-bold");
-  
+
   nanogui::Widget *undo_redo = new nanogui::Widget(window);
   undo_redo->setLayout(new nanogui::BoxLayout(
                                               nanogui::Orientation::Horizontal, nanogui::Alignment::Middle, 0, 6));
@@ -96,9 +96,9 @@ void FlashPhotoApp::InitNanoGUI() {
                    pixel_buffer()->height());
     }
   });
-  
-  
-  
+
+
+
   // TOOLS Section
 
   new nanogui::Label(window, "Tools", "sans-bold");
@@ -657,12 +657,14 @@ void FlashPhotoApp::ApplyEdgeDetectFilter() {
 
 void FlashPhotoApp::ApplyThresholdFilter(float value) {
   SaveStateForPossibleUndo();
-  (void)value;
+  threshold_filter_.set_threshold(value);
+  threshold_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplySaturateFilter(float scale) {
   SaveStateForPossibleUndo();
-  (void)scale;
+  sat_filter_.set_saturation_scale(scale);
+  sat_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
@@ -676,7 +678,7 @@ void FlashPhotoApp::ApplyQuantizeFilter(int num) {
   SaveStateForPossibleUndo();
   (void)num;
 }
-  
+
 bool FlashPhotoApp::can_undo() {
   return saved_states_.size();
 }
@@ -689,7 +691,7 @@ void FlashPhotoApp::Undo() {
   if (can_undo()) {
     // save state for a possilbe redo
     undone_states_.push_front(current_buffer_);
-    
+
     // make the top state on the undo stack the current one
     current_buffer_ = saved_states_.front();
     saved_states_.pop_front();
@@ -700,7 +702,7 @@ void FlashPhotoApp::Redo() {
   if (can_redo()) {
     // save state for a possible undo
     saved_states_.push_front(current_buffer_);
-    
+
     // make the top state on the redo stack the current one
     current_buffer_ = undone_states_.front();
     undone_states_.pop_front();
@@ -710,13 +712,13 @@ void FlashPhotoApp::Redo() {
 void FlashPhotoApp::SaveStateForPossibleUndo() {
   PixelBuffer *buffer_copy = new PixelBuffer(*current_buffer_);
   saved_states_.push_front(buffer_copy);
-  
+
   // remove the oldest undos if we've over our limit
   while (saved_states_.size() > max_undos_) {
     delete saved_states_.back();
     saved_states_.pop_back();
   }
-  
+
   // committing a new state invalidates the states saved in the redo stack,
   // so, we simply clear out this stack.
   while (!undone_states_.empty()) {

@@ -10,12 +10,20 @@ OriginaApplyToBufferl Author(s) of this File:
 
 #include "flashphoto/pixel_buffer.h"
 #include "flashphoto/color_data.h"
+#include "flashphoto/filter.h"
 
 namespace image_tools {
 
-class FilterSaturate: public Filter {
+class FilterSaturate : public Filter {
  public:
   ColorData CalculateFilteredPixel(PixelBuffer buffer, int x, int y) override;
+
+  inline void set_saturation_scale(float scale) {sat_scale_ = scale;}
+
+  inline float get_saturation_scale() const  {return sat_scale_;}
+
+ private:
+  float sat_scale_ = 1.0;
 };
 
 }  // namespace image_tools

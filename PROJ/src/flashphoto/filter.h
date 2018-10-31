@@ -18,12 +18,12 @@ class Filter {
   /** template that defines the key recipe for filtering*/
   void ApplyToBuffer(PixelBuffer *buffer);
 
-  virtual void SetupFilter() = 0;
+  virtual void SetupFilter();
 
   virtual ColorData CalculateFilteredPixel(PixelBuffer buffer,
                                            int x, int y) = 0;
 
-  virtual void CleanupFilter() = 0;
+  virtual void CleanupFilter();
 
   virtual bool  can_calculate_in_place() {return true;}
 };
