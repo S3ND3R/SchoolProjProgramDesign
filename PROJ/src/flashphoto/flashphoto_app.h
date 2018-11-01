@@ -38,6 +38,7 @@ Author(s) of Significant Updates/Modifications to the File:
 //filters
 #include "flashphoto/filter_saturate.h"
 #include "flashphoto/filter_threshold.h"
+#include "flashphoto/filter_channels.h"
 
 namespace image_tools {
 
@@ -214,6 +215,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   //filters
   FilterThreshold threshold_filter_;
   FilterSaturate sat_filter_;
+  FilterChannels channel_filter_;
 
   PixelBuffer *current_buffer_;
 

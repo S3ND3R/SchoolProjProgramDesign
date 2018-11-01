@@ -669,9 +669,8 @@ void FlashPhotoApp::ApplySaturateFilter(float scale) {
 
 void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
   SaveStateForPossibleUndo();
-  (void)red;
-  (void)green;
-  (void)blue;
+  channel_filter_.set_rgb_scale(red, green, blue);
+  channel_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyQuantizeFilter(int num) {

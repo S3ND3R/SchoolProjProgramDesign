@@ -14,13 +14,12 @@ namespace image_tools {
 void Filter::ApplyToBuffer(PixelBuffer *buffer) {
  int height = buffer->height();
  int width = buffer->width();
- PixelBuffer buff = *buffer;
  if (can_calculate_in_place()) {
  // in the case that you can calculate in place
-  for (int i = 0; i < height; i++) {
-   for (int j = 0; j < width; j++) {
+  for (int i = 0; i < width; i++) {
+   for (int j = 0; j < height; j++) {
     // currently should be dereferencing the buffer to calculate the pixel val
-    ColorData filter_color = CalculateFilteredPixel(buff, i, j);
+    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
     buffer->set_pixel(i, j, filter_color);
    }
   }
@@ -28,9 +27,9 @@ void Filter::ApplyToBuffer(PixelBuffer *buffer) {
  // in the case that the pixel cannot be calculated in place
  else {
   SetupFilter();
-  for (int i = 0; i < height; i++) {
-   for (int j = 0; j < width; j++) {
-    ColorData filter_color = CalculateFilteredPixel(buff, i, j);
+  for (int i = 0; i < width; i++) {
+   for (int j = 0; j < height; j++) {
+    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
     buffer->set_pixel(i, j, filter_color);
    }
   }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018 
+Copyright (c) 2018
 
 OriginaApplyToBufferl Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
@@ -16,7 +16,7 @@ namespace image_tools {
 
 class FilterSaturate : public Filter {
  public:
-  ColorData CalculateFilteredPixel(PixelBuffer buffer, int x, int y) override;
+  ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x, int y) override;
 
   inline void set_saturation_scale(float scale) {sat_scale_ = scale;}
 
@@ -29,4 +29,3 @@ class FilterSaturate : public Filter {
 }  // namespace image_tools
 
 #endif  // FLASHPHOTO_FILTER_SATURATION_H_
-                                          

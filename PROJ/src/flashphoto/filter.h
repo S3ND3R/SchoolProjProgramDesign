@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018 
+Copyright (c) 2018
 
 Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
@@ -20,7 +20,7 @@ class Filter {
 
   virtual void SetupFilter();
 
-  virtual ColorData CalculateFilteredPixel(PixelBuffer buffer,
+  virtual ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                            int x, int y) = 0;
 
   virtual void CleanupFilter();

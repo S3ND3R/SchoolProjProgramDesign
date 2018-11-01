@@ -11,8 +11,8 @@ OriginaApplyToBufferl Author(s) of this File:
 
 namespace image_tools {
 
-ColorData FilterThreshold::CalculateFilteredPixel(PixelBuffer buffer, int x,
-                                                 int y) {
+ColorData FilterThreshold::CalculateFilteredPixel(const PixelBuffer &buffer,
+                                                  int x, int y) {
  ColorData white(1.0,1.0,1.0);
  ColorData black(0.0,0.0,0.0);
  ColorData pixel = buffer.pixel(x,y);
