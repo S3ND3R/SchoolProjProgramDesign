@@ -1,0 +1,24 @@
+/*
+Copyright (c) 2018
+
+OriginaApplyToBufferl Author(s) of this File:
+  Warren Weber, 10/26/18, University of Minnesota
+*/
+
+#include "flashphoto/pixel_buffer.h"
+#include "flashphoto/color_data.h"
+#include "flashphoto/filter_quantize.h"
+#include <math.h>  // round
+
+namespace image_tools {
+ ColorData FilterQuantize::CalculateFilteredPixel(const PixelBuffer &buffer,
+                                                   int x, int y){
+  ColorData pixel = buffer.pixel(x,y);
+  int num_steps = bins_ - 1;
+  pixel.set_red(round(pixel.red()*num_steps)/num_steps);
+  pixel.set_green(round(pixel.green()*num_steps)/num_steps);
+  pixel.set_blue(round(pixel.blue()*num_steps)/num_steps);
+
+  return pixel;
+ }
+}  //namespace image_tools

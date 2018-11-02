@@ -675,7 +675,8 @@ void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
 
 void FlashPhotoApp::ApplyQuantizeFilter(int num) {
   SaveStateForPossibleUndo();
-  (void)num;
+  quantize_filter_.set_num_bins(num);
+  quantize_filter_.ApplyToBuffer(current_buffer_);
 }
 
 bool FlashPhotoApp::can_undo() {
