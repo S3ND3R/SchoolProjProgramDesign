@@ -17,7 +17,7 @@ namespace image_tools {
 
 class ConvolutionFilter: public Filter {
  public:
-  FloatMatrix *CreateKernel();
+  virtual FloatMatrix *CreateKernel() = 0;
 
   void SetupFilter() override;
 
@@ -28,8 +28,13 @@ class ConvolutionFilter: public Filter {
 
   bool can_calculate_in_place() {return false;}
 
+  void set_kernel_radius(float radius) {kernel_radius_ = radius;}
+
+  float kernel_radius() {return kernel_radius_;}
+
  private:
   FloatMatrix *kernel_;
+  float kernel_radius_ = 1.0;
 };
 }  //namespace image_tools
 

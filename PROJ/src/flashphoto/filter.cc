@@ -27,16 +27,14 @@ void Filter::ApplyToBuffer(PixelBuffer *buffer) {
  // in the case that the pixel cannot be calculated in place
  else {
   // copy of the pixel buffer
-  PixelBuffer pixel_copy = new PixelBuffer(buffer);
-  SetupFilter();
+  PixelBuffer buffer_copy = new PixelBuffer(buffer);
   for (int i = 0; i < width; i++) {
    for (int j = 0; j < height; j++) {
-    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
+    ColorData filter_color = CalculateFilteredPixel(buffer_copy, i, j);
     buffer->set_pixel(i, j, filter_color);
    }
   }
   delete pixel_copy;
-  CleanupFilter();
  }
 }  // End ApplyToBuffer
 
