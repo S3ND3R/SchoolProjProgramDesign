@@ -19,10 +19,12 @@ namespace image_tools {
        float x_distance = (x - sigma) * (x - sigma);
        float y_distance = (y - sigma) * (y - sigma);
        float distance = sqrt(x_distance + y_distance);
-       float gauss_val = ImageToolsMath::Gaussian(distance, sigma);
+       float gauss_val = ImageToolsMath::Gaussian(distance, radius);
        blur_kernel->set_value(x,y,gauss_val);
      }
     }
+    // normalize
+    blur_kernel->normalize();
     return blur_kernel;
   }
 }  // namespace image_tools

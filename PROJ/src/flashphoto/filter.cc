@@ -28,6 +28,7 @@ void Filter::ApplyToBuffer(PixelBuffer *buffer) {
  else {
   // copy of the pixel buffer
   PixelBuffer *buffer_copy = new PixelBuffer(*buffer);
+  setupFilter();
   for (int i = 0; i < width; i++) {
    for (int j = 0; j < height; j++) {
     ColorData filter_color = CalculateFilteredPixel(*buffer_copy, i, j);
@@ -35,6 +36,7 @@ void Filter::ApplyToBuffer(PixelBuffer *buffer) {
    }
   }
   delete buffer_copy;
+  CleanupFilter();
  }
 }  // End ApplyToBuffer
 
