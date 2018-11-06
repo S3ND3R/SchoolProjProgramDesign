@@ -5,19 +5,18 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#ifndef CONVOLUTION_FILTER_BLUR_H
-#define CONVOLUTION_FILTER_BLUR_H
+#ifndef CONVOLUTION_FILTER_SHARPEN_H
+#define CONVOLUTION_FILTER_SHARPEN_H
 
 #include "flashphoto/float_matrix.h"
 #include "flashphoto/convolution_filter.h"
 
 namespace image_tools {
 
- class ConvolutionFilterBlur : public ConvolutionFilter {
-  public:
-   FloatMatrix *CreateKernel() override;
+class ConvolutionFilterSharpen : public ConvolutionFilter {
+ public:
+  FloatMatrix *CreateKernel() override;
 
- };
-
+  };
 }  // namespace image_tools
-#endif  // CONVOLUTION_FILTER_BLUR_H
+#endif  // CONVOLUTION_FILTER_SHARPEN_H

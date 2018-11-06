@@ -40,6 +40,8 @@ Author(s) of Significant Updates/Modifications to the File:
 #include "flashphoto/filter_threshold.h"
 #include "flashphoto/filter_channels.h"
 #include "flashphoto/filter_quantize.h"
+#include "flashphoto/convolution_filter_blur.h"
+#include "flashphoto/convolution_filter_sharpen.h"
 
 namespace image_tools {
 
@@ -218,6 +220,8 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   FilterSaturate sat_filter_;
   FilterChannels channel_filter_;
   FilterQuantize quantize_filter_;
+  ConvolutionFilterBlur convo_filter_blur;
+  ConvolutionFilterSharpen convo_filter_sharp;
 
   PixelBuffer *current_buffer_;
 

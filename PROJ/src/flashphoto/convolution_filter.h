@@ -26,15 +26,20 @@ class ConvolutionFilter: public Filter {
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 
-  bool can_calculate_in_place() {return false;}
+  inline void set_slider_radius(float radius) {slider_radius_= radius;}
 
-  void set_kernel_radius(float radius) {kernel_radius_ = radius;}
+  inline void set_kernel_radius(int radius) {kernel_radius_ = radius;}
 
-  float kernel_radius() {return kernel_radius_;}
+  inline int get_kernel_radius() {return kernel_radius_;}
+
+  inline bool can_calculate_in_place() override {return false;}
 
  private:
   FloatMatrix *kernel_;
-  float kernel_radius_ = 1.0;
+
+  float slider_radius_;
+
+  int kernel_radius_;
 };
 }  //namespace image_tools
 

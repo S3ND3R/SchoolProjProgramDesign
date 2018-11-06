@@ -13,7 +13,7 @@ namespace image_tools {
  ColorData ConvolutionFilter::CalculateFilteredPixel(const PixelBuffer &buffer,
                                                       int x, int y) {
   SetupFilter();
-  ColorData pixel = buffer.pixel(x,y);
+  // ColorData pixel = buffer.pixel(x,y);
   int middle = (kernel_->width() - 1) / 2;
   double red = 0.0;
   double green = 0.0;
@@ -30,14 +30,16 @@ namespace image_tools {
     }
    }
   }
-  kernel->Normalize();
+  kernel_->Normalize();
   for (int filterY = 0; filterY < kernel_->height(); filterY++) {
    for (int filterX = 0; filterX < kernel_->width(); filterX++) {
-     if ((x + (filterX - middle) > 0 ||
-          x + (filterX - middle) < kernel_->width() - 1) ||
-         (y + (filterY - middle) > 0 ||
-          y + (filterY - middle) < kernel_->height() - 1)) {
-      ColorData filter_pixel = buffer.pixel(filterY,filterX);
+     int pixel_loc_x = x + (filterX - middle);
+     int pixel_loc_y = y + (filterY - middle);
+     if ((pixel_loc_x > 0 ||
+          pixel_loc_x < kernel_->width() - 1) ||
+         (pixel_loc_y > 0 ||
+          pixel_loc_y < kernel_->height() - 1)) {
+      ColorData filter_pixel = buffer.pixel(pixel_loc_y,pixel_loc_x);
       red += filter_pixel.red() * kernel_->value(filterY, filterX);
       green += filter_pixel.green() * kernel_->value(filterY, filterX);
       blue += filter_pixel.blue() * kernel_->value(filterY, filterX);
@@ -45,13 +47,22 @@ namespace image_tools {
    }
   }
   CleanupFilter();
-  pixel.set_red(red);
-  pixel.set_green(green);
-  pixel.set_blue(blue);
-  return pixel;
+  //pixel.set_red(red);
+  //pixel.set_green(green);
+  //pixel.set_blue(blue);
+  ColorData result = ColorData(red,green,blue);
+  result.Clamp();
+  return result;
+  // return pixel;
  }
 
  void ConvolutionFilter::SetupFilter() {
+   if (slider_radius_ < 2)
+    set_kernel_radius(1);
+   else if (slider_radius_ < 3)
+    set_kernel_radius(2);
+   else
+    set_kernel_radius(3);
    kernel_ = CreateKernel();
  }
  void ConvolutionFilter::CleanupFilter() {delete kernel_;}
