@@ -20,6 +20,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <stdio.h>
 #include <string>
 #include "flashphoto/tool.h"
+#include "flashphoto/convolution_filter_blur.h"
 
 namespace image_tools {
 
@@ -34,7 +35,7 @@ class ToolBlur : public Tool {
   static const std::string name() { return "Blur"; }
 
   FloatMatrix* CreateMask(float radius) override;
-    
+
   ColorData LookupPaintColor(int x, int y) override;
 
 
@@ -42,12 +43,13 @@ class ToolBlur : public Tool {
   /* Copy assignment/construction is disallowed */
   ToolBlur(const ToolBlur& rhs) = delete;
   ToolBlur& operator=(const ToolBlur& rhs) = delete;
-  
+
   // TODO: Students, add a member variable to create an instance of your
   // ConvolutionBlurFilter here.
+  ConvolutionFilterBlur *blur_filter_;
+
 };
 
 }  // namespace image_tools
 
 #endif  // FLASHPHOTO_TOOL_BLUR_H_
-
