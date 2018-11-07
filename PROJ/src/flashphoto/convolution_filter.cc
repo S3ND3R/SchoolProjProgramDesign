@@ -36,9 +36,9 @@ namespace image_tools {
      int pixel_loc_x = x + (filterX - middle);
      int pixel_loc_y = y + (filterY - middle);
      if ((pixel_loc_x >= 0 ||
-          pixel_loc_x <= buffer.width() - 1) ||
+          pixel_loc_x <= buffer.height() - 1) ||
          (pixel_loc_y >= 0 ||
-          pixel_loc_y <= buffer.height() - 1)) {
+          pixel_loc_y <= buffer.width() - 1)) {
       ColorData filter_pixel = buffer.pixel(pixel_loc_x,pixel_loc_y);
       red += filter_pixel.red() * kernel_->value(filterY, filterX);
       green += filter_pixel.green() * kernel_->value(filterY, filterX);
@@ -56,13 +56,8 @@ namespace image_tools {
  }
 
  void ConvolutionFilter::SetupFilter() {
-   if (slider_radius_ < 2)
-    set_kernel_radius(1);
-   else if (slider_radius_ < 3)
-    set_kernel_radius(2);
-   else
-    set_kernel_radius(3);
-   kernel_ = CreateKernel();
+  set_kernel_radius((int) slider_radius_);
+  kernel_ = CreateKernel();
  }
  void ConvolutionFilter::CleanupFilter() {delete kernel_;}
 }  // namespace image_tools

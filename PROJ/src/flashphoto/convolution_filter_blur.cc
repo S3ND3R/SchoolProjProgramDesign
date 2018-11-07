@@ -24,7 +24,7 @@ namespace image_tools {
      }
     }
     // normalize
-    blur_kernel->normalize();
+    blur_kernel->Normalize();
     return blur_kernel;
   }
 }  // namespace image_tools

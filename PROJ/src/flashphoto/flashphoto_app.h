@@ -42,6 +42,8 @@ Author(s) of Significant Updates/Modifications to the File:
 #include "flashphoto/filter_quantize.h"
 #include "flashphoto/convolution_filter_blur.h"
 #include "flashphoto/convolution_filter_sharpen.h"
+#include "flashphoto/convolution_filter_edge.h"
+#include "flashphoto/convolution_filter_motion_blur.h"
 
 namespace image_tools {
 
@@ -119,9 +121,9 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 
   // FILTERS
 
-  /// Four possible motion blur directions are supported
+  // /// Four possible motion blur directions are supported
   enum MBlurDir { MBLUR_DIR_N_S, MBLUR_DIR_E_W, MBLUR_DIR_NE_SW,
-      MBLUR_DIR_NW_SE };
+                  MBLUR_DIR_NW_SE };
   static std::string MotionBlurDirectionName(MBlurDir dir) {
       return mblur_dir_names_.find(dir)->second; }
 
@@ -220,8 +222,10 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   FilterSaturate sat_filter_;
   FilterChannels channel_filter_;
   FilterQuantize quantize_filter_;
-  ConvolutionFilterBlur convo_filter_blur;
-  ConvolutionFilterSharpen convo_filter_sharp;
+  ConvolutionFilterBlur convo_filter_blur_;
+  ConvolutionFilterSharpen convo_filter_sharp_;
+  ConvolutionFilterEdge convo_filter_edge_;
+  ConvolutionFilterMotionBlur convo_filter_motion_blur_;
 
   PixelBuffer *current_buffer_;
 

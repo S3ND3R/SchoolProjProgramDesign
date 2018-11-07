@@ -17,7 +17,7 @@ namespace image_tools {
       sharp_kernel->set_value(x,y,-1.0);
     }
    }
-   float center = Sharp_kernel->width() * sharp_kernel->width();
+   float center = sharp_kernel->width() * sharp_kernel->width();
    sharp_kernel->set_value(radius,radius,center);
    return sharp_kernel;
  }

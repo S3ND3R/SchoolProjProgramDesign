@@ -636,25 +636,27 @@ void FlashPhotoApp::SaveToFile(const std::string &filename) {
 
 void FlashPhotoApp::ApplyBlurFilter(float radius) {
   SaveStateForPossibleUndo();
-  convo_filter_blur.set_slider_radius(radius);
-  convo_filter_blur.ApplyToBuffer(current_buffer_);
+  convo_filter_blur_.set_slider_radius(radius);
+  convo_filter_blur_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyMotionBlurFilter(
     float rad, MBlurDir dir) {
   SaveStateForPossibleUndo();
-  (void)rad;
-  (void)dir;
+  convo_filter_motion_blur_.set_slider_radius(rad);
+  convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
+  convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplySharpenFilter(float rad) {
   SaveStateForPossibleUndo();
-  convo_filter_sharp.set_slider_radius(rad);
-  convo_filter_sharp.ApplyToBuffer(current_buffer_);
+  convo_filter_sharp_.set_slider_radius(rad);
+  convo_filter_sharp_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyEdgeDetectFilter() {
   SaveStateForPossibleUndo();
+  convo_filter_edge_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyThresholdFilter(float value) {
