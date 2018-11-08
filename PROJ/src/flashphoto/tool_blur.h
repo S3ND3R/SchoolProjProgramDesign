@@ -46,7 +46,7 @@ class ToolBlur : public Tool {
 
   // TODO: Students, add a member variable to create an instance of your
   // ConvolutionBlurFilter here.
-  ConvolutionFilterBlur *blur_filter_;
+  ConvolutionFilterBlur blur_filter_;
 
 };
 

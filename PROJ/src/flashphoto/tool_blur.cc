@@ -21,7 +21,6 @@ namespace image_tools {
 
 ToolBlur::ToolBlur() {
   // TODO: Students, setup your blur filter to use a radius of 5.0 here
-  blur_filter_ = new ConvolutionFilterBlur();
   blur_filter_->set_kernel_radius(5);
   blur_filter_->CreateKernel();
 
