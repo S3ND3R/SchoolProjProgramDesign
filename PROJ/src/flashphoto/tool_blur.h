@@ -44,10 +44,9 @@ class ToolBlur : public Tool {
   ToolBlur(const ToolBlur& rhs) = delete;
   ToolBlur& operator=(const ToolBlur& rhs) = delete;
 
-  // TODO: Students, add a member variable to create an instance of your
+  // TODO(THeMan): Students, add a member variable to create an instance of your
   // ConvolutionBlurFilter here.
   ConvolutionFilterBlur blur_filter_;
-
 };
 
 }  // namespace image_tools

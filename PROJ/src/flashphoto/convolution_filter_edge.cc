@@ -10,16 +10,16 @@ Original Author(s) of this File:
 
 namespace image_tools {
 
- FloatMatrix *ConvolutionFilterEdge::CreateKernel() {
+FloatMatrix *ConvolutionFilterEdge::CreateKernel() {
   FloatMatrix *edge_kernel = new FloatMatrix(1.0);
   for (int x = 0; x < edge_kernel->height(); x++) {
-   for (int y = 0; y < edge_kernel->width(); y++) {
-     edge_kernel->set_value(x,y,-1.0);
-   }
+    for (int y = 0; y < edge_kernel->width(); y++) {
+     edge_kernel->set_value(x, y, -1.0);
+    }
   }
   float center = edge_kernel->width() * edge_kernel->width() - 1.0;
-  edge_kernel->set_value(1,1,center);
+  edge_kernel->set_value(1, 1, center);
   return edge_kernel;
- }
+}
 
 }  // namespace image_tools

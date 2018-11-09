@@ -26,7 +26,7 @@ class ConvolutionFilter: public Filter {
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 
-  inline void set_slider_radius(float radius) {slider_radius_= radius;}
+  inline void set_slider_radius(float radius) {slider_radius_ = radius;}
 
   inline void set_kernel_radius(int radius) {kernel_radius_ = radius;}
 
@@ -41,6 +41,6 @@ class ConvolutionFilter: public Filter {
 
   int kernel_radius_;
 };
-}  //namespace image_tools
+}  // namespace image_tools
 
 #endif  // FLASHPHOTO_CONVOLUTION_FILTER_H_

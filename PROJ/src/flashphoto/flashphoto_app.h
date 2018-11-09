@@ -35,7 +35,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include "flashphoto/tool_pen.h"
 #include "flashphoto/tool_spray_can.h"
 
-//filters
+// filters
 #include "flashphoto/filter_saturate.h"
 #include "flashphoto/filter_threshold.h"
 #include "flashphoto/filter_channels.h"
@@ -217,7 +217,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   ToolPen t_pen_;
   ToolSprayCan t_spray_can_;
 
-  //filters
+  // filters
   FilterThreshold threshold_filter_;
   FilterSaturate sat_filter_;
   FilterChannels channel_filter_;

@@ -12,35 +12,33 @@ Original Author(s) of this File:
 namespace image_tools {
 
 void Filter::ApplyToBuffer(PixelBuffer *buffer) {
- int height = buffer->height();
- int width = buffer->width();
- if (can_calculate_in_place()) {
- // in the case that you can calculate in place
-  for (int i = 0; i < width; i++) {
-   for (int j = 0; j < height; j++) {
-    // currently should be dereferencing the buffer to calculate the pixel val
-    ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
-    buffer->set_pixel(i, j, filter_color);
-   }
+  int height = buffer->height();
+  int width = buffer->width();
+  if (can_calculate_in_place()) {
+    // in the case that you can calculate in place
+    for (int i = 0; i < width; i++) {
+     for (int j = 0; j < height; j++) {
+      // currently should be dereferencing the buffer to calculate the pixel val
+      ColorData filter_color = CalculateFilteredPixel(*buffer, i, j);
+      buffer->set_pixel(i, j, filter_color);
+     }
+    }
+  } else {
+    // copy of the pixel buffer
+    PixelBuffer *buffer_copy = new PixelBuffer(*buffer);
+    SetupFilter();
+    for (int i = 0; i < width; i++) {
+     for (int j = 0; j < height; j++) {
+      ColorData filter_color = CalculateFilteredPixel(*buffer_copy, i, j);
+      buffer->set_pixel(i, j, filter_color);
+     }
+    }
+    delete buffer_copy;
+    CleanupFilter();
   }
- }
- // in the case that the pixel cannot be calculated in place
- else {
-  // copy of the pixel buffer
-  PixelBuffer *buffer_copy = new PixelBuffer(*buffer);
-  SetupFilter();
-  for (int i = 0; i < width; i++) {
-   for (int j = 0; j < height; j++) {
-    ColorData filter_color = CalculateFilteredPixel(*buffer_copy, i, j);
-    buffer->set_pixel(i, j, filter_color);
-   }
-  }
-  delete buffer_copy;
-  CleanupFilter();
- }
 }  // End ApplyToBuffer
 
-void Filter::SetupFilter(){};
-void Filter::CleanupFilter(){};
+void Filter::SetupFilter() {}
+void Filter::CleanupFilter() {}
 
 }  // namespace image_tools

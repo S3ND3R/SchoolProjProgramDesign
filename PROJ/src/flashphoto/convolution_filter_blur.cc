@@ -10,7 +10,7 @@ Original Author(s) of this File:
 #include "flashphoto/convolution_filter_blur.h"
 
 namespace image_tools {
-  FloatMatrix *ConvolutionFilterBlur::CreateKernel(){
+  FloatMatrix *ConvolutionFilterBlur::CreateKernel() {
     int radius = get_kernel_radius();
     FloatMatrix *blur_kernel = new FloatMatrix(radius);
     float sigma = blur_kernel->width() / 2.0;
@@ -20,7 +20,7 @@ namespace image_tools {
        float y_distance = (y - sigma) * (y - sigma);
        float distance = sqrt(x_distance + y_distance);
        float gauss_val = ImageToolsMath::Gaussian(distance, radius);
-       blur_kernel->set_value(x,y,gauss_val);
+       blur_kernel->set_value(x, y, gauss_val);
      }
     }
     // normalize

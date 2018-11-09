@@ -7,8 +7,8 @@ Original Author(s) of this File:
 enum created by teachers and TAs of 3081W
 */
 
-#ifndef CONVOLUTION_FILTER_MOTION_BLUR_H
-#define CONVOLUTION_FILTER_MOTION_BLUR_H
+#ifndef FLASHPHOTO_CONVOLUTION_FILTER_MOTION_BLUR_H_
+#define FLASHPHOTO_CONVOLUTION_FILTER_MOTION_BLUR_H_
 
 #include <string>
 
@@ -17,18 +17,14 @@ enum created by teachers and TAs of 3081W
 
 namespace image_tools {
 
- class ConvolutionFilterMotionBlur : public ConvolutionFilter {
-  public:
-   FloatMatrix *CreateKernel() override;
+class ConvolutionFilterMotionBlur : public ConvolutionFilter {
+ public:
+  FloatMatrix *CreateKernel() override;
 
-   /// Four possible motion blur directions are supported
-  // enum MBlurDir { MBLUR_DIR_N_S, MBLUR_DIR_E_W, MBLUR_DIR_NE_SW,
-  //    MBLUR_DIR_NW_SE };
+  inline void set_direction(std::string dir) {direction_ = dir;}
 
-   inline void set_direction(std::string dir) {direction_ = dir;}
-
-  private:
-    std::string direction_;
- };
+ private:
+  std::string direction_;
+};
 }  // namespace image_tools
-#endif  // CONVOLUTION_FILTER_MOTION_BLUR_H
+#endif  // FLASHPHOTO_CONVOLUTION_FILTER_MOTION_BLUR_H_

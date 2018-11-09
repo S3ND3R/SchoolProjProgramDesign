@@ -15,15 +15,15 @@ Original Author(s) of this File:
 namespace image_tools {
 
 class FilterQuantize : public Filter {
-public:
- // calculates the ColorData for a pixel by limiting excess colors to the
- // amount of bins passed
- ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
+ public:
+  // calculates the ColorData for a pixel by limiting excess colors to the
+  // amount of bins passed
+  ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
                                   int y) override;
 
- inline void set_num_bins(int bin_number) {bins_ = bin_number;}
+  inline void set_num_bins(int bin_number) {bins_ = bin_number;}
 
-private:
+ private:
   int bins_ = 0;
 };
 }  // namespace image_tools

@@ -16,7 +16,8 @@ namespace image_tools {
 
 class FilterThreshold : public Filter {
  public:
-  ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x, int y) override;
+  ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
+                                   int x, int y) override;
 
   inline void set_threshold(float val) {threshold_ = val;}
 
