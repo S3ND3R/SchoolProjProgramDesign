@@ -21,7 +21,7 @@ Author(s) of Significant Updates/Modifications to the File:
 namespace image_tools {
 
 ToolBlur::ToolBlur() {
-  // TODO: Students, setup your blur filter to use a radius of 5.0 here
+  // TODO(Writer): Students, setup your blur filter to use a radius of 5.0 here
   std::cout << "about to set kernel_radius" << std::endl;;
   blur_filter_.set_kernel_radius(5);
   std::cout << blur_filter_.get_kernel_radius() << std::endl;;
@@ -34,7 +34,7 @@ ToolBlur::ToolBlur() {
 }
 
 ToolBlur::~ToolBlur() {
-  // TODO: Students cleanup your filter here if needed.
+  // TODO(Writer): Students cleanup your filter here if needed.
 }
 
 FloatMatrix* ToolBlur::CreateMask(float radius) {
@@ -42,7 +42,8 @@ FloatMatrix* ToolBlur::CreateMask(float radius) {
 }
 
 ColorData ToolBlur::LookupPaintColor(int x, int y) {
-  // TODO: Students, here's your hook to calculate a filtered version of the
+  // TODO(Writer): Students, here's your hook to calculate a filtered version
+  // of the
   // pixel. Use your filter to compute the blurred version of the pixel at (x,y)
   // in *buffer_ and return the new color to make this tool work.
   std::cout << "Blur about to use CFP" << std::endl;;
