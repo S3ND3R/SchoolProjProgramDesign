@@ -21,10 +21,13 @@ class FilterQuantize : public Filter {
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
                                   int y) override;
 
-  inline void set_num_bins(int bin_number) {bins_ = bin_number;}
+  inline void set_num_bins(int bin_number) {
+    if (bin_number > 1)
+     bins_ = bin_number;
+  }
 
  private:
-  int bins_ = 0;
+  int bins_ = 2;
 };
 }  // namespace image_tools
 #endif  // FLASHPHOTO_FILTER_QUANTIZE_H_

@@ -15,6 +15,14 @@ namespace image_tools {
 
 class ConvolutionFilterBlur : public ConvolutionFilter {
  public:
+  ConvolutionFilterBlur();
+
+  virtual ~ConvolutionFilterBlur();
+
+  // Convolution Filter Blur kernel applies gaussian equation for each
+  // value in the kernel, sunm of kernel values should be equal to one
+  // returns: pointer to a FloatMatrix set up using:
+  //          ConvolutionFilter::kernel_radius_
   FloatMatrix *CreateKernel() override;
 };
 

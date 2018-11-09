@@ -10,6 +10,10 @@ Original Author(s) of this File:
 
 namespace image_tools {
 
+ConvolutionFilterSharpen::ConvolutionFilterSharpen() {}
+
+ConvolutionFilterSharpen::~ConvolutionFilterSharpen() {}
+
 FloatMatrix *ConvolutionFilterSharpen::CreateKernel() {
   int radius = get_kernel_radius();
   FloatMatrix *sharp_kernel = new FloatMatrix(radius);

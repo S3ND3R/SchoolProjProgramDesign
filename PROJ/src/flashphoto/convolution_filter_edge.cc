@@ -9,6 +9,9 @@ Original Author(s) of this File:
 #include "flashphoto/convolution_filter_edge.h"
 
 namespace image_tools {
+ConvolutionFilterEdge::ConvolutionFilterEdge() {}
+
+ConvolutionFilterEdge::~ConvolutionFilterEdge() {}
 
 FloatMatrix *ConvolutionFilterEdge::CreateKernel() {
   FloatMatrix *edge_kernel = new FloatMatrix(1.0);

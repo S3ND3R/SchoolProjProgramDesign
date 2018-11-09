@@ -10,6 +10,10 @@ Original Author(s) of this File:
 #include "flashphoto/convolution_filter_blur.h"
 
 namespace image_tools {
+  ConvolutionFilterBlur::ConvolutionFilterBlur() {}
+
+  ConvolutionFilterBlur::~ConvolutionFilterBlur() {}
+
   FloatMatrix *ConvolutionFilterBlur::CreateKernel() {
     int radius = get_kernel_radius();
     FloatMatrix *blur_kernel = new FloatMatrix(radius);
