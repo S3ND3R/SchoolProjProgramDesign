@@ -9,7 +9,12 @@ OriginaApplyToBufferl Author(s) of this File:
 #include "flashphoto/color_data.h"
 #include "flashphoto/filter_saturate.h"
 #include "flashphoto/image_tools_math.h"
+
 namespace image_tools {
+
+FilterSaturate::FilterSaturate() {}
+
+FilterSaturate::~FilterSaturate() {}
 
 ColorData FilterSaturate::CalculateFilteredPixel(const PixelBuffer &buffer,
                                                  int x, int y) {

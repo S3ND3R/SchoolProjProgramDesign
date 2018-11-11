@@ -16,6 +16,12 @@ namespace image_tools {
 
 class FilterThreshold : public Filter {
  public:
+  FilterThreshold();
+
+  virtual ~FilterThreshold();
+
+  // calculates color by setting color to white or black if the average of the
+  // rgb is greater than the passed threshold value
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 

@@ -16,6 +16,11 @@ namespace image_tools {
 
 class FilterSaturate : public Filter {
  public:
+  FilterSaturate();
+
+  virtual ~FilterSaturate();
+
+  // calculates the color by linear interpretation using a saturation scale
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 

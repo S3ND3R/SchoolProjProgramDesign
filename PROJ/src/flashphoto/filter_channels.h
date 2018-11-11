@@ -16,8 +16,12 @@ namespace image_tools {
 
 class FilterChannels : public Filter {
  public:
-  // calculates the colordata for a pixel if the RGB are individually adjusted
-  // for some scale
+  FilterChannels();
+
+  virtual ~FilterChannels();
+
+  // calculates the colordata for a pixel when the RGB are individually
+  // adjusted for some scale
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
                                   int y) override;
 

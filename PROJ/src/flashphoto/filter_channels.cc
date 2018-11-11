@@ -11,6 +11,10 @@ OriginaApplyToBufferl Author(s) of this File:
 
 namespace image_tools {
 
+FilterChannels::FilterChannels() {}
+
+FilterChannels::~FilterChannels() {}
+
 ColorData FilterChannels::CalculateFilteredPixel(const PixelBuffer &buffer,
                                                  int x, int y) {
   ColorData pixel = buffer.pixel(x, y);

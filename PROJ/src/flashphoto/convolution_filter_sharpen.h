@@ -21,7 +21,7 @@ class ConvolutionFilterSharpen : public ConvolutionFilter {
 
   // Kernel sets all values but the center to -1, center is set so that the
   // sum of values is equal to 1
-  // returns: FloatMatrix pointer & radius = ConvolutionFilter::kernel_radius_
+  // returns: FloatMatrix pointer & radius == ConvolutionFilter::kernel_radius_
   FloatMatrix *CreateKernel() override;
 };
 }  // namespace image_tools

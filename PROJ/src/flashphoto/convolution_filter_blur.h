@@ -20,7 +20,7 @@ class ConvolutionFilterBlur : public ConvolutionFilter {
   virtual ~ConvolutionFilterBlur();
 
   // Convolution Filter Blur kernel applies gaussian equation for each
-  // value in the kernel, sunm of kernel values should be equal to one
+  // value in the kernel, sunm of kernel values should be equal to 1
   // returns: pointer to a FloatMatrix set up using:
   //          ConvolutionFilter::kernel_radius_
   FloatMatrix *CreateKernel() override;

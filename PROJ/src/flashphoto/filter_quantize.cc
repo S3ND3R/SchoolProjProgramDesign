@@ -11,8 +11,11 @@ OriginaApplyToBufferl Author(s) of this File:
 #include "flashphoto/color_data.h"
 #include "flashphoto/filter_quantize.h"
 
-
 namespace image_tools {
+
+FilterQuantize::FilterQuantize() {}
+
+FilterQuantize::~FilterQuantize() {}
 
 ColorData FilterQuantize::CalculateFilteredPixel(const PixelBuffer &buffer,
                                                    int x, int y) {

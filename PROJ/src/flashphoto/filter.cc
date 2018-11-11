@@ -11,6 +11,10 @@ Original Author(s) of this File:
 
 namespace image_tools {
 
+Filter::Filter() {}
+
+Filter::~Filter() {}
+
 void Filter::ApplyToBuffer(PixelBuffer *buffer) {
   int height = buffer->height();
   int width = buffer->width();
@@ -24,7 +28,7 @@ void Filter::ApplyToBuffer(PixelBuffer *buffer) {
      }
     }
   } else {
-    // copy of the pixel buffer
+    // need copy of the pixel buffer
     PixelBuffer *buffer_copy = new PixelBuffer(*buffer);
     SetupFilter();
     for (int i = 0; i < width; i++) {

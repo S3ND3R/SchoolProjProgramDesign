@@ -11,21 +11,25 @@ Original Author(s) of this File:
 
 namespace image_tools {
 
+ConvolutionFilter::ConvolutionFilter() {}
+
+ConvolutionFilter::~ConvolutionFilter() {}
+
 ColorData ConvolutionFilter::CalculateFilteredPixel(const PixelBuffer &buffer,
                                                      int x, int y) {
-  int middle = (kernel_->width()) / 2;
+  // calculate the center of the kernel
+  int center = (kernel_->width()) / 2;
   double red = 0.0;
   double green = 0.0;
   double blue = 0.0;
   for (int filterX = 0; filterX < kernel_->height(); filterX++) {
     for (int filterY = 0; filterY < kernel_->width(); filterY++) {
-     int pixel_loc_x = x + (filterX - middle);
-     int pixel_loc_y = y + (filterY - middle);
+     int pixel_loc_x = x + (filterX - center);
+     int pixel_loc_y = y + (filterY - center);
      if ((pixel_loc_x >= 0 &&
           pixel_loc_x < buffer.width()) &&
          (pixel_loc_y >= 0 &&
           pixel_loc_y < buffer.height())) {
-      // error occurs here
       ColorData filter_pixel = buffer.pixel(pixel_loc_x, pixel_loc_y);
       red += filter_pixel.red() * kernel_->value(filterY, filterX);
       green += filter_pixel.green() * kernel_->value(filterY, filterX);

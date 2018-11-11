@@ -26,6 +26,8 @@ class ConvolutionFilterMotionBlur : public ConvolutionFilter {
   // The kernel has the values 0 on all values except along a passed direction
   // where the values are all 1.
   // input: the direction_ is a string that has the direction to implement
+  // return: a pointer to a float matrix &
+  //         radius == ConvolutionFilter::kernel_radius_
   FloatMatrix *CreateKernel() override;
 
   inline void set_direction(std::string dir) {direction_ = dir;}

@@ -17,12 +17,20 @@ namespace image_tools {
 
 class ConvolutionFilter: public Filter {
  public:
+  ConvolutionFilter();
+
+  virtual ~ConvolutionFilter();
+
+  // derived classes must define their version of CreateKernel
   virtual FloatMatrix *CreateKernel() = 0;
 
+  // Sets up the kernel used in CalculateFilteredPixel
   void SetupFilter() override;
 
+  // Cleans up memory dynamically allocated for the kernel
   void CleanupFilter() override;
 
+  // Calcultates the value of the new filtered color using the kernel.
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 

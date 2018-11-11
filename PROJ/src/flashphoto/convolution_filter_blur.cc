@@ -27,7 +27,6 @@ namespace image_tools {
        blur_kernel->set_value(x, y, gauss_val);
      }
     }
-    // normalize
     blur_kernel->Normalize();
     return blur_kernel;
   }
