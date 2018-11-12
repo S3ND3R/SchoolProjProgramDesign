@@ -1,9 +1,13 @@
 ### Feedback for Homework 05
 
-Run on October 12, 14:32:20 PM.
+Run on November 12, 10:06:23 AM.
 
 
 #### System Files and HW Directory Structure
+
++ Pass: Switch to correct commit.
+
+
 
 + Pass: Check that directory "/lhome/gitbot/umn-csci-3081-F18/grading-scripts/_hw_materials" exists.
 
@@ -24,6 +28,10 @@ Run on October 12, 14:32:20 PM.
 
 
 
++ Pass: Copy directory "cpplint config".
+
+
+
 + Pass: Check that directory "cpplint" exists.
 
 
@@ -39,19 +47,13 @@ Run on October 12, 14:32:20 PM.
 
 + Pass: Check Style for main.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for point2.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for point2.cc.
-
-    Complete.
 
 
 
@@ -96,103 +98,69 @@ Run on October 12, 14:32:20 PM.
 
 + Pass: Check Style for DecoyDuck.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for MallardDuck.h.
-
-    Complete.
 
 
 
 + Pass: Check Style for QuackBehavior.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for RubberDuck.h.
-
-    Complete.
 
 
 
 + Pass: Check Style for Duck.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for MuteQuack.h.
-
-    Complete.
 
 
 
 + Pass: Check Style for Quack.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for Squeak.h.
-
-    Complete.
 
 
 
 + Pass: Check Style for DecoyDuck.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for main.cpp.
-
-    Complete.
 
 
 
 + Pass: Check Style for MuteQuack.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for Quack.cpp.
-
-    Complete.
 
 
 
 + Pass: Check Style for Squeak.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for Duck.cpp.
-
-    Complete.
 
 
 
 + Pass: Check Style for MallardDuck.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for QuackBehavior.cpp.
 
-    Complete.
-
 
 
 + Pass: Check Style for RubberDuck.cpp.
-
-    Complete.
 
 
 
@@ -215,37 +183,25 @@ Run on October 12, 14:32:20 PM.
 
 + Pass: Check Style for Date.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for Debug.h.
-
-    Complete.
 
 
 
 + Pass: Check Style for Exceptions.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for Date.cc.
-
-    Complete.
 
 
 
 + Pass: Check Style for Exceptions.cc.
 
-    Complete.
-
 
 
 + Pass: Check Style for main.cc.
-
-    Complete.
 
 
 
@@ -262,19 +218,13 @@ Run on October 12, 14:32:20 PM.
 
 + Pass: Check Style for main.cc.
 
-    Complete.
-
 
 
 + Pass: Check Style for date.h.
 
-    Complete.
-
 
 
 + Pass: Check Style for date.cc.
-
-    Complete.
 
 
 
