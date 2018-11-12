@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Seth Johnson. All rights reserved.
 //
 
-#include "Squeak.h"
+#include "HW/HW02/Squeak.h"
 
 #include <iostream>
 
@@ -13,5 +13,5 @@ using std::cout;
 using std::endl;
 
 void Squeak::quack() {
-    cout << "SQUEAK!!" << endl;
+    cout << "SQUEAK!!!" << endl;
 }

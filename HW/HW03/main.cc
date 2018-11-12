@@ -4,16 +4,19 @@
  * @copyright 2018 3081 Staff, All rights reserved.
  */
 
-#include "Date.h"
-
 #include <iostream>
 #include <string>
 
-using namespace std;
+#include "HW/HW03/Date.h"
+
+using std::string;
+using std::cout;
+using std::endl;
 
 void doInterestingThing(int yr) {
   // variables used in this method
   int* array_len;
+  int initial_length;
   Date d1;
   Date d2;
   Date d3;
@@ -22,9 +25,10 @@ void doInterestingThing(int yr) {
   cout << " ... A set of Dates ... " << endl;
 
   array_len = NULL;
+  initial_length = 4;
   d2 = Date(yr, 4, 19);
   d3 = d2.copy();
-  *array_len = 4;
+  array_len = &initial_length;
 
   cout << "default date is: " << d1.show() << endl;
 
@@ -41,12 +45,12 @@ void doInterestingThing(int yr) {
   }
 
   // now show the dates accumulated in reverse order
-  for (int i = 0; i < *array_len; --i) {
+  for (int i = *array_len - 1; i > -1; i--) {
     cout << "date is: " << birthday_list[i].show() << endl;
   }
 
   // now set the dates to January 2
-  for (int i = 0; i <= *array_len; i++) {
+  for (int i = 0; i < *array_len; i++) {
     birthday_list[i] = Date(1990+i, 1, 2);
   }
 

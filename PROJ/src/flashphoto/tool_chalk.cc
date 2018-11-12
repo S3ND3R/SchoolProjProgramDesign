@@ -46,7 +46,7 @@ ColorData ToolChalk::CombinePaintAndCanvasColor(const ColorData &paint_color,
 
   // random number between 0.0 and 1.0
 #ifdef WIN32
-  float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+  float r = static_cast<float>(rand_r()) / static_cast<float>(RAND_MAX);
 #else
   float r = static_cast<float>(rand_r(&seed_)) / static_cast<float>(RAND_MAX);
 #endif

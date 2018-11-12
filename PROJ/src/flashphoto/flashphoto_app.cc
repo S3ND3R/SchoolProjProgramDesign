@@ -102,7 +102,13 @@ void FlashPhotoApp::InitNanoGUI() {
 
   nanogui::Widget *undo_redo = new nanogui::Widget(window);
   undo_redo->setLayout(new nanogui::BoxLayout(
+<<<<<<< HEAD
       nanogui::Orientation::Horizontal, nanogui::Alignment::Middle, 0, 6));
+=======
+                                              nanogui::Orientation::Horizontal,
+                                              nanogui::Alignment::Middle,
+                                              0, 6));
+>>>>>>> master
   undo_btn_ = new nanogui::Button(undo_redo, "Undo");
   undo_btn_->setFixedSize({72, 20});
   undo_btn_->setIcon(ENTYPO_ICON_REPLY);
@@ -122,6 +128,11 @@ void FlashPhotoApp::InitNanoGUI() {
     }
   });
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
   // TOOLS Section
 
   new nanogui::Label(window, "Tools", "sans-bold");
@@ -651,43 +662,62 @@ void FlashPhotoApp::SaveToFile(const std::string &filename) {
 
 void FlashPhotoApp::ApplyBlurFilter(float radius) {
   SaveStateForPossibleUndo();
-  (void)radius;
+  convo_filter_blur_.set_slider_radius(radius);
+  convo_filter_blur_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyMotionBlurFilter(float rad, MBlurDir dir) {
   SaveStateForPossibleUndo();
-  (void)rad;
-  (void)dir;
+  convo_filter_motion_blur_.set_slider_radius(rad);
+  convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
+  convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplySharpenFilter(float rad) {
   SaveStateForPossibleUndo();
-  (void)rad;
+  convo_filter_sharp_.set_slider_radius(rad);
+  convo_filter_sharp_.ApplyToBuffer(current_buffer_);
 }
 
+<<<<<<< HEAD
 void FlashPhotoApp::ApplyEdgeDetectFilter() { SaveStateForPossibleUndo(); }
+=======
+void FlashPhotoApp::ApplyEdgeDetectFilter() {
+  SaveStateForPossibleUndo();
+  convo_filter_edge_.ApplyToBuffer(current_buffer_);
+}
+>>>>>>> master
 
 void FlashPhotoApp::ApplyThresholdFilter(float value) {
   SaveStateForPossibleUndo();
-  (void)value;
+  threshold_filter_.set_threshold(value);
+  threshold_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplySaturateFilter(float scale) {
   SaveStateForPossibleUndo();
-  (void)scale;
+  sat_filter_.set_saturation_scale(scale);
+  sat_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
   SaveStateForPossibleUndo();
-  (void)red;
-  (void)green;
-  (void)blue;
+  channel_filter_.set_rgb_scale(red, green, blue);
+  channel_filter_.ApplyToBuffer(current_buffer_);
 }
 
 void FlashPhotoApp::ApplyQuantizeFilter(int num) {
   SaveStateForPossibleUndo();
-  (void)num;
+  quantize_filter_.set_num_bins(num);
+  quantize_filter_.ApplyToBuffer(current_buffer_);
 }
+<<<<<<< HEAD
+=======
+
+bool FlashPhotoApp::can_undo() {
+  return saved_states_.size();
+}
+>>>>>>> master
 
 bool FlashPhotoApp::can_undo() { return saved_states_.size(); }
 

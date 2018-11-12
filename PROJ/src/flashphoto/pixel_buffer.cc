@@ -103,9 +103,18 @@ void PixelBuffer::Resize(int new_width, int new_height) {
 
 void PixelBuffer::SaveToFile(const std::string &filename) { (void)filename; }
 
+<<<<<<< HEAD
 void PixelBuffer::LoadFromFile(const std::string &filename) { (void)filename; }
 
 bool operator==(const PixelBuffer &a, const PixelBuffer &b) {
+=======
+void PixelBuffer::LoadFromFile(const std::string &filename) {
+  (void)filename;
+}
+
+
+bool operator==(const PixelBuffer& a, const PixelBuffer& b) {
+>>>>>>> master
   if ((a.width() != b.width()) || (a.height() != b.height())) {
     return false;
   } else {

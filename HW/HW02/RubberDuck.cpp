@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#include "RubberDuck.h"
+#include "HW/HW02/RubberDuck.h"
 #include "Squeak.h"
 
 using std::cout;

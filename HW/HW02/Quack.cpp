@@ -6,7 +6,7 @@
 //
 
 #include <iostream>
-#include "Quack.h"
+#include "HW/HW02/Quack.h"
 
 using std::cout;
 using std::endl;
@@ -14,3 +14,4 @@ using std::endl;
 void Quack::quack() {
     cout << "QUACK!!" << endl;
 }
+
