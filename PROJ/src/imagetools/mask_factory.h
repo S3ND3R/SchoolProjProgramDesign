@@ -35,4 +35,3 @@ class MaskFactory {
 }  // namespace image_tools
 
 #endif  // IMAGETOOLS_MASK_FACTORY_H_
-

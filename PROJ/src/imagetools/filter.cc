@@ -5,9 +5,9 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#include "flashphoto/filter.h"
-#include "flashphoto/color_data.h"
-#include "flashphoto/pixel_buffer.h"
+#include "imagetools/filter.h"
+#include "imagetools/color_data.h"
+#include "imagetools/pixel_buffer.h"
 
 namespace image_tools {
 

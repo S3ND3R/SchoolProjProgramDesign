@@ -5,9 +5,9 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#include "flashphoto/float_matrix.h"
-#include "flashphoto/image_tools_math.h"
-#include "flashphoto/convolution_filter_blur.h"
+#include "imagetools/float_matrix.h"
+#include "imagetools/image_tools_math.h"
+#include "imagetools/convolution_filter_blur.h"
 
 namespace image_tools {
   ConvolutionFilterBlur::ConvolutionFilterBlur() {}

@@ -5,12 +5,12 @@ OriginaApplyToBufferl Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#ifndef FLASHPHOTO_FILTER_THRESHOLD_H_
-#define FLASHPHOTO_FILTER_THRESHOLD_H_
+#ifndef IMAGETOOLS_FILTER_THRESHOLD_H_
+#define IMAGETOOLS_FILTER_THRESHOLD_H_
 
-#include "flashphoto/pixel_buffer.h"
-#include "flashphoto/color_data.h"
-#include "flashphoto/filter.h"
+#include "imagetools/pixel_buffer.h"
+#include "imagetools/color_data.h"
+#include "imagetools/filter.h"
 
 namespace image_tools {
 
@@ -35,4 +35,4 @@ class FilterThreshold : public Filter {
 
 }  // namespace image_tools
 
-#endif  // FLASHPHOTO_FILTER_THRESHOLD_H_
+#endif  // IMAGETOOLS_FILTER_THRESHOLD_H_

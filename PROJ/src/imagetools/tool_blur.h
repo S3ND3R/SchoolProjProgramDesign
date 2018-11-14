@@ -14,13 +14,13 @@ Author(s) of Significant Updates/Modifications to the File:
   ...
 */
 
-#ifndef FLASHPHOTO_TOOL_BLUR_H_
-#define FLASHPHOTO_TOOL_BLUR_H_
+#ifndef IMAGETOOLS_TOOL_BLUR_H_
+#define IMAGETOOLS_TOOL_BLUR_H_
 
 #include <stdio.h>
 #include <string>
-#include "flashphoto/tool.h"
-#include "flashphoto/convolution_filter_blur.h"
+#include "imagetools/tool.h"
+#include "imagetools/convolution_filter_blur.h"
 
 namespace image_tools {
 
@@ -59,4 +59,4 @@ class ToolBlur : public Tool {
 
 }  // namespace image_tools
 
-#endif  // FLASHPHOTO_TOOL_BLUR_H_
+#endif  // IMAGETOOLS_TOOL_BLUR_H_

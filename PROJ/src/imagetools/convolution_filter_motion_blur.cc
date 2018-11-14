@@ -6,8 +6,8 @@ Original Author(s) of this File:
 */
 #include <string>
 
-#include "flashphoto/float_matrix.h"
-#include "flashphoto/convolution_filter_motion_blur.h"
+#include "imagetools/float_matrix.h"
+#include "imagetools/convolution_filter_motion_blur.h"
 
 namespace image_tools {
 ConvolutionFilterMotionBlur::ConvolutionFilterMotionBlur() {}

@@ -5,8 +5,8 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#include "flashphoto/float_matrix.h"
-#include "flashphoto/convolution_filter_sharpen.h"
+#include "imagetools/float_matrix.h"
+#include "imagetools/convolution_filter_sharpen.h"
 
 namespace image_tools {
 

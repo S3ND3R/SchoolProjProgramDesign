@@ -5,11 +5,11 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#ifndef FLASHPHOTO_CONVOLUTION_FILTER_EDGE_H_
-#define FLASHPHOTO_CONVOLUTION_FILTER_EDGE_H_
+#ifndef IMAGETOOLS_CONVOLUTION_FILTER_EDGE_H_
+#define IMAGETOOLS_CONVOLUTION_FILTER_EDGE_H_
 
-#include "flashphoto/float_matrix.h"
-#include "flashphoto/convolution_filter.h"
+#include "imagetools/float_matrix.h"
+#include "imagetools/convolution_filter.h"
 
 namespace image_tools {
 
@@ -26,4 +26,4 @@ class ConvolutionFilterEdge : public ConvolutionFilter {
   FloatMatrix *CreateKernel() override;
 };
 }  // namespace image_tools
-#endif  // FLASHPHOTO_CONVOLUTION_FILTER_EDGE_H_
+#endif  // IMAGETOOLS_CONVOLUTION_FILTER_EDGE_H_

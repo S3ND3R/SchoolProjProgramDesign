@@ -7,9 +7,9 @@ OriginaApplyToBufferl Author(s) of this File:
 
 #include <math.h>  // round
 
-#include "flashphoto/pixel_buffer.h"
-#include "flashphoto/color_data.h"
-#include "flashphoto/filter_quantize.h"
+#include "imagetools/pixel_buffer.h"
+#include "imagetools/color_data.h"
+#include "imagetools/filter_quantize.h"
 
 namespace image_tools {
 
