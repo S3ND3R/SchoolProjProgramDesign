@@ -24,8 +24,8 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <map>
 #include <sstream>
 #include <utility>
-#include "flashphoto/color_data.h"
-#include "flashphoto/pixel_buffer.h"
+#include "imagetools/color_data.h"
+#include "imagetools/pixel_buffer.h"
 
 namespace image_tools {
 
