@@ -26,6 +26,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include "imagetools/color_data.h"
 #include "imagetools/image_editor.h"
 #include "imagetools/pixel_buffer.h"
+#include "imagetools/convolution_filter_blur.h"
 
 namespace image_tools {
 
@@ -111,14 +112,10 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //     MBLUR_DIR_NE_SW,
 //     MBLUR_DIR_NW_SE
 //   };
-// =======
-//   // /// Four possible motion blur directions are supported
-//   enum MBlurDir { MBLUR_DIR_N_S, MBLUR_DIR_E_W, MBLUR_DIR_NE_SW,
-//                   MBLUR_DIR_NW_SE };
-// >>>>>>> master
-//   static std::string MotionBlurDirectionName(MBlurDir dir) {
-//     return mblur_dir_names_.find(dir)->second;
-//   }
+   static std::string MotionBlurDirectionName(
+       ConvolutionFilterMotionBlur::MBlurDir dir) {
+     return mblur_dir_names_.find(dir)->second;
+   }
 //
 //   /** Call this from the controller to apply the blur filter to the current
 //    pixel buffer using the current blur filter state. */
@@ -180,11 +177,15 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   mingfx::Texture2D display_texture_;
   mingfx::QuickShapes quick_shapes_;
 
+  nanogui::Button *undo_btn_;
+  nanogui::Button *redo_btn_;
+
   // Current state of the active tool as determined via user interaction
   std::string tool_name_;
   int tool_x_;
   int tool_y_;
   bool painting_;
+  PixelBuffer *current_buffer_;
 
   // May not need current tool
   Tool *current_tool_;
@@ -194,7 +195,8 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   // Variables updated by the GUI widgets
   float blur_radius_;
   float mblur_radius_;
-  MBlurDir mblur_dir_;
+  //MBlurDir mblur_dir_;
+  ConvolutionFilterMotionBlur::MBlurDir mblur_dir_;
   float sharpen_radius_;
   float thresh_cutoff_;
   float sat_value_;
@@ -212,8 +214,6 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //   ToolPen t_pen_;
 //   ToolSprayCan t_spray_can_;
 //
-// <<<<<<< HEAD
-// =======
 //   // filters
 //   FilterThreshold threshold_filter_;
 //   FilterSaturate sat_filter_;
@@ -223,12 +223,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //   ConvolutionFilterSharpen convo_filter_sharp_;
 //   ConvolutionFilterEdge convo_filter_edge_;
 //   ConvolutionFilterMotionBlur convo_filter_motion_blur_;
-
-// >>>>>>> master
 //   PixelBuffer *current_buffer_;
-//
-//   nanogui::Button *undo_btn_;
-//   nanogui::Button *redo_btn_;
 //
 //   void SaveStateForPossibleUndo();
 //
@@ -241,6 +236,8 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   FlashPhotoApp &operator=(const FlashPhotoApp &rhs) = delete;
 
 //  static const std::map<MBlurDir, std::string> mblur_dir_names_;
+static const std::map<ConvolutionFilterMotionBlur::MBlurDir,
+                      std::string> mblur_dir_names_;
 };
 
 } /* namespace image_tools */

@@ -100,7 +100,7 @@ class ImageEditor {
   /** Call this from the controller to apply the filter to the current
    pixel buffer using the current motion blur filter state. */
   void ApplyMotionBlurFilter(float radius,
-                             ConvolutionFilterMotionBlur::BlurDir dir);
+                             ConvolutionFilterMotionBlur::MBlurDir dir);
 
   /** Call this from the controller to apply the sharpen filter to the current
    pixel buffer using the current sharpen filter state. */
@@ -182,4 +182,3 @@ class ImageEditor {
 }  // namespace image_tools
 
 #endif  // IMAGETOOLS_IMAGE_EDITOR_H_
-

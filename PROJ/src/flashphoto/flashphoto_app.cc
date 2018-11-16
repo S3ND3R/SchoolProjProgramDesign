@@ -26,10 +26,12 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <utility>
 #include "imagetools/color_data.h"
 #include "imagetools/pixel_buffer.h"
+#include "imagetools/convolution_filter_blur.h"
 
 namespace image_tools {
 
-const std::map<FlashPhotoApp::MBlurDir, std::string>
+// may need to remove
+const std::map<ConvolutionFilterMotionBlur::MBlurDir, std::string>
     FlashPhotoApp::mblur_dir_names_ = {
         {MBLUR_DIR_N_S, "North/South"},
         {MBLUR_DIR_E_W, "East/West"},
@@ -45,6 +47,7 @@ FlashPhotoApp::FlashPhotoApp(int width, int height,
       tool_radius_(5.0),
       blur_radius_(5.0),
       mblur_radius_(5.0),
+      // mblur_dir may need change
       mblur_dir_(MBLUR_DIR_N_S),
       sharpen_radius_(5.0),
       thresh_cutoff_(0.5),
@@ -54,6 +57,7 @@ FlashPhotoApp::FlashPhotoApp(int width, int height,
       chan_b_(1.0),
       quant_bins_(5) {
   current_buffer_ = new PixelBuffer(width, height, background_color);
+  image_editor_.set_pixel_buffer(current_buffer_);
 }
 
 FlashPhotoApp::~FlashPhotoApp() {}
@@ -101,14 +105,10 @@ void FlashPhotoApp::InitNanoGUI() {
   new nanogui::Label(window, "Edit", "sans-bold");
 
   nanogui::Widget *undo_redo = new nanogui::Widget(window);
-  undo_redo->setLayout(new nanogui::BoxLayout(
-<<<<<<< HEAD
-      nanogui::Orientation::Horizontal, nanogui::Alignment::Middle, 0, 6));
-=======
-                                              nanogui::Orientation::Horizontal,
+  undo_redo->setLayout(new nanogui::BoxLayout(nanogui::Orientation::Horizontal,
                                               nanogui::Alignment::Middle,
                                               0, 6));
->>>>>>> master
+
   undo_btn_ = new nanogui::Button(undo_redo, "Undo");
   undo_btn_->setFixedSize({72, 20});
   undo_btn_->setIcon(ENTYPO_ICON_REPLY);
@@ -128,11 +128,6 @@ void FlashPhotoApp::InitNanoGUI() {
     }
   });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
   // TOOLS Section
 
   new nanogui::Label(window, "Tools", "sans-bold");
@@ -292,7 +287,8 @@ void FlashPhotoApp::InitNanoGUI() {
   mbr_cb->setCallback([this](float value) {
     (void)value;
     int intValue = static_cast<int>(value);
-    mblur_dir_ = static_cast<MBlurDir>(intValue);
+    // mblur_dir_ = static_cast<MBlurDir>(intValue);
+    mblur_dir_ = static_cast<ConvolutionFilterMotionBlur::MBlurDir>(intValue);
   });
 
   b = new nanogui::Button(m_blur_win, "Apply");
@@ -662,11 +658,20 @@ void FlashPhotoApp::SaveToFile(const std::string &filename) {
 
 void FlashPhotoApp::ApplyBlurFilter(float radius) {
   SaveStateForPossibleUndo();
-  convo_filter_blur_.set_slider_radius(radius);
-  convo_filter_blur_.ApplyToBuffer(current_buffer_);
+  image_editor_.ApplyBlurFilter(radius);
+  // convo_filter_blur_.set_slider_radius(radius);
+  // convo_filter_blur_.ApplyToBuffer(current_buffer_);
 }
 
-void FlashPhotoApp::ApplyMotionBlurFilter(float rad, MBlurDir dir) {
+// void FlashPhotoApp::ApplyMotionBlurFilter(float rad, MBlurDir dir) {
+//   SaveStateForPossibleUndo();
+//   convo_filter_motion_blur_.set_slider_radius(rad);
+//   convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
+//   convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
+// }
+
+void FlashPhotoApp::ApplyMotionBlurFilter(float rad,
+    ConvolutionFilterMotionBlur::MBlurDir dir) {
   SaveStateForPossibleUndo();
   convo_filter_motion_blur_.set_slider_radius(rad);
   convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
@@ -679,14 +684,10 @@ void FlashPhotoApp::ApplySharpenFilter(float rad) {
   convo_filter_sharp_.ApplyToBuffer(current_buffer_);
 }
 
-<<<<<<< HEAD
-void FlashPhotoApp::ApplyEdgeDetectFilter() { SaveStateForPossibleUndo(); }
-=======
 void FlashPhotoApp::ApplyEdgeDetectFilter() {
   SaveStateForPossibleUndo();
   convo_filter_edge_.ApplyToBuffer(current_buffer_);
 }
->>>>>>> master
 
 void FlashPhotoApp::ApplyThresholdFilter(float value) {
   SaveStateForPossibleUndo();
@@ -711,13 +712,6 @@ void FlashPhotoApp::ApplyQuantizeFilter(int num) {
   quantize_filter_.set_num_bins(num);
   quantize_filter_.ApplyToBuffer(current_buffer_);
 }
-<<<<<<< HEAD
-=======
-
-bool FlashPhotoApp::can_undo() {
-  return saved_states_.size();
-}
->>>>>>> master
 
 bool FlashPhotoApp::can_undo() { return saved_states_.size(); }
 

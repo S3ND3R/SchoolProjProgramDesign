@@ -35,11 +35,6 @@ class ToolBlur : public Tool {
   static const std::string name() { return "Blur"; }
 
   FloatMatrix* CreateMask(float radius) override;
-<<<<<<< HEAD
-=======
-
-  ColorData LookupPaintColor(int x, int y) override;
->>>>>>> master
 
   ColorData LookupPaintColor(int x, int y) override;
 
@@ -48,11 +43,7 @@ class ToolBlur : public Tool {
   ToolBlur(const ToolBlur& rhs) = delete;
   ToolBlur& operator=(const ToolBlur& rhs) = delete;
 
-<<<<<<< HEAD
-  // TODO(students): add a member variable to create an instance of your
-=======
   // TODO(THeMan): Students, add a member variable to create an instance of your
->>>>>>> master
   // ConvolutionBlurFilter here.
   ConvolutionFilterBlur blur_filter_;
 };
