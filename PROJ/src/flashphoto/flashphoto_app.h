@@ -23,27 +23,9 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <string>
 #include <vector>
 
-#include "flashphoto/color_data.h"
-#include "flashphoto/pixel_buffer.h"
-
-// tools
-#include "flashphoto/tool_blur.h"
-#include "flashphoto/tool_calligraphy_pen.h"
-#include "flashphoto/tool_chalk.h"
-#include "flashphoto/tool_eraser.h"
-#include "flashphoto/tool_highlighter.h"
-#include "flashphoto/tool_pen.h"
-#include "flashphoto/tool_spray_can.h"
-
-// filters
-#include "flashphoto/filter_saturate.h"
-#include "flashphoto/filter_threshold.h"
-#include "flashphoto/filter_channels.h"
-#include "flashphoto/filter_quantize.h"
-#include "flashphoto/convolution_filter_blur.h"
-#include "flashphoto/convolution_filter_sharpen.h"
-#include "flashphoto/convolution_filter_edge.h"
-#include "flashphoto/convolution_filter_motion_blur.h"
+#include "imagetools/color_data.h"
+#include "imagetools/image_editor.h"
+#include "imagetools/pixel_buffer.h"
 
 namespace image_tools {
 
@@ -93,105 +75,107 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   /** Used to draw the PixelBuffer to the screen once each frame. */
   void DrawUsingOpenGL() override;
 
-  /** Loads a pixel buffer from a PNG formatted file. */
-  void LoadFromFile(const std::string &filename);
-
-  /** Saves the current pixel buffer to a PNG file. */
-  void SaveToFile(const std::string &filename);
-
-  // TOOLS
-
-  Tool *GetToolByName(const std::string &name);
-
-  /** Call this from the controller to being a new stroke at pixel (x,y) using
-   the tool named tool_name and the specified color and radius.  Since it
-   takes multiple frames to complete a stroke the tool_name, color, and radius
-   are saved as state variables and are used for subsequent calls to
-   AddToStroke() and EndStroke(). */
-  void StartStroke(const std::string &tool_name, const ColorData &color,
-                   float radius, int x, int y);
-
-  /** Call this from the controller to add to a stroke that was recently
-   started with a call to StartStroke(). */
-  void AddToStroke(int x, int y);
-
-  /** Call this from the controller to end a stroke started with
-   StartStroke(). */
-  void EndStroke(int x, int y);
-
-  // FILTERS
-
-<<<<<<< HEAD
-  /// Four possible motion blur directions are supported
-  enum MBlurDir {
-    MBLUR_DIR_N_S,
-    MBLUR_DIR_E_W,
-    MBLUR_DIR_NE_SW,
-    MBLUR_DIR_NW_SE
-  };
-=======
-  // /// Four possible motion blur directions are supported
-  enum MBlurDir { MBLUR_DIR_N_S, MBLUR_DIR_E_W, MBLUR_DIR_NE_SW,
-                  MBLUR_DIR_NW_SE };
->>>>>>> master
-  static std::string MotionBlurDirectionName(MBlurDir dir) {
-    return mblur_dir_names_.find(dir)->second;
-  }
-
-  /** Call this from the controller to apply the blur filter to the current
-   pixel buffer using the current blur filter state. */
-  void ApplyBlurFilter(float radius);
-
-  /** Call this from the controller to apply the filter to the current
-   pixel buffer using the current motion blur filter state. */
-  void ApplyMotionBlurFilter(float radius, MBlurDir dir);
-
-  /** Call this from the controller to apply the sharpen filter to the current
-   pixel buffer using the current sharpen filter state. */
-  void ApplySharpenFilter(float radius);
-
-  /** Call this from the controller to apply the edge detect filter to the
-   current
-   pixel buffer using the current edge detect filter state. */
-  void ApplyEdgeDetectFilter();
-
-  /** Call this from the controller to apply the threshold filter to the current
-   pixel buffer using the current threshold filter state. */
-  void ApplyThresholdFilter(float cutoff_value);
-
-  /** Call this from the controller to apply the saturate filter to the current
-   pixel buffer using the current saturate filter state. */
-  void ApplySaturateFilter(float scale_factor);
-
-  /** Call this from the controller to apply the channels filter to the current
-   pixel buffer using the current channels filter state. */
-  void ApplyChannelsFilter(float red_scale, float green_scale,
-                           float blue_scale);
-
-  /** Call this from the controller to apply the quantize filter to the current
-   pixel buffer using the current quantize filter state. */
-  void ApplyQuantizeFilter(int num_bins);
-
-  /** Undo the last operation. */
-  void Undo();
-
-  /** Redo the last "undone" operation. */
-  void Redo();
-
-  /** True if the the log of applied commands is not empty, i.e., it is
-   possible to perform an undo operation. */
-  bool can_undo();
-
-  /** True if the log of undone commands is not empty, i.e., it is possible to
-   perform a redo operation. */
-  bool can_redo();
-
-  PixelBuffer *pixel_buffer();
-
-  void set_pixel_buffer(PixelBuffer *buffer);
+//   /** Loads a pixel buffer from a PNG formatted file. */
+//   void LoadFromFile(const std::string &filename);
+//
+//   /** Saves the current pixel buffer to a PNG file. */
+//   void SaveToFile(const std::string &filename);
+//
+//   // TOOLS
+//
+//   Tool *GetToolByName(const std::string &name);
+//
+//   /** Call this from the controller to being a new stroke at pixel (x,y) using
+//    the tool named tool_name and the specified color and radius.  Since it
+//    takes multiple frames to complete a stroke the tool_name, color, and radius
+//    are saved as state variables and are used for subsequent calls to
+//    AddToStroke() and EndStroke(). */
+//   void StartStroke(const std::string &tool_name, const ColorData &color,
+//                    float radius, int x, int y);
+//
+//   /** Call this from the controller to add to a stroke that was recently
+//    started with a call to StartStroke(). */
+//   void AddToStroke(int x, int y);
+//
+//   /** Call this from the controller to end a stroke started with
+//    StartStroke(). */
+//   void EndStroke(int x, int y);
+//
+//   // FILTERS
+//
+// <<<<<<< HEAD
+//   /// Four possible motion blur directions are supported
+//   enum MBlurDir {
+//     MBLUR_DIR_N_S,
+//     MBLUR_DIR_E_W,
+//     MBLUR_DIR_NE_SW,
+//     MBLUR_DIR_NW_SE
+//   };
+// =======
+//   // /// Four possible motion blur directions are supported
+//   enum MBlurDir { MBLUR_DIR_N_S, MBLUR_DIR_E_W, MBLUR_DIR_NE_SW,
+//                   MBLUR_DIR_NW_SE };
+// >>>>>>> master
+//   static std::string MotionBlurDirectionName(MBlurDir dir) {
+//     return mblur_dir_names_.find(dir)->second;
+//   }
+//
+//   /** Call this from the controller to apply the blur filter to the current
+//    pixel buffer using the current blur filter state. */
+//   void ApplyBlurFilter(float radius);
+//
+//   /** Call this from the controller to apply the filter to the current
+//    pixel buffer using the current motion blur filter state. */
+//   void ApplyMotionBlurFilter(float radius, MBlurDir dir);
+//
+//   /** Call this from the controller to apply the sharpen filter to the current
+//    pixel buffer using the current sharpen filter state. */
+//   void ApplySharpenFilter(float radius);
+//
+//   /** Call this from the controller to apply the edge detect filter to the
+//    current
+//    pixel buffer using the current edge detect filter state. */
+//   void ApplyEdgeDetectFilter();
+//
+//   /** Call this from the controller to apply the threshold filter to the current
+//    pixel buffer using the current threshold filter state. */
+//   void ApplyThresholdFilter(float cutoff_value);
+//
+//   /** Call this from the controller to apply the saturate filter to the current
+//    pixel buffer using the current saturate filter state. */
+//   void ApplySaturateFilter(float scale_factor);
+//
+//   /** Call this from the controller to apply the channels filter to the current
+//    pixel buffer using the current channels filter state. */
+//   void ApplyChannelsFilter(float red_scale, float green_scale,
+//                            float blue_scale);
+//
+//   /** Call this from the controller to apply the quantize filter to the current
+//    pixel buffer using the current quantize filter state. */
+//   void ApplyQuantizeFilter(int num_bins);
+//
+//   /** Undo the last operation. */
+//   void Undo();
+//
+//   /** Redo the last "undone" operation. */
+//   void Redo();
+//
+//   /** True if the the log of applied commands is not empty, i.e., it is
+//    possible to perform an undo operation. */
+//   bool can_undo();
+//
+//   /** True if the log of undone commands is not empty, i.e., it is possible to
+//    perform a redo operation. */
+//   bool can_redo();
+//
+//   PixelBuffer *pixel_buffer();
+//
+//   void set_pixel_buffer(PixelBuffer *buffer);
 
  private:
   void InitializeBuffers(ColorData initial_color, int width, int height);
+
+  ImageEditor image_editor_;
 
   mingfx::Texture2D display_texture_;
   mingfx::QuickShapes quick_shapes_;
@@ -202,7 +186,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   int tool_y_;
   bool painting_;
 
-  // state data saved during calls to StartStroke, AddToStroke, EndStroke
+  // May not need current tool
   Tool *current_tool_;
   ColorData tool_color_;
   float tool_radius_;
@@ -219,43 +203,44 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   float chan_b_;
   int quant_bins_;
 
-  ToolBlur t_blur_;
-  ToolCalligraphyPen t_calligraphy_pen_;
-  ToolChalk t_chalk_;
-  ToolEraser t_eraser_;
-  ToolHighlighter t_highlighter_;
-  ToolPen t_pen_;
-  ToolSprayCan t_spray_can_;
+//
+//   ToolBlur t_blur_;
+//   ToolCalligraphyPen t_calligraphy_pen_;
+//   ToolChalk t_chalk_;
+//   ToolEraser t_eraser_;
+//   ToolHighlighter t_highlighter_;
+//   ToolPen t_pen_;
+//   ToolSprayCan t_spray_can_;
+//
+// <<<<<<< HEAD
+// =======
+//   // filters
+//   FilterThreshold threshold_filter_;
+//   FilterSaturate sat_filter_;
+//   FilterChannels channel_filter_;
+//   FilterQuantize quantize_filter_;
+//   ConvolutionFilterBlur convo_filter_blur_;
+//   ConvolutionFilterSharpen convo_filter_sharp_;
+//   ConvolutionFilterEdge convo_filter_edge_;
+//   ConvolutionFilterMotionBlur convo_filter_motion_blur_;
 
-<<<<<<< HEAD
-=======
-  // filters
-  FilterThreshold threshold_filter_;
-  FilterSaturate sat_filter_;
-  FilterChannels channel_filter_;
-  FilterQuantize quantize_filter_;
-  ConvolutionFilterBlur convo_filter_blur_;
-  ConvolutionFilterSharpen convo_filter_sharp_;
-  ConvolutionFilterEdge convo_filter_edge_;
-  ConvolutionFilterMotionBlur convo_filter_motion_blur_;
-
->>>>>>> master
-  PixelBuffer *current_buffer_;
-
-  nanogui::Button *undo_btn_;
-  nanogui::Button *redo_btn_;
-
-  void SaveStateForPossibleUndo();
-
-  unsigned int max_undos_;
-  std::deque<PixelBuffer *> saved_states_;   // undo
-  std::deque<PixelBuffer *> undone_states_;  // redo
+// >>>>>>> master
+//   PixelBuffer *current_buffer_;
+//
+//   nanogui::Button *undo_btn_;
+//   nanogui::Button *redo_btn_;
+//
+//   void SaveStateForPossibleUndo();
+//
+//   unsigned int max_undos_;
+//   std::deque<PixelBuffer *> saved_states_;   // undo
+//   std::deque<PixelBuffer *> undone_states_;  // redo
 
   /* Copy/move assignment/construction disallowed */
   FlashPhotoApp(const FlashPhotoApp &rhs) = delete;
   FlashPhotoApp &operator=(const FlashPhotoApp &rhs) = delete;
 
-  static const std::map<MBlurDir, std::string> mblur_dir_names_;
+//  static const std::map<MBlurDir, std::string> mblur_dir_names_;
 };
 
 } /* namespace image_tools */
