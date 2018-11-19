@@ -6,10 +6,13 @@ Original Author(s) of this File:
 */
 
 //#include <string>
-#include "imagetools/float_matrix.h"
 #include "imagetools/convolution_filter_motion_blur.h"
+#include <cmath>
+
+#include "imagetools/float_matrix.h"
 
 namespace image_tools {
+
 ConvolutionFilterMotionBlur::ConvolutionFilterMotionBlur() {}
 
 ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
@@ -59,8 +62,15 @@ ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
 //      }
 //     }
 //   }
+// }
+
+FloatMatrix *ConvolutionFilterMotionBlur::CreateKernel() {
+  int radius = get_kernel_radius();
+  FloatMatrix *motion_kernel = new FloatMatrix(radius);
+  int middle = (motion_kernel->width() - 1) / 2;
+
   switch (direction_) {
-    case MBLUR_DIR_N_S:
+    case BLUR_DIR_N_S:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
        if(x == middle)
@@ -70,7 +80,7 @@ ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
       }
      }
      break;
-    case MBLUR_DIR_E_W:
+    case BLUR_DIR_E_W:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
        if(y == middle)
@@ -80,7 +90,7 @@ ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
       }
      }
      break;
-    case MBLUR_DIR_NE_SW:
+    case BLUR_DIR_NE_SW:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
        if(x + y == motion_kernel->width() - 1)
@@ -90,7 +100,7 @@ ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
       }
      }
      break;
-    case MBLUR_DIR_NW_SE:
+    case BLUR_DIR_NW_SE:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
        if(x == y)
@@ -99,7 +109,9 @@ ConvolutionFilterMotionBlur::~ConvolutionFilterMotionBlur() {}
         motion_kernel->set_value(x,y,0.0);
       }
      }
-    break;
+     break;
+    default:
+     break;
   }
 
   motion_kernel->Normalize();

@@ -23,10 +23,29 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <string>
 #include <vector>
 
-#include "imagetools/color_data.h"
 #include "imagetools/image_editor.h"
+#include "imagetools/color_data.h"
 #include "imagetools/pixel_buffer.h"
-#include "imagetools/convolution_filter_blur.h"
+
+// filters
+#include "imagetools/convolution_filter_motion_blur.h"
+// #include "flashphoto/convolution_filter_blur.h"
+// #include "flashphoto/convolution_filter_edge.h"
+// #include "flashphoto/convolution_filter_sharpen.h"
+// #include "flashphoto/filter_channels.h"
+// #include "flashphoto/filter_quantize.h"
+// #include "flashphoto/filter_saturate.h"
+// #include "flashphoto/filter_threshold.h"
+//
+// // tools
+// #include "flashphoto/tool_blur.h"
+// #include "flashphoto/tool_calligraphy_pen.h"
+// #include "flashphoto/tool_chalk.h"
+// #include "flashphoto/tool_eraser.h"
+// #include "flashphoto/tool_highlighter.h"
+// #include "flashphoto/tool_pen.h"
+// #include "flashphoto/tool_spray_can.h"
+
 
 namespace image_tools {
 
@@ -36,6 +55,7 @@ namespace image_tools {
 class FlashPhotoApp : public mingfx::GraphicsApp {
  public:
   FlashPhotoApp(int width, int height, const ColorData &background_color);
+
   virtual ~FlashPhotoApp();
 
   /** Called when the mouse moves but no
@@ -102,28 +122,28 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //    StartStroke(). */
 //   void EndStroke(int x, int y);
 //
-//   // FILTERS
-//
-// <<<<<<< HEAD
-//   /// Four possible motion blur directions are supported
-//   enum MBlurDir {
-//     MBLUR_DIR_N_S,
-//     MBLUR_DIR_E_W,
-//     MBLUR_DIR_NE_SW,
-//     MBLUR_DIR_NW_SE
-//   };
-   static std::string MotionBlurDirectionName(
-       ConvolutionFilterMotionBlur::MBlurDir dir) {
+
+// FILTERS
+
+  /// Four possible motion blur directions are supported
+  enum MBlurDir {
+    MBLUR_DIR_N_S,
+    MBLUR_DIR_E_W,
+    MBLUR_DIR_NE_SW,
+    MBLUR_DIR_NW_SE
+  };
+  static std::string MotionBlurDirectionName(MBlurDir dir) {
      return mblur_dir_names_.find(dir)->second;
-   }
+  }
+
 //
 //   /** Call this from the controller to apply the blur filter to the current
 //    pixel buffer using the current blur filter state. */
 //   void ApplyBlurFilter(float radius);
 //
-//   /** Call this from the controller to apply the filter to the current
-//    pixel buffer using the current motion blur filter state. */
-//   void ApplyMotionBlurFilter(float radius, MBlurDir dir);
+  /** Call this from the controller to apply the filter to the current
+   pixel buffer using the current motion blur filter state. */
+  void ApplyMotionBlurFilter(float radius, MBlurDir dir);
 //
 //   /** Call this from the controller to apply the sharpen filter to the current
 //    pixel buffer using the current sharpen filter state. */
@@ -165,9 +185,9 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //    perform a redo operation. */
 //   bool can_redo();
 //
-//   PixelBuffer *pixel_buffer();
-//
-//   void set_pixel_buffer(PixelBuffer *buffer);
+  PixelBuffer *pixel_buffer();
+
+  void set_pixel_buffer(PixelBuffer *buffer);
 
  private:
   void InitializeBuffers(ColorData initial_color, int width, int height);
@@ -195,8 +215,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   // Variables updated by the GUI widgets
   float blur_radius_;
   float mblur_radius_;
-  //MBlurDir mblur_dir_;
-  ConvolutionFilterMotionBlur::MBlurDir mblur_dir_;
+  MBlurDir mblur_dir_;
   float sharpen_radius_;
   float thresh_cutoff_;
   float sat_value_;
@@ -205,7 +224,6 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   float chan_b_;
   int quant_bins_;
 
-//
 //   ToolBlur t_blur_;
 //   ToolCalligraphyPen t_calligraphy_pen_;
 //   ToolChalk t_chalk_;
@@ -223,7 +241,6 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //   ConvolutionFilterSharpen convo_filter_sharp_;
 //   ConvolutionFilterEdge convo_filter_edge_;
 //   ConvolutionFilterMotionBlur convo_filter_motion_blur_;
-//   PixelBuffer *current_buffer_;
 //
 //   void SaveStateForPossibleUndo();
 //
@@ -236,8 +253,7 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
   FlashPhotoApp &operator=(const FlashPhotoApp &rhs) = delete;
 
 //  static const std::map<MBlurDir, std::string> mblur_dir_names_;
-static const std::map<ConvolutionFilterMotionBlur::MBlurDir,
-                      std::string> mblur_dir_names_;
+static const std::map<MBlurDir, std::string> mblur_dir_names_;
 };
 
 } /* namespace image_tools */

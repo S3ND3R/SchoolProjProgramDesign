@@ -31,12 +31,13 @@ Author(s) of Significant Updates/Modifications to the File:
 namespace image_tools {
 
 // may need to remove
-const std::map<ConvolutionFilterMotionBlur::MBlurDir, std::string>
+const std::map<FlashPhotoApp::MBlurDir, std::string>
     FlashPhotoApp::mblur_dir_names_ = {
         {MBLUR_DIR_N_S, "North/South"},
         {MBLUR_DIR_E_W, "East/West"},
         {MBLUR_DIR_NE_SW, "Northeast/Southwest"},
-        {MBLUR_DIR_NW_SE, "Northwest/Southeast"}};
+        {MBLUR_DIR_NW_SE, "Northwest/Southeast"}
+};
 
 FlashPhotoApp::FlashPhotoApp(int width, int height,
                              const ColorData &background_color)
@@ -84,9 +85,9 @@ void FlashPhotoApp::InitNanoGUI() {
     std::string fname =
         nanogui::file_dialog({{"png", "Portable Network Graphics"}}, false);
     if (fname != "") {
-      LoadFromFile(fname);
-      ResizeWindow(pixel_buffer()->width(),
-                   pixel_buffer()->height());
+      image_editor_.LoadFromFile(fname);
+      ResizeWindow(image_editor_.pixel_buffer()->width(),
+                   image_editor_.pixel_buffer()->height());
     }
   });
   b = new nanogui::Button(file_io, "Save");
@@ -95,7 +96,7 @@ void FlashPhotoApp::InitNanoGUI() {
     std::string fname =
         nanogui::file_dialog({{"png", "Portable Network Graphics"}}, true);
     if (fname != "") {
-      //image_editor_.SaveToFile(fname);
+      image_editor_.SaveToFile(fname);
     }
   });
 
@@ -108,23 +109,24 @@ void FlashPhotoApp::InitNanoGUI() {
   undo_redo->setLayout(new nanogui::BoxLayout(nanogui::Orientation::Horizontal,
                                               nanogui::Alignment::Middle,
                                               0, 6));
-
   undo_btn_ = new nanogui::Button(undo_redo, "Undo");
   undo_btn_->setFixedSize({72, 20});
   undo_btn_->setIcon(ENTYPO_ICON_REPLY);
   undo_btn_->setCallback([this]() {
-    if (can_undo()) {
-      Undo();
-      ResizeWindow(pixel_buffer()->width(), pixel_buffer()->height());
+    if (image_editor_.can_undo()) {
+      image_editor_.Undo();
+      ResizeWindow(image_editor_.pixel_buffer()->width(),
+                   image_editor_.pixel_buffer()->height());
     }
   });
   redo_btn_ = new nanogui::Button(undo_redo, "Redo");
   redo_btn_->setFixedSize({72, 20});
   redo_btn_->setIcon(ENTYPO_ICON_FORWARD);
   redo_btn_->setCallback([this]() {
-    if (can_redo()) {
-      Redo();
-      ResizeWindow(pixel_buffer()->width(), pixel_buffer()->height());
+    if (image_editor_.can_redo()) {
+      image_editor_.Redo();
+      ResizeWindow(image_editor_.pixel_buffer()->width(),
+                   image_editor_.pixel_buffer()->height());
     }
   });
 
@@ -245,9 +247,9 @@ void FlashPhotoApp::InitNanoGUI() {
   });
   b = new nanogui::Button(blur_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplyBlurFilter(blur_radius_); });
+  b->setCallback([this] { image_editor_.ApplyBlurFilter(blur_radius_); });
 
-  // MOTION BLUR
+  // MOTION BLUR *********!!!!NEED TO WORK ON!!!!**********
   nanogui::PopupButton *m_blur_pb =
       new nanogui::PopupButton(filters, "Motion Blur");
   m_blur_pb->setFixedSize({150, 20});
@@ -287,8 +289,8 @@ void FlashPhotoApp::InitNanoGUI() {
   mbr_cb->setCallback([this](float value) {
     (void)value;
     int intValue = static_cast<int>(value);
-    // mblur_dir_ = static_cast<MBlurDir>(intValue);
-    mblur_dir_ = static_cast<ConvolutionFilterMotionBlur::MBlurDir>(intValue);
+    mblur_dir_ = static_cast<MBlurDir>(intValue);
+    //mblur_dir_ = static_cast<ConvolutionFilterMotionBlur::MBlurDir>(intValue);
   });
 
   b = new nanogui::Button(m_blur_win, "Apply");
@@ -325,7 +327,8 @@ void FlashPhotoApp::InitNanoGUI() {
 
   b = new nanogui::Button(sharp_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplySharpenFilter(sharpen_radius_); });
+  b->setCallback(
+      [this] { image_editor_.ApplySharpenFilter(sharpen_radius_); });
 
   // EDGE DETECT
   nanogui::PopupButton *edge = new nanogui::PopupButton(filters, "Edge Detect");
@@ -335,7 +338,7 @@ void FlashPhotoApp::InitNanoGUI() {
   edge_win->setLayout(params_layout);
   b = new nanogui::Button(edge_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplyEdgeDetectFilter(); });
+  b->setCallback([this] {image_editor_.ApplyEdgeDetectFilter(); });
 
   // THRESHOLD
   nanogui::PopupButton *thresh = new nanogui::PopupButton(filters, "Threshold");
@@ -371,7 +374,8 @@ void FlashPhotoApp::InitNanoGUI() {
 
   b = new nanogui::Button(thresh_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplyThresholdFilter(thresh_cutoff_); });
+  b->setCallback(
+      [this] { image_editor_.ApplyThresholdFilter(thresh_cutoff_); });
 
   // SATURATE
   nanogui::PopupButton *sat = new nanogui::PopupButton(filters, "Saturate");
@@ -407,7 +411,7 @@ void FlashPhotoApp::InitNanoGUI() {
 
   b = new nanogui::Button(sat_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplySaturateFilter(sat_value_); });
+  b->setCallback([this] { image_editor_.ApplySaturateFilter(sat_value_); });
 
   // CHANNELS
   nanogui::PopupButton *channels =
@@ -488,7 +492,9 @@ void FlashPhotoApp::InitNanoGUI() {
 
   b = new nanogui::Button(chan_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback([this] { ApplyChannelsFilter(chan_r_, chan_g_, chan_b_); });
+  b->setCallback(
+      [this] { image_editor_.ApplyChannelsFilter(chan_r_,
+                                                 chan_g_, chan_b_); });
 
   // QUANTIZE
   nanogui::PopupButton *quant_pb =
@@ -521,16 +527,16 @@ void FlashPhotoApp::InitNanoGUI() {
 
   b = new nanogui::Button(quant_win, "Apply");
   b->setFixedSize({150, 30});
-  b->setCallback(
-      [this] { ApplyQuantizeFilter(static_cast<int>(quant_bins_)); });
+  b->setCallback([this] {
+    image_editor_.ApplyQuantizeFilter(static_cast<int>(quant_bins_)); });
 
   screen()->performLayout();
 }
 
 void FlashPhotoApp::InitOpenGL() {
-  display_texture_.InitFromFloats(pixel_buffer()->width(),
-                                  pixel_buffer()->height(),
-                                  pixel_buffer()->data());
+  display_texture_.InitFromFloats(image_editor_.pixel_buffer()->width(),
+                                  image_editor_.pixel_buffer()->height(),
+                                  image_editor_.pixel_buffer()->data());
 }
 
 void FlashPhotoApp::DrawUsingNanoVG(NVGcontext *ctx) {
@@ -541,9 +547,12 @@ void FlashPhotoApp::DrawUsingNanoVG(NVGcontext *ctx) {
 }
 
 void FlashPhotoApp::DrawUsingOpenGL() {
+  undo_btn_->setEnabled(image_editor_.can_undo());
+  redo_btn_->setEnabled(image_editor_.can_redo());
+
   if (display_texture_.initialized()) {
-    display_texture_.UpdateFromFloats(pixel_buffer()->data());
-    ColorData bg = pixel_buffer()->background_color();
+    display_texture_.UpdateFromFloats(image_editor_.pixel_buffer()->data());
+    ColorData bg = image_editor_.pixel_buffer()->background_color();
     glClearColor(bg.red(), bg.blue(), bg.green(), 1.0);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -562,7 +571,8 @@ void FlashPhotoApp::OnMouseMove(const mingfx::Point2 &pos,
 void FlashPhotoApp::OnLeftMouseDown(const mingfx::Point2 &pos) {
   tool_x_ = pos[0];
   tool_y_ = pos[1];
-  StartStroke(tool_name_, tool_color_, tool_radius_, tool_x_, tool_y_);
+  image_editor_.StartStroke(tool_name_, tool_color_, tool_radius_, tool_x_,
+                            tool_y_);
   painting_ = true;
 }
 
@@ -579,90 +589,90 @@ void FlashPhotoApp::OnLeftMouseDrag(const mingfx::Point2 &pos,
 void FlashPhotoApp::OnLeftMouseUp(const mingfx::Point2 &pos) {
   tool_x_ = pos[0];
   tool_y_ = pos[1];
-  EndStroke(tool_x_, tool_y_);
+  image_editor_.EndStroke(tool_x_, tool_y_);
   painting_ = false;
 }
 
 void FlashPhotoApp::UpdateSimulation(double dt) {
   (void)dt;
   if (painting_) {
-    AddToStroke(tool_x_, tool_y_);
+    image_editor_.AddToStroke(tool_x_, tool_y_);
   }
 }
 
 void FlashPhotoApp::OnWindowResize(int new_width, int new_height) {
-  pixel_buffer()->Resize(new_width, new_height);
+  image_editor_.pixel_buffer()->Resize(new_width, new_height);
   display_texture_ = mingfx::Texture2D();
-  display_texture_.InitFromFloats(pixel_buffer()->width(),
-                                  pixel_buffer()->height(),
-                                  pixel_buffer()->data());
+  display_texture_.InitFromFloats(image_editor_.pixel_buffer()->width(),
+                                  image_editor_.pixel_buffer()->height(),
+                                  image_editor_.pixel_buffer()->data());
 }
 
-Tool *FlashPhotoApp::GetToolByName(const std::string &name) {
-  if (name == t_blur_.name()) {
-    return &t_blur_;
-  } else if (name == t_calligraphy_pen_.name()) {
-    return &t_calligraphy_pen_;
-  } else if (name == t_chalk_.name()) {
-    return &t_chalk_;
-  } else if (name == t_eraser_.name()) {
-    return &t_eraser_;
-  } else if (name == t_highlighter_.name()) {
-    return &t_highlighter_;
-  } else if (name == t_pen_.name()) {
-    return &t_pen_;
-  } else if (name == t_spray_can_.name()) {
-    return &t_spray_can_;
-  } else {
-    return NULL;
-  }
-}
-
-void FlashPhotoApp::StartStroke(const std::string &tool_name,
-                                const ColorData &color, float radius, int x,
-                                int y) {
-  current_tool_ = GetToolByName(tool_name);
-  tool_color_ = color;
-  tool_radius_ = radius;
-  if ((current_tool_) && (current_buffer_)) {
-    SaveStateForPossibleUndo();
-    current_tool_->StartStroke(current_buffer_, x, y, tool_color_,
-                               tool_radius_);
-  }
-}
-
-void FlashPhotoApp::AddToStroke(int x, int y) {
-  if ((current_tool_) && (current_buffer_)) {
-    current_tool_->AddToStroke(x, y);
-  }
-}
-
-void FlashPhotoApp::EndStroke(int x, int y) {
-  if ((current_tool_) && (current_buffer_)) {
-    current_tool_->EndStroke(x, y);
-  }
-}
-
-void FlashPhotoApp::LoadFromFile(const std::string &filename) {
-  if (current_buffer_ != NULL) {
-    SaveStateForPossibleUndo();
-    current_buffer_->LoadFromFile(filename);
-  } else {
-    current_buffer_ = new PixelBuffer(filename);
-  }
-}
-
-void FlashPhotoApp::SaveToFile(const std::string &filename) {
-  current_buffer_->SaveToFile(filename);
-}
-
-void FlashPhotoApp::ApplyBlurFilter(float radius) {
-  SaveStateForPossibleUndo();
-  image_editor_.ApplyBlurFilter(radius);
-  // convo_filter_blur_.set_slider_radius(radius);
-  // convo_filter_blur_.ApplyToBuffer(current_buffer_);
-}
-
+// Tool *FlashPhotoApp::GetToolByName(const std::string &name) {
+//   if (name == t_blur_.name()) {
+//     return &t_blur_;
+//   } else if (name == t_calligraphy_pen_.name()) {
+//     return &t_calligraphy_pen_;
+//   } else if (name == t_chalk_.name()) {
+//     return &t_chalk_;
+//   } else if (name == t_eraser_.name()) {
+//     return &t_eraser_;
+//   } else if (name == t_highlighter_.name()) {
+//     return &t_highlighter_;
+//   } else if (name == t_pen_.name()) {
+//     return &t_pen_;
+//   } else if (name == t_spray_can_.name()) {
+//     return &t_spray_can_;
+//   } else {
+//     return NULL;
+//   }
+// }
+//
+// void FlashPhotoApp::StartStroke(const std::string &tool_name,
+//                                 const ColorData &color, float radius, int x,
+//                                 int y) {
+//   current_tool_ = GetToolByName(tool_name);
+//   tool_color_ = color;
+//   tool_radius_ = radius;
+//   if ((current_tool_) && (current_buffer_)) {
+//     SaveStateForPossibleUndo();
+//     current_tool_->StartStroke(current_buffer_, x, y, tool_color_,
+//                                tool_radius_);
+//   }
+// }
+//
+// void FlashPhotoApp::AddToStroke(int x, int y) {
+//   if ((current_tool_) && (current_buffer_)) {
+//     current_tool_->AddToStroke(x, y);
+//   }
+// }
+//
+// void FlashPhotoApp::EndStroke(int x, int y) {
+//   if ((current_tool_) && (current_buffer_)) {
+//     current_tool_->EndStroke(x, y);
+//   }
+// }
+//
+// void FlashPhotoApp::LoadFromFile(const std::string &filename) {
+//   if (current_buffer_ != NULL) {
+//     SaveStateForPossibleUndo();
+//     current_buffer_->LoadFromFile(filename);
+//   } else {
+//     current_buffer_ = new PixelBuffer(filename);
+//   }
+// }
+//
+// void FlashPhotoApp::SaveToFile(const std::string &filename) {
+//   current_buffer_->SaveToFile(filename);
+// }
+//
+// void FlashPhotoApp::ApplyBlurFilter(float radius) {
+//   SaveStateForPossibleUndo();
+//   image_editor_.ApplyBlurFilter(radius);
+//   // convo_filter_blur_.set_slider_radius(radius);
+//   // convo_filter_blur_.ApplyToBuffer(current_buffer_);
+// }
+//
 // void FlashPhotoApp::ApplyMotionBlurFilter(float rad, MBlurDir dir) {
 //   SaveStateForPossibleUndo();
 //   convo_filter_motion_blur_.set_slider_radius(rad);
@@ -670,92 +680,93 @@ void FlashPhotoApp::ApplyBlurFilter(float radius) {
 //   convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
 // }
 
-void FlashPhotoApp::ApplyMotionBlurFilter(float rad,
-    ConvolutionFilterMotionBlur::MBlurDir dir) {
-  SaveStateForPossibleUndo();
-  convo_filter_motion_blur_.set_slider_radius(rad);
-  convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
-  convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
+void FlashPhotoApp::ApplyMotionBlurFilter(float rad, MBlurDir dir) {
+  // image_editor_.SaveStateForPossibleUndo();
+  image_editor_.ApplyMotionBlurFilter(rad,
+     static_cast<ConvolutionFilterMotionBlur::BlurDir>(dir));
+  // convo_filter_motion_blur_.set_slider_radius(rad);
+  // convo_filter_motion_blur_.set_direction(MotionBlurDirectionName(dir));
+  // convo_filter_motion_blur_.ApplyToBuffer(current_buffer_);
 }
 
-void FlashPhotoApp::ApplySharpenFilter(float rad) {
-  SaveStateForPossibleUndo();
-  convo_filter_sharp_.set_slider_radius(rad);
-  convo_filter_sharp_.ApplyToBuffer(current_buffer_);
-}
-
-void FlashPhotoApp::ApplyEdgeDetectFilter() {
-  SaveStateForPossibleUndo();
-  convo_filter_edge_.ApplyToBuffer(current_buffer_);
-}
-
-void FlashPhotoApp::ApplyThresholdFilter(float value) {
-  SaveStateForPossibleUndo();
-  threshold_filter_.set_threshold(value);
-  threshold_filter_.ApplyToBuffer(current_buffer_);
-}
-
-void FlashPhotoApp::ApplySaturateFilter(float scale) {
-  SaveStateForPossibleUndo();
-  sat_filter_.set_saturation_scale(scale);
-  sat_filter_.ApplyToBuffer(current_buffer_);
-}
-
-void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
-  SaveStateForPossibleUndo();
-  channel_filter_.set_rgb_scale(red, green, blue);
-  channel_filter_.ApplyToBuffer(current_buffer_);
-}
-
-void FlashPhotoApp::ApplyQuantizeFilter(int num) {
-  SaveStateForPossibleUndo();
-  quantize_filter_.set_num_bins(num);
-  quantize_filter_.ApplyToBuffer(current_buffer_);
-}
-
-bool FlashPhotoApp::can_undo() { return saved_states_.size(); }
-
-bool FlashPhotoApp::can_redo() { return undone_states_.size(); }
-
-void FlashPhotoApp::Undo() {
-  if (can_undo()) {
-    // save state for a possilbe redo
-    undone_states_.push_front(current_buffer_);
-
-    // make the top state on the undo stack the current one
-    current_buffer_ = saved_states_.front();
-    saved_states_.pop_front();
-  }
-}
-
-void FlashPhotoApp::Redo() {
-  if (can_redo()) {
-    // save state for a possible undo
-    saved_states_.push_front(current_buffer_);
-
-    // make the top state on the redo stack the current one
-    current_buffer_ = undone_states_.front();
-    undone_states_.pop_front();
-  }
-}
-
-void FlashPhotoApp::SaveStateForPossibleUndo() {
-  PixelBuffer *buffer_copy = new PixelBuffer(*current_buffer_);
-  saved_states_.push_front(buffer_copy);
-
-  // remove the oldest undos if we've over our limit
-  while (saved_states_.size() > max_undos_) {
-    delete saved_states_.back();
-    saved_states_.pop_back();
-  }
-
-  // committing a new state invalidates the states saved in the redo stack,
-  // so, we simply clear out this stack.
-  while (!undone_states_.empty()) {
-    delete undone_states_.back();
-    undone_states_.pop_back();
-  }
-}
+// void FlashPhotoApp::ApplySharpenFilter(float rad) {
+//   SaveStateForPossibleUndo();
+//   convo_filter_sharp_.set_slider_radius(rad);
+//   convo_filter_sharp_.ApplyToBuffer(current_buffer_);
+// }
+//
+// void FlashPhotoApp::ApplyEdgeDetectFilter() {
+//   SaveStateForPossibleUndo();
+//   convo_filter_edge_.ApplyToBuffer(current_buffer_);
+// }
+//
+// void FlashPhotoApp::ApplyThresholdFilter(float value) {
+//   SaveStateForPossibleUndo();
+//   threshold_filter_.set_threshold(value);
+//   threshold_filter_.ApplyToBuffer(current_buffer_);
+// }
+//
+// void FlashPhotoApp::ApplySaturateFilter(float scale) {
+//   SaveStateForPossibleUndo();
+//   sat_filter_.set_saturation_scale(scale);
+//   sat_filter_.ApplyToBuffer(current_buffer_);
+// }
+//
+// void FlashPhotoApp::ApplyChannelsFilter(float red, float green, float blue) {
+//   SaveStateForPossibleUndo();
+//   channel_filter_.set_rgb_scale(red, green, blue);
+//   channel_filter_.ApplyToBuffer(current_buffer_);
+// }
+//
+// void FlashPhotoApp::ApplyQuantizeFilter(int num) {
+//   SaveStateForPossibleUndo();
+//   quantize_filter_.set_num_bins(num);
+//   quantize_filter_.ApplyToBuffer(current_buffer_);
+// }
+//
+// bool FlashPhotoApp::can_undo() { return saved_states_.size(); }
+//
+// bool FlashPhotoApp::can_redo() { return undone_states_.size(); }
+//
+// void FlashPhotoApp::Undo() {
+//   if (can_undo()) {
+//     // save state for a possilbe redo
+//     undone_states_.push_front(current_buffer_);
+//
+//     // make the top state on the undo stack the current one
+//     current_buffer_ = saved_states_.front();
+//     saved_states_.pop_front();
+//   }
+// }
+//
+// void FlashPhotoApp::Redo() {
+//   if (can_redo()) {
+//     // save state for a possible undo
+//     saved_states_.push_front(current_buffer_);
+//
+//     // make the top state on the redo stack the current one
+//     current_buffer_ = undone_states_.front();
+//     undone_states_.pop_front();
+//   }
+// }
+//
+// void FlashPhotoApp::SaveStateForPossibleUndo() {
+//   PixelBuffer *buffer_copy = new PixelBuffer(*current_buffer_);
+//   saved_states_.push_front(buffer_copy);
+//
+//   // remove the oldest undos if we've over our limit
+//   while (saved_states_.size() > max_undos_) {
+//     delete saved_states_.back();
+//     saved_states_.pop_back();
+//   }
+//
+//   // committing a new state invalidates the states saved in the redo stack,
+//   // so, we simply clear out this stack.
+//   while (!undone_states_.empty()) {
+//     delete undone_states_.back();
+//     undone_states_.pop_back();
+//   }
+// }
 
 PixelBuffer *FlashPhotoApp::pixel_buffer() { return current_buffer_; }
 

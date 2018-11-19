@@ -100,7 +100,7 @@ void ImageEditor::ApplyBlurFilter(float radius) {
 
 // need to edit to match current set-up
 void ImageEditor::ApplyMotionBlurFilter(float rad,
-    ConvolutionFilterMotionBlur::MBlurDir dir) {
+    ConvolutionFilterMotionBlur::BlurDir dir) {
   SaveStateForPossibleUndo();
   f_motion_blur_.set_slider_radius(rad);
   //f_motion_blur_.set_direction(MotionBlurDirectionName(dir));
