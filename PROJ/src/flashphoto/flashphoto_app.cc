@@ -26,6 +26,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <utility>
 #include "imagetools/color_data.h"
 #include "imagetools/pixel_buffer.h"
+#include "imagetools/image_editor.h"
 #include "imagetools/convolution_filter_blur.h"
 
 namespace image_tools {

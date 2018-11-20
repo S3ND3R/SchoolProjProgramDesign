@@ -26,7 +26,7 @@ OBJDIR = $(BUILDDIR)/obj/$(PROJECT_NAME)
 LIBDIR = $(BUILDDIR)/lib
 EXTERNAL_DIR = $(PROJ_DIR)/src/external
 MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
-
+IMAGE_DIR = $(PROJ_DIR)/src/imagetools
 # The name of the executable to create
 EXEFILE = $(BINDIR)/$(PROJECT_NAME)
 
@@ -39,9 +39,8 @@ SRCFILES = $(wildcard $(SRCDIR)/*.cc)
 # .o in order to generate the list of .o files make should create.
 OBJFILES = $(notdir $(patsubst %.cc,%.o,$(SRCFILES)))
 
-
 # Add -Idirname to add directories to the compiler search path for finding .h files
-INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(SRCDIR)/.. -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0 -I$(PROJ_DIR)/src/imagetools
+INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(SRCDIR)/.. -I$(IMAGE_DIR) -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0
 
 # Add -Ldirname to add directories to the linker search path for finding libraries
 LIBDIRS = -L$(LIBDIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
@@ -50,7 +49,8 @@ LIBDIRS = -L$(LIBDIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
 LIBS =  -lMinGfxd -lnanogui -Wl,-rpath,$(MINGFX_DIR)/lib
 #-lGL -lGLU
 
-UNAME = $(shell uname)
+UNAME = $(shell uname)#include "imagetools/image_editor.h"
+
 ifeq ($(UNAME), Darwin) # Mac OSX
 	LIBS += -framework glut -framework opengl
 else # LINUX
