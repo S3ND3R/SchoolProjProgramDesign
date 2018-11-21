@@ -23,8 +23,8 @@ PROJ_DIR = $(CS3081DIR)/PROJ
 BUILDDIR = $(PROJ_DIR)/build
 BINDIR = $(BUILDDIR)/bin
 # !!! use to be in OBJDIR /$(PROJECT_NAME)
-OBJDIR = $(BUILDDIR)/obj
-LIBDIR = $(BUILDDIR)/lib/$(LIBRARY_NAME)
+OBJDIR = $(BUILDDIR)/obj/$(LIBRARY_NAME)
+LIBDIR = $(BUILDDIR)/lib
 EXTERNAL_DIR = $(PROJ_DIR)/src/external
 MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
 
@@ -32,7 +32,7 @@ MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
 # !!!use to be  PROJECT_NAME
 LIBFILE = $(LIBDIR)/$(LIBRARY_NAME)
 
-# The list of files to compile for this project.  Defaults to all
+# The list of files to compile for this project.  Defaults to alllash
 # of the .cpp and .cc files in the source directory.  (We use both .cpp
 # and .cc in order to support two different popular naming conventions.)
 SRCFILES = $(wildcard $(SRCDIR)/*.cc)
@@ -43,13 +43,13 @@ OBJFILES = $(notdir $(patsubst %.cc,%.o,$(SRCFILES)))
 
 
 # Add -Idirname to add directories to the compiler search path for finding .h files
-INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(SRCDIR)/.. -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0 -I$(PROJ_DIR)/src/imagetools
+INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(PROJ_DIR)/src/imagetools -I$(SRCDIR)/.. -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0
 
 # Add -Ldirname to add directories to the linker search path for finding libraries
 LIBDIRS = -L$(LIBDIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
 
 # Add -llibname to link with external libraries
-LIBS =  -lMinGfxd -lnanogui -Wl,-rpath,$(MINGFX_DIR)/lib -limagetools.a
+LIBS =  -lMinGfxd -lnanogui -limagetools -Wl,-rpath,$(MINGFX_DIR)/lib
 #-lGL -lGLU
 
 UNAME = $(shell uname)
@@ -169,4 +169,4 @@ $(MINGFX_DIR):
 # Clean up the project, removing ALL files generated during a build.
 clean:
 	@rm -rf $(OBJDIR)
-	@rm -rf $(EXEFILE)
+	@rm -rf $(LIBFILE)

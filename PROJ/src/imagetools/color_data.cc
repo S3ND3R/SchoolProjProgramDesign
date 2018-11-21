@@ -58,24 +58,13 @@ bool operator==(const ColorData& a, const ColorData& b) {
   // comparisons
   static const float EPSILON = 0.00000001;
 
-<<<<<<< HEAD
   return (
       fabs(a.red_ - b.red_) < EPSILON && fabs(a.green_ - b.green_) < EPSILON &&
       fabs(a.blue_ - b.blue_) < EPSILON && fabs(a.alpha_ - b.alpha_) < EPSILON);
-}
-
-bool operator!=(const ColorData& a, const ColorData& b) { return !(a == b); }
-
-=======
-  return (fabs(a.red_ - b.red_) < EPSILON &&
-          fabs(a.green_ - b.green_) < EPSILON &&
-          fabs(a.blue_ - b.blue_) < EPSILON &&
-          fabs(a.alpha_ - b.alpha_) < EPSILON);
 }
 
 bool operator!=(const ColorData& a, const ColorData& b) {
   return !(a == b);
 }
 
->>>>>>> master
 } /* namespace image_tools */
