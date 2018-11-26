@@ -23,13 +23,13 @@ PROJ_DIR = $(CS3081DIR)/PROJ
 BUILDDIR = $(PROJ_DIR)/build
 BINDIR = $(BUILDDIR)/bin
 # !!! use to be in OBJDIR /$(PROJECT_NAME)
-OBJDIR = $(BUILDDIR)/obj/$(LIBRARY_NAME)
-LIBDIR = $(BUILDDIR)/lib
+OBJDIR = $(BUILDDIR)/obj
+LIBDIR = $(BUILDDIR)/lib/$(LIBRARY_NAME)
 EXTERNAL_DIR = $(PROJ_DIR)/src/external
 MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
+IMAGE_TOOL_DIR = $(PROJ_DIR)/src/imagetools
 
 # The name of the executable to create
-# !!!use to be  PROJECT_NAME
 LIBFILE = $(LIBDIR)/$(LIBRARY_NAME)
 
 # The list of files to compile for this project.  Defaults to alllash
@@ -43,7 +43,7 @@ OBJFILES = $(notdir $(patsubst %.cc,%.o,$(SRCFILES)))
 
 
 # Add -Idirname to add directories to the compiler search path for finding .h files
-INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(PROJ_DIR)/src/imagetools -I$(SRCDIR)/.. -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0
+INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(SRCDIR)/.. -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0 -I$(IMAGE_TOOL_DIR)
 
 # Add -Ldirname to add directories to the linker search path for finding libraries
 LIBDIRS = -L$(LIBDIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
@@ -96,7 +96,7 @@ $(addprefix $(OBJDIR)/, $(OBJFILES)): | $(OBJDIR)
 
 # And, this rule provides a recipe for creating that objdir.  The same rule applies
 # to the bindir, where the exe will be output.
-$(OBJDIR) $(BINDIR):
+$(OBJDIR) $(BINDIR) $(LIBDIR):
 	@mkdir -p $@
 
 
@@ -151,8 +151,8 @@ make-depend-cxx=$(CXX) -MM -MF $3 -MP -MT $2 $(CXXFLAGS) $1
 # output the exe there.  The recipe that follows calls g++ to tell it to link all the
 # .o files into an executable program.
 $(LIBFILE): $(addprefix $(OBJDIR)/, $(OBJFILES)) | $(LIBDIR)
+	@echo "==== Linking $@. ===="
 	ar rcs $(LIBFILE) $(addprefix $(OBJDIR)/, $(OBJFILES)) $@
-#	@echo "==== Linking $@. ===="
 #	$(CXX) $(OMP) $(LDFLAGS) $(addprefix $(OBJDIR)/, $(OBJFILES)) -o $@ $(LDLIBS)
 
 check-style:
@@ -169,4 +169,4 @@ $(MINGFX_DIR):
 # Clean up the project, removing ALL files generated during a build.
 clean:
 	@rm -rf $(OBJDIR)
-	@rm -rf $(LIBFILE)
+	#@rm -rf $(LIBFILE)
