@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 02
 
-Run on November 21, 13:02:53 PM.
+Run on November 26, 09:54:33 AM.
 
 
 #### System Files and PROJ Directory Structure
@@ -52,6 +52,10 @@ Run on November 21, 13:02:53 PM.
 + Pass: Copy directory "Copy Dependencies".
 
 
+
++ Fail: Check that file "./src/mia/image_editor_commands.cc" exists.
+
+     "./src/mia/image_editor_commands.cc" not found.
 
 + Fail: Ensuring code follows style guide.
 
@@ -107,8 +111,24 @@ make: *** [flashphoto] Error 2
 
 
 
++ Skip: Check that file "./build/lib/libimagetools.a" exists.
+
+  This test was not run because of an earlier failing test.
+
++ Skip: Check that file "./build/bin/flashphoto" exists.
+
+  This test was not run because of an earlier failing test.
+
++ Skip: Check that file "./build/bin/mia" exists.
+
+  This test was not run because of an earlier failing test.
+
 
 #### Run Student Tests
+
++ Skip: Check that file "./build/test/gtests" exists.
+
+  This test was not run because of an earlier failing test.
 
 + Skip: Running Student Tests.
 
