@@ -19,7 +19,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include "imagetools/color_data.h"
 #include "imagetools/pixel_buffer.h"
 
-namespace imagetools {
+namespace image_tools {
 
 ImageEditor::ImageEditor(PixelBuffer *buffer) {
   current_buffer_ = buffer;

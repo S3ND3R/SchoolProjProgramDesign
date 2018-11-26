@@ -95,7 +95,7 @@ FloatMatrix *ConvolutionFilterMotionBlur::CreateKernel() {
       for (int y = 0; y < motion_kernel->width(); y++) {
        if(x + y == motion_kernel->width() - 1)
         motion_kernel->set_value(x,y,1.0);
-       elsex == y
+       else
         motion_kernel->set_value(x,y,0.0);
       }
      }
