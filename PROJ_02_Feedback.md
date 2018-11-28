@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 02
 
-Run on November 27, 18:14:58 PM.
+Run on November 28, 09:10:03 AM.
 
 
 #### System Files and PROJ Directory Structure
@@ -87,52 +87,22 @@ make: *** [check-style] Error 2
 
 
 
-+ Fail: Check that make compiles.
-
-    Make compile fails with errors:.
-<pre>cd src/flashphoto; make -j
-make[1]: Entering directory '/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/flashphoto'
-==== Auto-Generating Dependencies for main.cc. ====
-/soft/gcc/7.1.0/Linux_x86_64/bin/g++ -MM -MF /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/main.d -MP -MT /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/main.o -W -Werror -Wall -Wextra -fdiagnostics-color=always -Wfloat-equal -Wshadow -Wcast-align -Wcast-qual -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wswitch-default -Wsuggest-override -Wstrict-null-sentinel -Wsign-promo -Wold-style-cast -Woverloaded-virtual -Wctor-dtor-privacy -Wno-old-style-cast -Wno-cast-align -g -std=c++14 -c -I.. -I. -I./.. -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/nanovg -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/MinGfx-1.0  main.cc
-==== Auto-Generating Dependencies for flashphoto_app.cc. ====
-/soft/gcc/7.1.0/Linux_x86_64/bin/g++ -MM -MF /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/flashphoto_app.d -MP -MT /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/flashphoto_app.o -W -Werror -Wall -Wextra -fdiagnostics-color=always -Wfloat-equal -Wshadow -Wcast-align -Wcast-qual -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wswitch-default -Wsuggest-override -Wstrict-null-sentinel -Wsign-promo -Wold-style-cast -Woverloaded-virtual -Wctor-dtor-privacy -Wno-old-style-cast -Wno-cast-align -g -std=c++14 -c -I.. -I. -I./.. -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/nanovg -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/MinGfx-1.0  flashphoto_app.cc
-==== Compiling main.cc into /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/main.o. ====
-/soft/gcc/7.1.0/Linux_x86_64/bin/g++ -fopenmp -W -Werror -Wall -Wextra -fdiagnostics-color=always -Wfloat-equal -Wshadow -Wcast-align -Wcast-qual -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wswitch-default -Wsuggest-override -Wstrict-null-sentinel -Wsign-promo -Wold-style-cast -Woverloaded-virtual -Wctor-dtor-privacy -Wno-old-style-cast -Wno-cast-align -g -std=c++14 -c -I.. -I. -I./.. -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/nanovg -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/MinGfx-1.0   -c -fPIC -o  /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/main.o main.cc
-==== Compiling flashphoto_app.cc into /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/flashphoto_app.o. ====
-/soft/gcc/7.1.0/Linux_x86_64/bin/g++ -fopenmp -W -Werror -Wall -Wextra -fdiagnostics-color=always -Wfloat-equal -Wshadow -Wcast-align -Wcast-qual -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wswitch-default -Wsuggest-override -Wstrict-null-sentinel -Wsign-promo -Wold-style-cast -Woverloaded-virtual -Wctor-dtor-privacy -Wno-old-style-cast -Wno-cast-align -g -std=c++14 -c -I.. -I. -I./.. -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/nanovg -isystem/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/include/MinGfx-1.0   -c -fPIC -o  /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/flashphoto_app.o flashphoto_app.cc
-==== Linking /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/bin/flashphoto. ====
-/soft/gcc/7.1.0/Linux_x86_64/bin/g++ -fopenmp -L/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/lib -L/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/lib -L/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/lib/MinGfx-1.0 /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/main.o /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/obj/flashphoto/flashphoto_app.o -o /class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/bin/flashphoto -lMinGfxd -lnanogui -limagetools -Wl,-rpath,/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/external/MinGfx/build/install/lib -lglut -lGL -lGLU
-/usr/bin/ld: cannot find -limagetools
-collect2: error: ld returned 1 exit status
-Makefile:152: recipe for target '/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/bin/flashphoto' failed
-make[1]: *** [/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/build/bin/flashphoto] Error 1
-make[1]: Leaving directory '/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/flashphoto'
-Makefile:10: recipe for target 'flashphoto' failed
-make: *** [flashphoto] Error 2
-</pre>
++ Pass: Check that make compiles.
 
 
 
-+ Skip: Check that file "./build/lib/libimagetools.a" exists.
++ Pass: Check that file "./build/lib/libimagetools.a" exists.
 
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "./build/bin/flashphoto" exists.
 
-+ Skip: Check that file "./build/bin/flashphoto" exists.
-
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file "./build/bin/mia" exists.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "./build/bin/mia" exists.
 
 
 #### Run Student Tests
 
-+ Skip: Check that file "./build/test/gtests" exists.
++ Pass: Check that file "./build/test/gtests" exists.
 
-  This test was not run because of an earlier failing test.
++ Pass: Running Student Tests.
 
-+ Skip: Running Student Tests.
 
-  This test was not run because of an earlier failing test.
 
