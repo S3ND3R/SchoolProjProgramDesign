@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 02
 
-Run on November 26, 14:05:34 PM.
+Run on November 27, 18:14:58 PM.
 
 
 #### System Files and PROJ Directory Structure
@@ -57,9 +57,7 @@ Run on November 26, 14:05:34 PM.
 
 
 
-+ Fail: Check that file "./src/mia/image_editor_commands.cc" exists.
-
-     "./src/mia/image_editor_commands.cc" not found.
++ Pass: Check that file "./src/mia/image_editor_commands.cc" exists.
 
 + Fail: Ensuring code follows style guide.
 
