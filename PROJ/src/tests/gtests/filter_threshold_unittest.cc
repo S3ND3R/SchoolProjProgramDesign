@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "flashphoto/filter_threshold.h"
+#include "imagetools/filter_threshold.h"
 
 using image_tools::FilterThreshold;
 

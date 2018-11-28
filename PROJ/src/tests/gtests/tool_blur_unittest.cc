@@ -3,7 +3,7 @@
 #include <math.h>
 #include <iostream>
 #include "gtest/gtest.h"
-#include "flashphoto/tool_blur.h"
+#include "imagetools/tool_blur.h"
 
 using image_tools::ToolBlur;
 

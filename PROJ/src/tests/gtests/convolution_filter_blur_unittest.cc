@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "flashphoto/convolution_filter_blur.h"
+#include "imagetools/convolution_filter_blur.h"
 
 using image_tools::ConvolutionFilterBlur;
 

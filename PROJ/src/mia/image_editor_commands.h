@@ -135,18 +135,19 @@ class ThresholdFilterCommand : public ImageEditorCommand {
   float cutoff_;
 };
 
-/** Specific command for executing a motion blur filter. */
+/** Specific command for executing a motion blur filter.
+    Replaced MBlurDir with BlurDir */
 class MotionBlurFilterCommand : public ImageEditorCommand {
  public:
   MotionBlurFilterCommand(ImageEditor *image_editor, float radius,
-                          ConvolutionFilterMotionBlur::MBlurDir dir);
+                          ConvolutionFilterMotionBlur::BlurDir dir);
   virtual ~MotionBlurFilterCommand();
 
   void Execute() override;
 
  private:
   float radius_;
-  ConvolutionFilterMotionBlur::MBlurDir dir_;
+  ConvolutionFilterMotionBlur::BlurDir dir_;
 };
 
 /** Specific command for executing an undo. */
