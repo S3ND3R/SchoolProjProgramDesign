@@ -21,7 +21,7 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <iostream>
 #include "imagetools/color_data.h"
 #include "imageio/image_manager.h"
-
+#include "imageio/image.h"
 using std::cerr;
 using std::endl;
 using imageio::Image;
@@ -107,7 +107,15 @@ void PixelBuffer::Resize(int new_width, int new_height) {
 
 void PixelBuffer::SaveToFile(const std::string &filename) { (void)filename; }
 
-void PixelBuffer::LoadFromFile(const std::string &filename) { (void)filename; }
+void PixelBuffer::LoadFromFile(const std::string &filename) {
+  std::cout << "load from file was entered" << endl;
+  Image* image = ImageManager::instance().LoadFromFile(filename);
+  std::cout << "Width: " << image->Width()
+            << ", Height: " << image->Height()
+            << ", NumChannels: " << image->NumChannels() << std::endl;
+  std::cout << "load from file exited" << endl;
+  delete image;
+}
 
 bool operator==(const PixelBuffer& a, const PixelBuffer& b) {
   if ((a.width() != b.width()) || (a.height() != b.height())) {

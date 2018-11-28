@@ -30,6 +30,11 @@ FLASHPHOTO_DIR = $(PROJ_DIR)/src/flashphoto
 GTEST_DIR = $(BUILDDIR)
 GTEST_HEADER = $(BUILDDIR)/include/gtest/gtest.h
 
+#imageio Path
+IMAGEIO_DIR = /classes/csel-f18c3081
+IMAGEIO_LIB_DIR = $(IMAGEIO_DIR)/lib
+IMAGEIO_INCLUDE_DIR = $(IMAGEIO_DIR)/include
+
 # The name of the executable to create
 EXEFILE = $(BINDIR)/$(PROJECT_NAME)
 
@@ -45,13 +50,13 @@ OBJFILES = $(notdir $(patsubst %.cc,%.o,$(SRCFILES)))
 
 
 # Add -Idirname to add directories to the compiler search path for finding .h files
-INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(PROJ_DIR)/src -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0 -isystem $(GTEST_DIR)/include
+INCLUDEDIRS = -I.. -I$(SRCDIR) -I$(PROJ_DIR)/src -isystem$(MINGFX_DIR)/include -isystem$(MINGFX_DIR)/include/nanovg -isystem$(MINGFX_DIR)/include/MinGfx-1.0 -isystem $(GTEST_DIR)/include -I$(IMAGEIO_INCLUDE_DIR)
 
 # Add -Ldirname to add directories to the linker search path for finding libraries
-LIBDIRS = -L$(LIBDIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
+LIBDIRS = -L$(LIBDIR) -L$(IMAGEIO_LIB_DIR) -L$(MINGFX_DIR)/lib -L$(MINGFX_DIR)/lib/MinGfx-1.0
 
 # Add -llibname to link with external libraries
-LIBS =  -limagetools -lMinGfxd -lnanogui -lgtest -lgtest_main -Wl,-rpath,$(MINGFX_DIR)/lib 
+LIBS =  -limagetools -limageio -lMinGfxd -lnanogui -lgtest -lgtest_main -Wl,-rpath,$(MINGFX_DIR)/lib
 #-lGL -lGLU
 
 UNAME = $(shell uname)
