@@ -29,6 +29,11 @@ EXTERNAL_DIR = $(PROJ_DIR)/src/external
 MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
 IMAGE_TOOL_DIR = $(PROJ_DIR)/src/imagetools
 
+#imageio Path
+IMAGEIO_DIR = /classes/csel-f18c3081
+IMAGEIO_LIB_DIR = $(IMAGEIO_DIR)/lib
+IMAGEIO_INCLUDE_DIR = $(IMAGEIO_DIR)/include/imageio
+
 # The name of the executable to create
 LIBFILE = $(LIBDIR)/$(LIBRARY_NAME)
 
