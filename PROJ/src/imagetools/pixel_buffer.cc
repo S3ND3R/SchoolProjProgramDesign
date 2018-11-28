@@ -20,9 +20,13 @@ Author(s) of Significant Updates/Modifications to the File:
 #include <cstring>
 #include <iostream>
 #include "imagetools/color_data.h"
+#include "imageio/image_manager.h"
 
 using std::cerr;
 using std::endl;
+using imageio::Image;
+using imageio::ImageManager;
+
 namespace image_tools {
 
 PixelBuffer::PixelBuffer(int w, int h, ColorData background_color)
