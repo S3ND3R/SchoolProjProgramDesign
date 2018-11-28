@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 02
 
-Run on November 28, 10:40:33 AM.
+Run on November 28, 14:28:35 PM.
 
 
 #### System Files and PROJ Directory Structure
@@ -78,7 +78,7 @@ Done processing flashphoto_app.cc
 Done processing main.cc
 Done processing flashphoto_app.h
 Total errors found: 9
-Makefile:156: recipe for target 'check-style' failed
+Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/class/grades/Fall-2018/csci3081/student-repos/PROJ_02_Feedback/repo-weber767/PROJ/src/flashphoto'
 Makefile:4: recipe for target 'check-style' failed
