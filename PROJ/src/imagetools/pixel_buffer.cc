@@ -108,12 +108,22 @@ void PixelBuffer::Resize(int new_width, int new_height) {
 void PixelBuffer::SaveToFile(const std::string &filename) { (void)filename; }
 
 void PixelBuffer::LoadFromFile(const std::string &filename) {
-  std::cout << "load from file was entered" << endl;
   Image* image = ImageManager::instance().LoadFromFile(filename);
-  std::cout << "Width: " << image->Width()
-            << ", Height: " << image->Height()
-            << ", NumChannels: " << image->NumChannels() << std::endl;
-  std::cout << "load from file exited" << endl;
+  float *buffer_p = data();
+  float r,g,b,a;
+  for (int i = 0; i < image->Width(); i ++) {
+    for (int j = 0; j < image->Height(); j ++) {
+      r = image->FloatValue(i,j,0);
+      g = image->FloatValue(i,j,1);
+      b = image->FloatValue(i,j,2);
+      a = image->FloatValue(i,j,3);
+      // convert char val to float
+      image->SetFloatValue(i,j,0,r);
+      image->SetFloatValue(i,j,1,g);
+      image->SetFloatValue(i,j,0,b);
+      image->SetFloatValue(i,j,3,a);
+    }
+  }
   delete image;
 }
 
