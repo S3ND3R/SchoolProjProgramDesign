@@ -105,11 +105,32 @@ void PixelBuffer::Resize(int new_width, int new_height) {
   *this = tmp;
 }
 
-void PixelBuffer::SaveToFile(const std::string &filename) { (void)filename; }
+void PixelBuffer::SaveToFile(const std::string &filename) {
+  Image img(this->width(), this->height(), 4);
+  float r,g,b,a;
+  for (int i = 0; i < img.Width(); i ++) {
+    for (int j = 0; j < img.Height(); j ++) {
+      ColorData pixel = this->pixel(i,j);
+      r = pixel.red();
+      g = pixel.green();
+      b = pixel.blue();
+      a = pixel.alpha();
+
+      img.SetFloatValue(i,j,0,r);
+      img.SetFloatValue(i,j,1,g);
+      img.SetFloatValue(i,j,2,b);
+      img.SetFloatValue(i,j,3,a);
+    }
+  }
+  std::string file = filename;
+  file = file + ".png";
+  ImageManager::instance().SaveToFile(file, img);
+}
 
 void PixelBuffer::LoadFromFile(const std::string &filename) {
   Image* image = ImageManager::instance().LoadFromFile(filename);
-  float *buffer_p = data();
+  ColorData *color_ptr = new ColorData();
+  this->Resize(image->Width(),image->Height());
   float r,g,b,a;
   for (int i = 0; i < image->Width(); i ++) {
     for (int j = 0; j < image->Height(); j ++) {
@@ -117,14 +138,17 @@ void PixelBuffer::LoadFromFile(const std::string &filename) {
       g = image->FloatValue(i,j,1);
       b = image->FloatValue(i,j,2);
       a = image->FloatValue(i,j,3);
-      // convert char val to float
-      image->SetFloatValue(i,j,0,r);
-      image->SetFloatValue(i,j,1,g);
-      image->SetFloatValue(i,j,0,b);
-      image->SetFloatValue(i,j,3,a);
+
+      color_ptr->set_red(r);
+      color_ptr->set_green(g);
+      color_ptr->set_blue(b);
+      color_ptr->set_alpha(a);
+
+      this->set_pixel(i,j,*color_ptr);
     }
   }
   delete image;
+  delete color_ptr;
 }
 
 bool operator==(const PixelBuffer& a, const PixelBuffer& b) {
