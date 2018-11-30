@@ -18,12 +18,10 @@ class CommandLineProcessor {
  public:
   void ProcessCommandLine(int argc, char* argv[]);
 
-  ImageEditorCommand *GetCommand(const std::string &cmd);
+  ImageEditorCommand *GetCommand(const std::string &cmd, int cmd_indx);
 
  private:
-   std::vector<ImageEditorCommand*> cmd_v_;
-  //int arg_cnt_;
-  //char* arg_ptr_;
+  std::vector<ImageEditorCommand*> cmd_v_;
 };
 } // namespace image_tools
 #endif     // COMMAND_LINE_PROCESSOR_H_
