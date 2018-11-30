@@ -291,7 +291,6 @@ void FlashPhotoApp::InitNanoGUI() {
     (void)value;
     int intValue = static_cast<int>(value);
     mblur_dir_ = static_cast<MBlurDir>(intValue);
-    //mblur_dir_ = static_cast<ConvolutionFilterMotionBlur::MBlurDir>(intValue);
   });
 
   b = new nanogui::Button(m_blur_win, "Apply");

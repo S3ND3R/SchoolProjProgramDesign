@@ -106,11 +106,12 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //
 //   Tool *GetToolByName(const std::string &name);
 //
-//   /** Call this from the controller to being a new stroke at pixel (x,y) using
-//    the tool named tool_name and the specified color and radius.  Since it
-//    takes multiple frames to complete a stroke the tool_name, color, and radius
-//    are saved as state variables and are used for subsequent calls to
-//    AddToStroke() and EndStroke(). */
+//   /** Call this from the controller to being a new stroke at pixel (x,y)
+//       using the tool named tool_name and the specified color and radius.
+//       Since it takes multiple frames to complete a stroke the tool_name,
+//       color, and radius are saved as state variables and are used for
+//       subsequent calls to AddToStroke() and EndStroke(). */
+//
 //   void StartStroke(const std::string &tool_name, const ColorData &color,
 //                    float radius, int x, int y);
 //
@@ -145,8 +146,8 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
    pixel buffer using the current motion blur filter state. */
   void ApplyMotionBlurFilter(float radius, MBlurDir dir);
 //
-//   /** Call this from the controller to apply the sharpen filter to the current
-//    pixel buffer using the current sharpen filter state. */
+//   /** Call this from the controller to apply the sharpen filter to
+//       the current pixel buffer using the current sharpen filter state. */
 //   void ApplySharpenFilter(float radius);
 //
 //   /** Call this from the controller to apply the edge detect filter to the
@@ -154,21 +155,21 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //    pixel buffer using the current edge detect filter state. */
 //   void ApplyEdgeDetectFilter();
 //
-//   /** Call this from the controller to apply the threshold filter to the current
-//    pixel buffer using the current threshold filter state. */
+//   /** Call this from the controller to apply the threshold filter to the
+//       current pixel buffer using the current threshold filter state. */
 //   void ApplyThresholdFilter(float cutoff_value);
 //
-//   /** Call this from the controller to apply the saturate filter to the current
-//    pixel buffer using the current saturate filter state. */
+//   /** Call this from the controller to apply the saturate filter to the
+//       current pixel buffer using the current saturate filter state. */
 //   void ApplySaturateFilter(float scale_factor);
 //
-//   /** Call this from the controller to apply the channels filter to the current
-//    pixel buffer using the current channels filter state. */
+//   /** Call this from the controller to apply the channels filter to the
+//       current pixel buffer using the current channels filter state. */
 //   void ApplyChannelsFilter(float red_scale, float green_scale,
 //                            float blue_scale);
 //
-//   /** Call this from the controller to apply the quantize filter to the current
-//    pixel buffer using the current quantize filter state. */
+//   /** Call this from the controller to apply the quantize filter to the
+//       current pixel buffer using the current quantize filter state. */
 //   void ApplyQuantizeFilter(int num_bins);
 //
 //   /** Undo the last operation. */
@@ -181,8 +182,8 @@ class FlashPhotoApp : public mingfx::GraphicsApp {
 //    possible to perform an undo operation. */
 //   bool can_undo();
 //
-//   /** True if the log of undone commands is not empty, i.e., it is possible to
-//    perform a redo operation. */
+//   /** True if the log of undone commands is not empty, i.e., it is possible
+//       to perform a redo operation. */
 //   bool can_redo();
 //
   PixelBuffer *pixel_buffer();
