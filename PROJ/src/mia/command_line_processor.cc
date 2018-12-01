@@ -7,6 +7,7 @@ Original Author(s) of this File:
 #include "command_line_processor.h"
 #include <vector>
 #include <string>
+#include "imagetools/pixel_buffer.h"
 
 /**
 * commands:
@@ -39,6 +40,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]){
   std::string out_file = std::string(argv[argc - 1]);
   std::cout << "in_file command: " << in_file << std::endl;
   std::cout << "out_file command: " << out_file << std::endl;
+  ImageEditor image_edit;
+  //image_editor_ptr->LoadFromFile(in_file);
+  LoadCommand load_input(&image_edit,in_file);
+  std::cout << "got to save command " << std::endl;
+  SaveCommand save_output(&image_edit,out_file);
+  std::cout << "got to load_input command " << std::endl;
+  load_input.Execute();
+  std::cout << "got to save_output command " << std::endl;
+  save_output.Execute();
+  std::cout << "exited save " << std::endl;
   // loop through commands in argv
   // for (int i = 2; i < (argc - 1); i++) {
   //   std::string argv_cmd = std::string(argv[i]).substr(1);
