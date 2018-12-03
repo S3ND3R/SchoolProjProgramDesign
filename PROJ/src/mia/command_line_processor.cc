@@ -8,6 +8,8 @@ Original Author(s) of this File:
 #include <vector>
 #include <string>
 #include "imagetools/pixel_buffer.h"
+#include "imagetools/color_data.h"
+
 
 /**
 * commands:
@@ -26,7 +28,12 @@ Original Author(s) of this File:
 * motionblur-nw-se r
 */
 namespace image_tools {
-void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]){
+CommandLineProcessor::CommandLineProcessor() {
+  PixelBuffer *buf = new PixelBuffer(1, 1, image_tools::ColorData(1, 1, 1));
+  image_edit_.set_pixel_buffer(buf);
+}
+
+void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
   // outputting commands entered
   std::cout << "There are " << argc << " commands:" << std::endl;
   for (int j = 0; j < argc; j++) {
@@ -38,59 +45,61 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]){
   // argv[argc-1] should be outputfile
   std::string in_file = std::string(argv[1]);
   std::string out_file = std::string(argv[argc - 1]);
-  std::cout << "in_file command: " << in_file << std::endl;
-  std::cout << "out_file command: " << out_file << std::endl;
-  ImageEditor image_edit;
-  //image_editor_ptr->LoadFromFile(in_file);
-  LoadCommand load_input(&image_edit,in_file);
-  std::cout << "got to save command " << std::endl;
-  SaveCommand save_output(&image_edit,out_file);
-  std::cout << "got to load_input command " << std::endl;
-  load_input.Execute();
-  std::cout << "got to save_output command " << std::endl;
-  save_output.Execute();
-  std::cout << "exited save " << std::endl;
-  // loop through commands in argv
-  // for (int i = 2; i < (argc - 1); i++) {
-  //   std::string argv_cmd = std::string(argv[i]).substr(1);
-  //   if (cmd == "blur") {
-  //     if(i < (argc - 2)) {
-  //     //std::string radius_str = std::string(argv[i + 1]);
-  //     float radius = std::stof(argv[i + 1]);
-  //     BlurFilterCommand *blur_cmd = new BlurFilterCommand(image_editor_,radius);
-  //     cmd_v_.push_back(blur_cmd);
-  //     delete blur_cmd;
-  //     }
-  //     return ;
-  //   // } else if (cmd == "edgedetect") {
-  //   //   return &t_calligraphy_pen_;
-  //   // } else if (cmd == "sharpen") {
-  //   //   return ;
-  //   // } else if (cmd == "red") {
-  //   //   return ;
-  //   // } else if (cmd == "green") {
-  //   //   return ;
-  //   // } else if (cmd == "blue") {
-  //   //   return ;
-  //   // } else if (cmd == "quantize") {
-  //   //   return ;
-  //   // } else if (cmd == "saturate") {
-  //   //   return ;
-  //   // } else if (cmd == "threshold") {
-  //   //   return ;
-  //   // } else if (cmd == "motionblur-n-s") {
-  //   //   return ;
-  //   // } else if (cmd == "motionblur-e-w") {
-  //   //   return ;
-  //   // } else if (cmd == "motionblur-ne-sw") {
-  //   //   return ;
-  //   // } else if (cmd == "motionblur-nw-se") {
-  //   //   return ;
-  //   } else {
-  //     return NULL;
-  //   }
-  //   //ImageEditorCommand *i_e_cmd_ptr = GetCommand(argv_cmd,i);
-  //  }
+  //LoadCommand *load_ptr = new LoadCommand(&image_edit_,in_file);
+  cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
+  //loop through commands in argv
+  for (int i = 2; i < (argc - 1); i++) {
+    std::string argv_cmd = std::string(argv[i]).substr(1);
+    if (argv_cmd == "blur") {
+      if(i < (argc - 2)) {
+        float radius = std::stof(argv[i + 1]);
+        cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
+        i++;
+      }
+    } else if (argv_cmd == "edgedetect") {
+      cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
+    } else if (argv_cmd == "sharpen") {
+      if(i < (argc - 2)) {
+        float radius = std::stof(argv[i + 1]);
+        cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
+        i++;
+      }
+    // } else if (cmd == "red") {
+    //   return ;
+    // } else if (cmd == "green") {
+    //   return ;
+    // } else if (cmd == "blue") {
+    //   return ;
+    // } else if (cmd == "quantize") {
+    //   return ;
+    // } else if (cmd == "saturate") {
+    //   return ;
+    // } else if (cmd == "threshold") {
+    //   return ;
+    // } else if (cmd == "motionblur-n-s") {
+    //   return ;
+    // } else if (cmd == "motionblur-e-w") {
+    //   return ;
+    // } else if (cmd == "motionblur-ne-sw") {
+    //   return ;
+    // } else if (cmd == "motionblur-nw-se") {
+    //   return ;
+    } else {
+      std::cout << "invalid commands" << std::endl;
+    }
+    //ImageEditorCommand *i_e_cmd_ptr = GetComma  cmd_ptr = cmd_v_[0];nd(argv_cmd,i);
+   }
+  cmd_v_.push_back(new SaveCommand(&image_edit_,out_file));
+  //print out the commands in the command vector
+  for (unsigned int cmd_index = 0; cmd_index < cmd_v_.size(); cmd_index++) {
+    cmd_v_.at(cmd_index)->Execute();
+  }
+  //delete the pointers in the vector;
+  for( int j = 0, i = cmd_v_.size(); j < i ; j++) {
+    ImageEditorCommand* img_cmd = cmd_v_.at(j);
+    delete img_cmd;
+  }
+  cmd_v_.clear();
   std::cout << "exiting command processor" << std::endl;
 }
 

@@ -123,7 +123,7 @@ void PixelBuffer::SaveToFile(const std::string &filename) {
     }
   }
   std::string file = filename;
-  file = file + ".png";
+  //file = file + ".png";
   ImageManager::instance().SaveToFile(file, img);
 }
 
