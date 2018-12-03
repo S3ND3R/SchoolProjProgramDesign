@@ -9,6 +9,7 @@ Original Author(s) of this File:
 #include <string>
 #include "imagetools/pixel_buffer.h"
 #include "imagetools/color_data.h"
+#include "imagetools/convolution_filter_motion_blur.h"
 
 
 /**
@@ -31,111 +32,147 @@ namespace image_tools {
 CommandLineProcessor::CommandLineProcessor() {
   PixelBuffer *buf = new PixelBuffer(1, 1, image_tools::ColorData(1, 1, 1));
   image_edit_.set_pixel_buffer(buf);
+  red_chan_ = 1.0;
+  green_chan_ = 1.0;
+  blue_chan_ = 1.0;
+  blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_N_S;
+  valid_cmds_ = true;
+  help_message_ = "<Help Message for Mia>\n"
+                "Image Processing Commands:\n"
+                "-blur r             <apply a gaussian blur of radius r>\n"
+                "-edgedetect         <apply an edge detection filter>\n"
+                "-sharpen r          <apply a sharpening filter of radius r>\n"
+                "-red s              <scale red channel by a factor of s>\n"
+                "-green s            <scale green channel by a factor of s>\n"
+                "-blue s             <scale blue channel by a factor of s>\n"
+                "-quantize n         <quantize each color channel in n bins>\n"
+                "-saturate s         <saturate colors by a scale factor of s>\n"
+                "-threshold c        <threshold using cutoff value c>\n"
+                "-motionblur-n-s r   <north-south motion blur with radius r>\n"
+                "-motionblur-e-w r   <east-west motion blur with radius r>\n"
+                "-motionblur-ne-sw r <northeast-southwest motion blur "
+                                     "with radius r>\n"
+                "-motionblur-nw-se r <northwest-southeast motion blur "
+                                     "with radius r>\n"
+                "Valid Command Format:\n"
+                "application input filename -commands... output filename";
 }
 
 void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
-  // outputting commands entered
-  std::cout << "There are " << argc << " commands:" << std::endl;
-  for (int j = 0; j < argc; j++) {
-    //std::cout << "command: " << argv[j] << std::endl;
-    std::cout << "command: " << std::string(argv[j]) << std::endl;
-  }
-  // argv[0] should be file path
-  // argv[1] should be inputfile
-  // argv[argc-1] should be outputfile
-  std::string in_file = std::string(argv[1]);
-  std::string out_file = std::string(argv[argc - 1]);
-  //LoadCommand *load_ptr = new LoadCommand(&image_edit_,in_file);
-  cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
-  //loop through commands in argv
-  for (int i = 2; i < (argc - 1); i++) {
-    std::string argv_cmd = std::string(argv[i]).substr(1);
-    if (argv_cmd == "blur") {
-      if(i < (argc - 2)) {
-        float radius = std::stof(argv[i + 1]);
-        cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
-        i++;
+  //check that there are enough arguments
+  if (argc > 2) {
+    // argv[0] should be file path
+    // argv[1] should be inputfile
+    // argv[argc-1] should be outputfile
+    std::string in_file = std::string(argv[1]);
+    std::string out_file = std::string(argv[argc - 1]);
+    cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
+    //loop through commands in argv
+    for (int i = 2; i < (argc - 1); i++) {
+      std::string argv_cmd = std::string(argv[i]).substr(1);
+      if (argv_cmd == "blur") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
+          i++;
+        }
+      } else if (argv_cmd == "edgedetect") {
+        cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
+      } else if (argv_cmd == "sharpen") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
+          i++;
+        }
+      } else if (argv_cmd == "red") {
+        if(i < (argc - 2)) {
+          float color_scale = std::stof(argv[i + 1]);
+          red_chan_ = color_scale;
+          i++;
+        }
+      } else if (argv_cmd == "green") {
+        if(i < (argc - 2)) {
+          float color_scale = std::stof(argv[i + 1]);
+          green_chan_ = color_scale;
+          i++;
+        };
+      } else if (argv_cmd == "blue") {
+        if(i < (argc - 2)) {
+          float color_scale = std::stof(argv[i + 1]);
+          blue_chan_ = color_scale;
+          i++;
+        }
+      } else if (argv_cmd == "quantize") {
+        if(i < (argc - 2)) {
+          int bins = std::stoi(argv[i + 1]);
+          cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_,bins));
+          i++;
+        }
+      } else if (argv_cmd == "saturate") {
+        if(i < (argc - 2)) {
+          float scale = std::stof(argv[i + 1]);
+          cmd_v_.push_back(new SaturateFilterCommand(&image_edit_,scale));
+          i++;
+        }
+      } else if (argv_cmd == "threshold") {
+        if(i < (argc - 2)) {
+          float cutoff = std::stof(argv[i + 1]);
+          cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_,cutoff));
+          i++;
+        }
+      } else if (argv_cmd == "motionblur-n-s") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                       blur_dir_));
+          i++;
+        }
+      } else if (argv_cmd == "motionblur-e-w") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
+          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                       blur_dir_));
+          i++;
+        }
+      } else if (argv_cmd == "motionblur-ne-sw") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
+          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                       blur_dir_));
+          i++;
+        }
+      } else if (argv_cmd == "motionblur-nw-se") {
+        if(i < (argc - 2)) {
+          float radius = std::stof(argv[i + 1]);
+          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
+          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                       blur_dir_));
+          i++;
+        }
+      } else {
+        valid_cmds_ = false;
       }
-    } else if (argv_cmd == "edgedetect") {
-      cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
-    } else if (argv_cmd == "sharpen") {
-      if(i < (argc - 2)) {
-        float radius = std::stof(argv[i + 1]);
-        cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
-        i++;
-      }
-    // } else if (cmd == "red") {
-    //   return ;
-    // } else if (cmd == "green") {
-    //   return ;
-    // } else if (cmd == "blue") {
-    //   return ;
-    // } else if (cmd == "quantize") {
-    //   return ;
-    // } else if (cmd == "saturate") {
-    //   return ;
-    // } else if (cmd == "threshold") {
-    //   return ;
-    // } else if (cmd == "motionblur-n-s") {
-    //   return ;
-    // } else if (cmd == "motionblur-e-w") {
-    //   return ;
-    // } else if (cmd == "motionblur-ne-sw") {
-    //   return ;
-    // } else if (cmd == "motionblur-nw-se") {
-    //   return ;
-    } else {
-      std::cout << "invalid commands" << std::endl;
     }
-    //ImageEditorCommand *i_e_cmd_ptr = GetComma  cmd_ptr = cmd_v_[0];nd(argv_cmd,i);
-   }
-  cmd_v_.push_back(new SaveCommand(&image_edit_,out_file));
-  //print out the commands in the command vector
-  for (unsigned int cmd_index = 0; cmd_index < cmd_v_.size(); cmd_index++) {
-    cmd_v_.at(cmd_index)->Execute();
+    if(valid_cmds_){
+      cmd_v_.push_back(new ChannelsFilterCommand(&image_edit_, red_chan_,
+                                                 green_chan_, blue_chan_));
+      cmd_v_.push_back(new SaveCommand(&image_edit_,out_file));
+      //print out the commands in the command vector
+      for (unsigned int cmd_indx = 0; cmd_indx < cmd_v_.size(); cmd_indx++) {
+        cmd_v_.at(cmd_indx)->Execute();
+      }
+    } else {std::cout << help_message_ << std::endl;}
+    //delete the pointers in the vector;
+    for( int j = 0, i = cmd_v_.size(); j < i ; j++) {
+      ImageEditorCommand* img_cmd = cmd_v_.at(j);
+      delete img_cmd;
+    }
+    cmd_v_.clear();
+  } else {
+    std::cout << help_message_ << std::endl;
   }
-  //delete the pointers in the vector;
-  for( int j = 0, i = cmd_v_.size(); j < i ; j++) {
-    ImageEditorCommand* img_cmd = cmd_v_.at(j);
-    delete img_cmd;
-  }
-  cmd_v_.clear();
-  std::cout << "exiting command processor" << std::endl;
 }
-
-// ImageEditorCommand *CommandLineProcessor::GetCommand(const std::string &cmd,
-//                                                      int cmd_indx) {
-//   if (cmd == "blur") {
-//     if argv[]
-//     BlurFilterCommand *blur_cmd = new BlurFilterCommand(image_editor_,);
-//     return ;
-//   } else if (cmd == "edgedetect") {
-//     return &t_calligraphy_pen_;
-//   } else if (cmd == "sharpen") {
-//     return ;
-//   } else if (cmd == "red") {
-//     return ;
-//   } else if (cmd == "green") {
-//     return ;
-//   } else if (cmd == "blue") {
-//     return ;
-//   } else if (cmd == "quantize") {
-//     return ;
-//   } else if (cmd == "saturate") {
-//     return ;
-//   } else if (cmd == "threshold") {
-//     return ;
-//   } else if (cmd == "motionblur-n-s") {
-//     return ;
-//   } else if (cmd == "motionblur-e-w") {
-//     return ;
-//   } else if (cmd == "motionblur-ne-sw") {
-//     return ;
-//   } else if (cmd == "motionblur-nw-se") {
-//     return ;
-//   } else {
-//     return NULL;
-//   }
-// }
 
 } //  namespace image_tools

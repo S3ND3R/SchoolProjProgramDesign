@@ -150,46 +150,17 @@ EndStrokeCommand::~EndStrokeCommand() {}
 void EndStrokeCommand::Execute() { image_editor_->EndStroke(x_, y_); }
 
 LoadCommand::LoadCommand(ImageEditor *image_editor, const std::string &filename)
-    : ImageEditorCommand(image_editor), filename_(filename) {
-  if(filename_ != "") {
-    std::cout << "infilename: " << filename_ << std::endl;
-  }
-  std::cout << "exiting loadCommand" << std::endl;
-  std::cout << "image editor: " << image_editor_ << std::endl;
-}
+    : ImageEditorCommand(image_editor), filename_(filename) {}
 
 LoadCommand::~LoadCommand() {}
 
-void LoadCommand::Execute() {
-  if(filename_ != "") {
-    std::cout << "infilename: " << filename_ << std::endl;
-  }
-
-  image_editor_->LoadFromFile(filename_);
-  std::cout << "exiting loadexecute" << std::endl;
-  std::cout << "image editor: " << image_editor_ << std::endl;
-}
+void LoadCommand::Execute() {image_editor_->LoadFromFile(filename_);}
 
 SaveCommand::SaveCommand(ImageEditor *image_editor, const std::string &filename)
-    : ImageEditorCommand(image_editor), filename_(filename) {
-      if(filename_ != "") {
-        std::cout << "ofilename: " << filename_ << std::endl;
-      }
-      std::cout << "exiting saveCommand" << std::endl;
-      std::cout << "image editor: " << image_editor_ << std::endl;
-}
+    : ImageEditorCommand(image_editor), filename_(filename) {}
 
 SaveCommand::~SaveCommand() {}
 
-void SaveCommand::Execute() {
-  if(filename_ != "") {
-    std::cout << "ofilename: " << filename_ << std::endl;
-  }
-  image_editor_->SaveToFile(filename_);
-  std::cout << "exiting saveexecute" << std::endl;
-  if(image_editor_ != NULL) {
-    std::cout << "image editor: " << image_editor_ << std::endl;
-  }
-}
+void SaveCommand::Execute() {image_editor_->SaveToFile(filename_);}
 
 }  // namespace image_tools
