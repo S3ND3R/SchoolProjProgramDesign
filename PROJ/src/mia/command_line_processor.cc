@@ -7,27 +7,11 @@ Original Author(s) of this File:
 #include "command_line_processor.h"
 #include <vector>
 #include <string>
+#include <exception>
 #include "imagetools/pixel_buffer.h"
 #include "imagetools/color_data.h"
 #include "imagetools/convolution_filter_motion_blur.h"
 
-
-/**
-* commands:
-* blur r
-* edgedetect
-* sharpen r
-* red s
-* green s
-* blue s
-* quantize n
-* saturate s
-* threshold c
-* motionblur-n-s r
-* motionblur-e-w r
-* motionblur-ne-sw r
-* motionblur-nw-se r
-*/
 namespace image_tools {
 CommandLineProcessor::CommandLineProcessor() {
   PixelBuffer *buf = new PixelBuffer(1, 1, image_tools::ColorData(1, 1, 1));
@@ -37,7 +21,7 @@ CommandLineProcessor::CommandLineProcessor() {
   blue_chan_ = 1.0;
   blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_N_S;
   valid_cmds_ = true;
-  help_message_ = "<Help Message for Mia>\n"
+  help_message_ = "\n<Help Message for Mia>\n\n"
                 "Image Processing Commands:\n"
                 "-blur r             <apply a gaussian blur of radius r>\n"
                 "-edgedetect         <apply an edge detection filter>\n"
@@ -53,103 +37,254 @@ CommandLineProcessor::CommandLineProcessor() {
                 "-motionblur-ne-sw r <northeast-southwest motion blur "
                                      "with radius r>\n"
                 "-motionblur-nw-se r <northwest-southeast motion blur "
-                                     "with radius r>\n"
+                                     "with radius r>\n\n"
                 "Valid Command Format:\n"
-                "application input filename -commands... output filename";
+                "<application> <input filename> <-commands...> "
+                "<output filename>\n";
 }
 
 void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
-  //check that there are enough arguments
+  // check that there are enough arguments
+  // if there is only 2 brings up help message
   if (argc > 2) {
     // argv[0] should be file path
     // argv[1] should be inputfile
     // argv[argc-1] should be outputfile
     std::string in_file = std::string(argv[1]);
     std::string out_file = std::string(argv[argc - 1]);
-    cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
-    //loop through commands in argv
-    for (int i = 2; i < (argc - 1); i++) {
-      std::string argv_cmd = std::string(argv[i]).substr(1);
-      if (argv_cmd == "blur") {
-        if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
-          i++;
+    // checking correct postfix on image files
+    std::string in_post_fix = in_file.substr((in_file.size()- 4), 4);
+    std::string out_post_fix = out_file.substr((out_file.size()- 4), 4);
+    if (((in_post_fix != ".png") && (in_post_fix != ".PNG")) ||
+        ((out_post_fix != ".png") && (out_post_fix != ".PNG"))) {
+          std::cout << "\nIncorrect file naming"
+                       " <files must have .png or .PNG as postfix>\n";
+          valid_cmds_ = false;
         }
+    cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
+    // loop through commands in argv
+    for (int i = 2; valid_cmds_ && i < (argc - 1); i++) {
+      std::string argv_cmd = std::string(argv[i]).substr(1);
+      // blur case
+      if (argv_cmd == "blur") {
+        // if-satement checks that the correct number of arguments
+        // have been passed
+        if(i < (argc - 2)) {
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
+        }
+        // edge detect case
       } else if (argv_cmd == "edgedetect") {
         cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
+        // sharpen case
       } else if (argv_cmd == "sharpen") {
         if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
-          i++;
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // red case
       } else if (argv_cmd == "red") {
         if(i < (argc - 2)) {
-          float color_scale = std::stof(argv[i + 1]);
-          red_chan_ = color_scale;
-          i++;
+          try {
+            float color_scale = std::stof(argv[i + 1]);
+            if (color_scale <= 0.0 || color_scale > 10.0) {
+              std::cout << "\nScale value is out-of bounds "
+                           "<scale should be greater than 0 "
+                           "and less than or equal to 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            red_chan_ = color_scale;
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // green case
       } else if (argv_cmd == "green") {
         if(i < (argc - 2)) {
-          float color_scale = std::stof(argv[i + 1]);
-          green_chan_ = color_scale;
-          i++;
-        };
+          try {
+            float color_scale = std::stof(argv[i + 1]);
+            if (color_scale <= 0.0 || color_scale > 10.0) {
+              std::cout << "\nScale value is out-of bounds "
+                           "<scale should be greater than 0 "
+                           "and less than or equal to 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            green_chan_ = color_scale;
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
+        }
+        // blue case
       } else if (argv_cmd == "blue") {
         if(i < (argc - 2)) {
-          float color_scale = std::stof(argv[i + 1]);
-          blue_chan_ = color_scale;
-          i++;
+          try {
+            float color_scale = std::stof(argv[i + 1]);
+            if (color_scale <= 0.0 || color_scale > 10.0) {
+              std::cout << "\nScale value is out-of bounds "
+                           "<scale should be greater than 0 "
+                           "and less than or equal to 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            blue_chan_ = color_scale;
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // quantize case
       } else if (argv_cmd == "quantize") {
         if(i < (argc - 2)) {
-          int bins = std::stoi(argv[i + 1]);
-          cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_,bins));
-          i++;
+          try {
+            int bins = std::stoi(argv[i + 1]);
+            if (bins < 1 || bins > 256) {
+              std::cout << "\nNumber of bins is out-of bounds "
+                           "<bins should be between 1 and 256>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_,bins));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // saturate case
       } else if (argv_cmd == "saturate") {
         if(i < (argc - 2)) {
-          float scale = std::stof(argv[i + 1]);
-          cmd_v_.push_back(new SaturateFilterCommand(&image_edit_,scale));
-          i++;
+          try {
+            float scale = std::stof(argv[i + 1]);
+            if (scale <= 0.0 || scale > 10.0) {
+              std::cout << "\nScale value is out-of bounds "
+                           "<scale should be greater than 0 "
+                           "and less than or equal to 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new SaturateFilterCommand(&image_edit_,scale));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // threshold case
       } else if (argv_cmd == "threshold") {
         if(i < (argc - 2)) {
-          float cutoff = std::stof(argv[i + 1]);
-          cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_,cutoff));
-          i++;
+          try {
+            float cutoff = std::stof(argv[i + 1]);
+            if (cutoff <= 0.0 || cutoff > 1.0) {
+              std::cout << "\nCutoff value is out-of bounds "
+                           "<cutoff should be greater than 0 "
+                           "and less than or equal to 1>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_,cutoff));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // motionblur-n-s case
       } else if (argv_cmd == "motionblur-n-s") {
         if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
-                                                       blur_dir_));
-          i++;
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                         blur_dir_));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // motionblur-e-w case
       } else if (argv_cmd == "motionblur-e-w") {
         if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
-          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
-                                                       blur_dir_));
-          i++;
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                         blur_dir_));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-ne-sw") {
         if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
-          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
-                                                       blur_dir_));
-          i++;
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                         blur_dir_));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
+        // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-nw-se") {
         if(i < (argc - 2)) {
-          float radius = std::stof(argv[i + 1]);
-          blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
-          cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
-                                                       blur_dir_));
-          i++;
+          try {
+            float radius = std::stof(argv[i + 1]);
+            if (radius < 1.0 || radius > 10.0) {
+              std::cout << "\nRadius value is out-of bounds "
+                           "<values should be between 1 and 10>" << std::endl;
+              valid_cmds_ = false;
+            }
+            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+                                                         blur_dir_));
+            i++;
+          } catch (const std::exception& e) {
+              valid_cmds_ = false;
+              std::cout << e.what() << std::endl;
+          }
         }
       } else {
         valid_cmds_ = false;

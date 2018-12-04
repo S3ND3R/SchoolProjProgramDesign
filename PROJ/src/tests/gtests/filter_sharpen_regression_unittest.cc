@@ -8,30 +8,29 @@
 #include "imagetools/color_data.h"
 
 
-using image_tools::ConvolutionFilterBlur;
+using image_tools::ConvolutionFilterSharpen;
 using image_tools::ImageEditor;
 using image_tools::PixelBuffer;
 
-class FilterBlurRegressionTest : public ::testing::Test {
+class FilterSharpenRegressionTest : public ::testing::Test {
   void SetUp() override {
-    //test_buffer_.loadFromFile(test_file);
-    //expected_buffer_.loadFromFile(expect_file);
     radius_ = 5.0;
   }
 
  protected:
   std::string test_file = "./resources/test_in.png";
-  std::string expect_file = "./resources/blur_5.0_expected.png";
+  std::string expect_file = "./resources/sharpen_5.0_expected.png";
+  std::string generated_file = "./resources/sharpen_5.0_generated.png";
   ImageEditor image_editor_;
   float radius_;
 };
 
-TEST_F(FilterBlurRegressionTest, ImageRegressionEquality) {
+TEST_F(FilterSharpenRegressionTest, ImageRegressionEquality) {
   PixelBuffer *test_buffer_ = new PixelBuffer(test_file);
   PixelBuffer *expected_buffer_ = new PixelBuffer(expect_file);
   image_editor_.set_pixel_buffer(test_buffer_);
-  image_editor_.ApplyBlurFilter(radius_);
-  image_editor_.SaveToFile("./resources/blur_5.0_generated.png");
-  image_editor_.LoadFromFile("./resources/blur_5.0_generated.png");
+  image_editor_.ApplySharpenFilter(radius_);
+  image_editor_.SaveToFile(generated_file);
+  image_editor_.LoadFromFile(generated_file);
   EXPECT_TRUE(*expected_buffer_ == *test_buffer_);
 };
