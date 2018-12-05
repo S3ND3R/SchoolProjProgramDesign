@@ -10,7 +10,7 @@ enum created by teachers and TAs of 3081W
 #ifndef IMAGETOOLS_CONVOLUTION_FILTER_MOTION_BLUR_H_
 #define IMAGETOOLS_CONVOLUTION_FILTER_MOTION_BLUR_H_
 
-//#include <string>
+// #include <string>
 
 #include "imagetools/float_matrix.h"
 #include "imagetools/convolution_filter.h"
@@ -45,7 +45,7 @@ class ConvolutionFilterMotionBlur : public ConvolutionFilter {
 
  private:
   BlurDir direction_;
-  //std::string direction_;
+  // std::string direction_;
 };
 }  // namespace image_tools
 #endif  // IMAGETOOLS_CONVOLUTION_FILTER_MOTION_BLUR_H_

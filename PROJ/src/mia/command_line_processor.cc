@@ -4,7 +4,7 @@ Copyright (c) 2018
 Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
-#include "command_line_processor.h"
+#include "mia/command_line_processor.h"
 #include <vector>
 #include <string>
 #include <exception>
@@ -19,7 +19,7 @@ CommandLineProcessor::CommandLineProcessor() {
   red_chan_ = 1.0;
   green_chan_ = 1.0;
   blue_chan_ = 1.0;
-  blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_N_S;
+  blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_N_S;
   valid_cmds_ = true;
   help_message_ = "\n<Help Message for Mia>\n\n"
                 "Image Processing Commands:\n"
@@ -61,7 +61,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                        " <files must have .png or .PNG as postfix>\n";
           valid_cmds_ = false;
         }
-    cmd_v_.push_back(new LoadCommand(&image_edit_,in_file));
+    cmd_v_.push_back(new LoadCommand(&image_edit_, in_file));
     // loop through commands in argv
     for (int i = 2; valid_cmds_ && i < (argc - 1); i++) {
       std::string argv_cmd = std::string(argv[i]).substr(1);
@@ -69,7 +69,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
       if (argv_cmd == "blur") {
         // if-satement checks that the correct number of arguments
         // have been passed
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -77,7 +77,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new BlurFilterCommand(&image_edit_,radius));
+            cmd_v_.push_back(new BlurFilterCommand(&image_edit_, radius));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
@@ -89,7 +89,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
         // sharpen case
       } else if (argv_cmd == "sharpen") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -97,7 +97,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new SharpenFilterCommand(&image_edit_,radius));
+            cmd_v_.push_back(new SharpenFilterCommand(&image_edit_, radius));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
@@ -106,7 +106,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // red case
       } else if (argv_cmd == "red") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
@@ -124,7 +124,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // green case
       } else if (argv_cmd == "green") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
@@ -142,7 +142,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // blue case
       } else if (argv_cmd == "blue") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
@@ -160,7 +160,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // quantize case
       } else if (argv_cmd == "quantize") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             int bins = std::stoi(argv[i + 1]);
             if (bins < 1 || bins > 256) {
@@ -168,7 +168,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<bins should be between 1 and 256>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_,bins));
+            cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_, bins));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
@@ -177,7 +177,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // saturate case
       } else if (argv_cmd == "saturate") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float scale = std::stof(argv[i + 1]);
             if (scale <= 0.0 || scale > 10.0) {
@@ -186,7 +186,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "and less than or equal to 10>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new SaturateFilterCommand(&image_edit_,scale));
+            cmd_v_.push_back(new SaturateFilterCommand(&image_edit_, scale));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
@@ -195,7 +195,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // threshold case
       } else if (argv_cmd == "threshold") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float cutoff = std::stof(argv[i + 1]);
             if (cutoff <= 0.0 || cutoff > 1.0) {
@@ -204,7 +204,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "and less than or equal to 1>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_,cutoff));
+            cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_, cutoff));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
@@ -213,7 +213,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // motionblur-n-s case
       } else if (argv_cmd == "motionblur-n-s") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -221,7 +221,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
                                                          blur_dir_));
             i++;
           } catch (const std::exception& e) {
@@ -231,7 +231,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // motionblur-e-w case
       } else if (argv_cmd == "motionblur-e-w") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -239,8 +239,8 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
-            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+            blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
                                                          blur_dir_));
             i++;
           } catch (const std::exception& e) {
@@ -250,7 +250,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-ne-sw") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -258,8 +258,8 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
-            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+            blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
                                                          blur_dir_));
             i++;
           } catch (const std::exception& e) {
@@ -269,7 +269,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         }
         // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-nw-se") {
-        if(i < (argc - 2)) {
+        if (i < (argc - 2)) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
@@ -277,8 +277,8 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
                            "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
             }
-            blur_dir_= ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
-            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_,radius,
+            blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
+            cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
                                                          blur_dir_));
             i++;
           } catch (const std::exception& e) {
@@ -290,17 +290,17 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
         valid_cmds_ = false;
       }
     }
-    if(valid_cmds_){
+    if (valid_cmds_) {
       cmd_v_.push_back(new ChannelsFilterCommand(&image_edit_, red_chan_,
                                                  green_chan_, blue_chan_));
-      cmd_v_.push_back(new SaveCommand(&image_edit_,out_file));
-      //print out the commands in the command vector
+      cmd_v_.push_back(new SaveCommand(&image_edit_, out_file));
+      // print out the commands in the command vector
       for (unsigned int cmd_indx = 0; cmd_indx < cmd_v_.size(); cmd_indx++) {
         cmd_v_.at(cmd_indx)->Execute();
       }
     } else {std::cout << help_message_ << std::endl;}
-    //delete the pointers in the vector;
-    for( int j = 0, i = cmd_v_.size(); j < i ; j++) {
+    // delete the pointers in the vector;
+    for (int j = 0, i = cmd_v_.size(); j < i ; j++) {
       ImageEditorCommand* img_cmd = cmd_v_.at(j);
       delete img_cmd;
     }
@@ -310,4 +310,4 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
   }
 }
 
-} //  namespace image_tools
+}  // namespace image_tools

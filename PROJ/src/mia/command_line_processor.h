@@ -5,10 +5,11 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-#ifndef COMMAND_LINE_PROCESSOR_H_
-#define COMMAND_LINE_PROCESSOR_H_
+#ifndef MIA_COMMAND_LINE_PROCESSOR_H_
+#define MIA_COMMAND_LINE_PROCESSOR_H_
 
 #include <vector>
+#include <string>
 #include "imagetools/image_editor.h"
 #include "mia/image_editor_commands.h"
 #include "imagetools/convolution_filter_motion_blur.h"
@@ -21,7 +22,7 @@ class CommandLineProcessor {
   void ProcessCommandLine(int argc, char* argv[]);
 
   bool is_valid_commands_() {return valid_cmds_;}
-  
+
  private:
   std::vector<ImageEditorCommand*> cmd_v_;
   ImageEditor image_edit_;
@@ -32,5 +33,5 @@ class CommandLineProcessor {
   bool valid_cmds_;
   std::string help_message_;
 };
-} // namespace image_tools
-#endif     // COMMAND_LINE_PROCESSOR_H_
+}  // namespace image_tools
+#endif     // MIA_COMMAND_LINE_PROCESSOR_H_

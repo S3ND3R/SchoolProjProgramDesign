@@ -10,18 +10,18 @@ using image_tools::CommandLineProcessor;
 class CommandLineProcessorTest : public ::testing::Test {
   void SetUp() override {
     arg_count_ = 5;
-    //arg_v_ = {strdup("build/bin/mia"), strdup("in_test.png"), strdup("-blur"), strdup("5.0"), strdup("blur_test_img.png")};
   }
 
  protected:
-  int arg_count_ = 5;
+  int arg_count_;
   CommandLineProcessor cmd_processor_;
 };
 
 TEST_F(CommandLineProcessorTest, AcceptsCorrectCommands) {
-  char *arg_v_[arg_count_] = {strdup("build/bin/mia"), strdup("resources/test_in.png"),
-                     strdup("-blur"), strdup("5.0"),
-                     strdup("resources/blur_test_img.png")};
+  char *arg_v_[arg_count_] = {strdup("build/bin/mia"),
+                              strdup("resources/test_in.png"),
+                              strdup("-blur"), strdup("5.0"),
+                              strdup("resources/blur_test_img.png")};
   cmd_processor_.ProcessCommandLine(arg_count_, arg_v_);
-  EXPECT_FALSE(cmd_processor_.is_valid_commands_());
+  EXPECT_TRUE(cmd_processor_.is_valid_commands_());
 }
