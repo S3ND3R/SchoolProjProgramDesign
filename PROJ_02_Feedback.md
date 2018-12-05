@@ -1,6 +1,6 @@
 ### Feedback for Project Iteration 02
 
-Run on December 03, 19:41:56 PM.
+Run on December 04, 20:42:04 PM.
 
 
 #### System Files and PROJ Directory Structure
@@ -78,71 +78,7 @@ Run on December 03, 19:41:56 PM.
 
 + Pass: Check that file "./build/test/gtests" exists.
 
-+ Fail: Running Student Tests.
-
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = -Instructor*
-[==========] Running 10 tests from 9 test cases.
-[----------] Global test environment set-up.
-[----------] 1 test from FilterThresholdTest
-[ RUN      ] FilterThresholdTest.SetsCorrectThreshold
-[       OK ] FilterThresholdTest.SetsCorrectThreshold (0 ms)
-[----------] 1 test from FilterThresholdTest (0 ms total)
-
-[----------] 1 test from FilterSaturateTest
-[ RUN      ] FilterSaturateTest.SetsCorrectSaturationScale
-[       OK ] FilterSaturateTest.SetsCorrectSaturationScale (0 ms)
-[----------] 1 test from FilterSaturateTest (0 ms total)
-
-[----------] 1 test from FlashPhotoAppTest
-[ RUN      ] FlashPhotoAppTest.CanApplyFilters
-[       OK ] FlashPhotoAppTest.CanApplyFilters (260 ms)
-[----------] 1 test from FlashPhotoAppTest (260 ms total)
-
-[----------] 1 test from FilterBlurRegressionTest
-[ RUN      ] FilterBlurRegressionTest.ImageRegressionEquality
-filter_blur_regression_unittest.cc:37: Failure
-Value of: *expected_buffer_ == *test_buffer_
-  Actual: false
-Expected: true
-[  FAILED  ] FilterBlurRegressionTest.ImageRegressionEquality (880 ms)
-[----------] 1 test from FilterBlurRegressionTest (880 ms total)
-
-[----------] 2 tests from ToolPenTest
-[ RUN      ] ToolPenTest.HasCorrectName
-[       OK ] ToolPenTest.HasCorrectName (0 ms)
-[ RUN      ] ToolPenTest.HasCorrectMask
-[       OK ] ToolPenTest.HasCorrectMask (0 ms)
-[----------] 2 tests from ToolPenTest (0 ms total)
-
-[----------] 1 test from ToolEraserTest
-[ RUN      ] ToolEraserTest.HasCorrectName
-[       OK ] ToolEraserTest.HasCorrectName (0 ms)
-[----------] 1 test from ToolEraserTest (0 ms total)
-
-[----------] 1 test from ToolBlurTest
-[ RUN      ] ToolBlurTest.HasCorrectName
-[       OK ] ToolBlurTest.HasCorrectName (0 ms)
-[----------] 1 test from ToolBlurTest (0 ms total)
-
-[----------] 1 test from ToolChalkTest
-[ RUN      ] ToolChalkTest.HasCorrectName
-[       OK ] ToolChalkTest.HasCorrectName (0 ms)
-[----------] 1 test from ToolChalkTest (0 ms total)
-
-[----------] 1 test from ConvolutionFilterBlurTest
-[ RUN      ] ConvolutionFilterBlurTest.SetsCorrectKernelRadius
-[       OK ] ConvolutionFilterBlurTest.SetsCorrectKernelRadius (0 ms)
-[----------] 1 test from ConvolutionFilterBlurTest (0 ms total)
-
-[----------] Global test environment tear-down
-[==========] 10 tests from 9 test cases ran. (1142 ms total)
-[  PASSED  ] 9 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] FilterBlurRegressionTest.ImageRegressionEquality
-
- 1 FAILED TEST
-</pre>
++ Pass: Running Student Tests.
 
 
 
