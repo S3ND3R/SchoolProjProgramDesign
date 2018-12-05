@@ -37,4 +37,5 @@ TEST_F(FilterChannelsRegressionTest, ImageRegressionEquality) {
   image_editor_.SaveToFile(generated_file);
   image_editor_.LoadFromFile(generated_file);
   EXPECT_TRUE(*expected_buffer_ == *test_buffer_);
+  //delete test_buffer_;
 };
