@@ -27,6 +27,7 @@ LIBDIR = $(BUILDDIR)/lib
 EXTERNAL_DIR = $(PROJ_DIR)/src/external
 MINGFX_DIR = $(EXTERNAL_DIR)/MinGfx/build/install
 FLASHPHOTO_DIR = $(PROJ_DIR)/src/flashphoto
+MIA_DIR = $(PROJ_DIR)/src/mia
 GTEST_DIR = $(BUILDDIR)
 GTEST_HEADER = $(BUILDDIR)/include/gtest/gtest.h
 
@@ -41,8 +42,9 @@ EXEFILE = $(BINDIR)/$(PROJECT_NAME)
 # The list of files to compile for this project.  Defaults to all
 # of the .cpp and .cc files in the source directory.  (We use both .cpp
 # and .cc in order to support two different popular naming conventions.)
-SRCFILES = $(wildcard $(SRCDIR)/*.cc) $(wildcard $(FLASHPHOTO_DIR)/*.cc)
+SRCFILES = $(wildcard $(SRCDIR)/*.cc) $(wildcard $(FLASHPHOTO_DIR)/*.cc) $(wildcard $(MIA_DIR)/*.cc)
 SRCFILES := $(filter-out $(FLASHPHOTO_DIR)/main.cc, $(SRCFILES))
+SRCFILES := $(filter-out $(MIA_DIR)/main.cc, $(SRCFILES))
 
 # For each of the source files found above, replace .cpp (or .cc) with
 # .o in order to generate the list of .o files make should create.
@@ -122,6 +124,13 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cc $(MINGFX_DIR) $(GTEST_HEADER)
 
 # The same thing will also work for files with a .cc extension
 $(OBJDIR)/%.o: $(FLASHPHOTO_DIR)/%.cc $(GTEST_HEADER)
+	@echo "==== Auto-Generating Dependencies for $<. ===="
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	@echo "==== Compiling $< into $@. ===="
+	$(CXX) $(OMP) $(CXXFLAGS) $(CXXLIBDIRS) -c -fPIC -o  $@ $<
+
+# Add the following target to compile the .cc into .o (much like flash photo)
+$(OBJDIR)/%.o: $(MIA_DIR)/%.cc $(GTEST_HEADER)
 	@echo "==== Auto-Generating Dependencies for $<. ===="
 	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	@echo "==== Compiling $< into $@. ===="

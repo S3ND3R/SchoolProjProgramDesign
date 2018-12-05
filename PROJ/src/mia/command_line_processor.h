@@ -20,8 +20,8 @@ class CommandLineProcessor {
 
   void ProcessCommandLine(int argc, char* argv[]);
 
-  ImageEditorCommand *GetCommand(const std::string &cmd, int cmd_indx);
-
+  bool is_valid_commands_() {return valid_cmds_;}
+  
  private:
   std::vector<ImageEditorCommand*> cmd_v_;
   ImageEditor image_edit_;
