@@ -1,4 +1,8 @@
 *.o
 *.out
 *.a
+*.html
+index/
+latex/
+html/
 point2_unittest
