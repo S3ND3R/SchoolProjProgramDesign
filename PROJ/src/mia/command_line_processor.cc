@@ -83,7 +83,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // edge detect case
       } else if (argv_cmd == "edgedetect") {
         cmd_v_.push_back(new EdgeFilterCommand(&image_edit_));
@@ -103,7 +103,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // red case
       } else if (argv_cmd == "red") {
         if (i < (argc - 2)) {
@@ -121,7 +121,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // green case
       } else if (argv_cmd == "green") {
         if (i < (argc - 2)) {
@@ -139,7 +139,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // blue case
       } else if (argv_cmd == "blue") {
         if (i < (argc - 2)) {
@@ -157,7 +157,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // quantize case
       } else if (argv_cmd == "quantize") {
         if (i < (argc - 2)) {
@@ -174,7 +174,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // saturate case
       } else if (argv_cmd == "saturate") {
         if (i < (argc - 2)) {
@@ -192,7 +192,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // threshold case
       } else if (argv_cmd == "threshold") {
         if (i < (argc - 2)) {
@@ -210,7 +210,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // motionblur-n-s case
       } else if (argv_cmd == "motionblur-n-s") {
         if (i < (argc - 2)) {
@@ -228,7 +228,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // motionblur-e-w case
       } else if (argv_cmd == "motionblur-e-w") {
         if (i < (argc - 2)) {
@@ -247,7 +247,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-ne-sw") {
         if (i < (argc - 2)) {
@@ -266,7 +266,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
         // motionblur-ne-sw case
       } else if (argv_cmd == "motionblur-nw-se") {
         if (i < (argc - 2)) {
@@ -285,7 +285,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
               valid_cmds_ = false;
               std::cout << e.what() << std::endl;
           }
-        }
+        } else {valid_cmds_ = false;}
       } else {
         valid_cmds_ = false;
       }
@@ -296,7 +296,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
       cmd_v_.push_back(new SaveCommand(&image_edit_, out_file));
       // print out the commands in the command vector
       for (unsigned int cmd_indx = 0; cmd_indx < cmd_v_.size(); cmd_indx++) {
-        cmd_v_.at(cmd_indx)->Execute();
+          cmd_v_.at(cmd_indx)->Execute();
       }
     } else {std::cout << help_message_ << std::endl;}
     // delete the pointers in the vector;

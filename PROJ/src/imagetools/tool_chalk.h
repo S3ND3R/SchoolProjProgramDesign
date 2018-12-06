@@ -39,6 +39,8 @@ class ToolChalk : public Tool {
                                        const ColorData &canvas_color,
                                        float mask_intensity) override;
 
+  void set_seed_(unsigned int seed) {seed_ = seed;};
+
  private:
   static unsigned int seed_;
 };
