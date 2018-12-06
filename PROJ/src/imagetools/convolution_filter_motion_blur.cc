@@ -5,7 +5,7 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
-//#include <string>
+// #include <string>
 #include "imagetools/convolution_filter_motion_blur.h"
 #include <cmath>
 
@@ -73,40 +73,40 @@ FloatMatrix *ConvolutionFilterMotionBlur::CreateKernel() {
     case BLUR_DIR_N_S:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
-       if(x == middle)
-        motion_kernel->set_value(x,y,1.0);
+       if (x == middle)
+        motion_kernel->set_value(x, y, 1.0);
        else
-        motion_kernel->set_value(x,y,0.0);
+        motion_kernel->set_value(x, y, 0.0);
       }
      }
      break;
     case BLUR_DIR_E_W:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
-       if(y == middle)
-        motion_kernel->set_value(x,y,1.0);
+       if (y == middle)
+        motion_kernel->set_value(x, y, 1.0);
        else
-        motion_kernel->set_value(x,y,0.0);
+        motion_kernel->set_value(x, y, 0.0);
       }
      }
      break;
     case BLUR_DIR_NE_SW:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
-       if(x + y == motion_kernel->width() - 1)
-        motion_kernel->set_value(x,y,1.0);
+       if (x + y == motion_kernel->width() - 1)
+        motion_kernel->set_value(x, y, 1.0);
        else
-        motion_kernel->set_value(x,y,0.0);
+        motion_kernel->set_value(x, y, 0.0);
       }
      }
      break;
     case BLUR_DIR_NW_SE:
      for (int x = 0; x < motion_kernel->height(); x++) {
       for (int y = 0; y < motion_kernel->width(); y++) {
-       if(x == y)
-        motion_kernel->set_value(x,y,1.0);
+       if (x == y)
+        motion_kernel->set_value(x, y, 1.0);
        else
-        motion_kernel->set_value(x,y,0.0);
+        motion_kernel->set_value(x, y, 0.0);
       }
      }
      break;

@@ -104,4 +104,4 @@ FloatMatrix* MaskFactory::CreateBullseyeMask(float radius, float linewidth) {
   return mask;
 }
 
-} // namespace image_tools
+}  // namespace image_tools

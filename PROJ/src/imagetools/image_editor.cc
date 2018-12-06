@@ -25,11 +25,11 @@ ImageEditor::ImageEditor(PixelBuffer *buffer) {
   current_buffer_ = buffer;
 }
 
-ImageEditor::ImageEditor(){
+ImageEditor::ImageEditor() {
   current_buffer_ = NULL;
 }
 
-ImageEditor::~ImageEditor(){
+ImageEditor::~ImageEditor() {
   if (current_buffer_ != NULL)
     delete current_buffer_;
 }
@@ -105,7 +105,6 @@ void ImageEditor::ApplyMotionBlurFilter(float rad,
     ConvolutionFilterMotionBlur::BlurDir dir) {
   SaveStateForPossibleUndo();
   f_motion_blur_.set_slider_radius(rad);
-  //f_motion_blur_.set_direction(MotionBlurDirectionName(dir));
   f_motion_blur_.set_direction(dir);
   f_motion_blur_.ApplyToBuffer(current_buffer_);
 }
@@ -194,4 +193,5 @@ PixelBuffer *ImageEditor::pixel_buffer() { return current_buffer_; }
 void ImageEditor::set_pixel_buffer(PixelBuffer *buffer) {
   current_buffer_ = buffer;
 }
-}  // namespace imagetools
+
+}  // namespace image_tools

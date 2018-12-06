@@ -107,44 +107,44 @@ void PixelBuffer::Resize(int new_width, int new_height) {
 
 void PixelBuffer::SaveToFile(const std::string &filename) {
   Image img(this->width(), this->height(), 4);
-  float r,g,b,a;
+  float r, g, b, a;
   for (int i = 0; i < img.Width(); i ++) {
     for (int j = 0; j < img.Height(); j ++) {
-      ColorData pixel = this->pixel(i,j);
+      ColorData pixel = this->pixel(i, j);
       r = pixel.red();
       g = pixel.green();
       b = pixel.blue();
       a = pixel.alpha();
 
-      img.SetFloatValue(i,j,0,r);
-      img.SetFloatValue(i,j,1,g);
-      img.SetFloatValue(i,j,2,b);
-      img.SetFloatValue(i,j,3,a);
+      img.SetFloatValue(i, j, 0, r);
+      img.SetFloatValue(i, j, 1, g);
+      img.SetFloatValue(i, j, 2, b);
+      img.SetFloatValue(i, j, 3, a);
     }
   }
   std::string file = filename;
-  //file = file + ".png";
+  // file = file + ".png";
   ImageManager::instance().SaveToFile(file, img);
 }
 
 void PixelBuffer::LoadFromFile(const std::string &filename) {
   Image* image = ImageManager::instance().LoadFromFile(filename);
   ColorData *color_ptr = new ColorData();
-  this->Resize(image->Width(),image->Height());
-  float r,g,b,a;
+  this->Resize(image->Width(), image->Height());
+  float r, g, b, a;
   for (int i = 0; i < image->Width(); i ++) {
     for (int j = 0; j < image->Height(); j ++) {
-      r = image->FloatValue(i,j,0);
-      g = image->FloatValue(i,j,1);
-      b = image->FloatValue(i,j,2);
-      a = image->FloatValue(i,j,3);
+      r = image->FloatValue(i, j, 0);
+      g = image->FloatValue(i, j, 1);
+      b = image->FloatValue(i, j, 2);
+      a = image->FloatValue(i, j, 3);
 
       color_ptr->set_red(r);
       color_ptr->set_green(g);
       color_ptr->set_blue(b);
       color_ptr->set_alpha(a);
 
-      this->set_pixel(i,j,*color_ptr);
+      this->set_pixel(i, j, *color_ptr);
     }
   }
   delete image;
@@ -171,4 +171,4 @@ bool operator!=(const PixelBuffer &a, const PixelBuffer &b) {
   return !(a == b);
 }
 
-} /* namespace image_tools */
+}  // namespace image_tools
