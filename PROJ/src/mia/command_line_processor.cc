@@ -5,6 +5,7 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 #include "mia/command_line_processor.h"
+#include <mingfx.h>
 #include <vector>
 #include <string>
 #include <exception>
@@ -52,6 +53,10 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
     // argv[argc-1] should be outputfile
     std::string in_file = std::string(argv[1]);
     std::string out_file = std::string(argv[argc - 1]);
+    if (!(mingfx::Platform::FileExists(in_file))) {
+      valid_cmds_ = false;
+      std::cout << "\n File does not exist." << std::endl;
+    }
     // checking correct postfix on image files
     std::string in_post_fix = in_file.substr((in_file.size()- 4), 4);
     std::string out_post_fix = out_file.substr((out_file.size()- 4), 4);

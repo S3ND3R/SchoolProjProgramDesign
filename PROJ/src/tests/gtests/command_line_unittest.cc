@@ -17,6 +17,7 @@ class CommandLineProcessorTest : public ::testing::Test {
   char *path = strdup("build/bin/mia");
   char *in_file = strdup("resources/test_in.png");
   char *bad_in_file = strdup("resources/test_in.pn");
+  char *non_exist_in_file = strdup("resources/in_test.png");
   char *correct_cmd_blur = strdup("-blur");
   char *correct_cmd_sharp = strdup("-sharpen");
   char *correct_cmd_edge = strdup("-edgedetect");
@@ -126,6 +127,14 @@ TEST_F(CommandLineProcessorTest, RejectsIncorrectInputFileValCommand) {
   arg_count_ = 5;
   char *arg_v_[arg_count_] = {path, bad_in_file, correct_cmd_red, float_val,
                               out_file};
+  cmd_processor_.ProcessCommandLine(arg_count_, arg_v_);
+  EXPECT_FALSE(cmd_processor_.is_valid_commands_());
+}
+
+TEST_F(CommandLineProcessorTest, RejectsInvalidtInputFileValCommand) {
+  arg_count_ = 5;
+  char *arg_v_[arg_count_] = {path, non_exist_in_file, correct_cmd_red,
+                              float_val, out_file};
   cmd_processor_.ProcessCommandLine(arg_count_, arg_v_);
   EXPECT_FALSE(cmd_processor_.is_valid_commands_());
 }
