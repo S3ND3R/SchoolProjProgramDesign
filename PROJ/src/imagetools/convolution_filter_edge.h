@@ -1,4 +1,4 @@
-/*
+/**
 Copyright (c) 2018
 
 Original Author(s) of this File:
@@ -12,17 +12,19 @@ Original Author(s) of this File:
 #include "imagetools/convolution_filter.h"
 
 namespace image_tools {
-
+/**
+  @brief This edge detect filter detects where image brightness
+  changes significantly in the curent PixelBuffer*/
 class ConvolutionFilterEdge : public ConvolutionFilter {
  public:
   ConvolutionFilterEdge();
 
   virtual ~ConvolutionFilterEdge();
 
-  // Convolution Filter Edge kernel applies -1 for each
-  // value in the kernel except the center value which is set so that
-  // the sum of the values is zero.
-  // returns: pointer to a FloatMatrix set to a radius of 1
+  /**
+  @brief The convolution filter edge kernel applies -1 for each value in the
+  kernel except the center value which is set so that the sum of the values
+  is zero.*/
   FloatMatrix *CreateKernel() override;
 };
 }  // namespace image_tools

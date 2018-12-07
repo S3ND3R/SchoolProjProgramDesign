@@ -1,4 +1,5 @@
-/*
+/**
+@file filter_channels.h
 Copyright (c) 2018
 
 OriginaApplyToBufferl Author(s) of this File:
@@ -13,15 +14,17 @@ OriginaApplyToBufferl Author(s) of this File:
 #include "imagetools/filter.h"
 
 namespace image_tools {
-
+/**
+@brief This channels filter adjusts the individual color channels in the current
+PixelBuffer*/
 class FilterChannels : public Filter {
  public:
   FilterChannels();
 
   virtual ~FilterChannels();
 
-  // calculates the colordata for a pixel when the RGB are individually
-  // adjusted for some scale
+  /**@brief calculates the color data for a pixel on each individual RGB
+  channel by a scale value*/
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
                                   int y) override;
 
