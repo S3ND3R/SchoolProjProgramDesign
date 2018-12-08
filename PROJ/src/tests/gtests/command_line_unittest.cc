@@ -108,12 +108,12 @@ TEST_F(CommandLineProcessorTest, RejectsMissingInputFileValCommand) {
   EXPECT_FALSE(cmd_processor_.is_valid_commands_());
 }
 
-// TEST_F(CommandLineProcessorTest, RejectsMissingOutputFileValCommand) {
-//   arg_count_ = 4;
-//   char *arg_v_[arg_count_] = {path, in_file, correct_cmd_red, float_val};
-//   cmd_processor_.ProcessCommandLine(arg_count_, arg_v_);
-//   EXPECT_FALSE(cmd_processor_.is_valid_commands_());
-// }
+TEST_F(CommandLineProcessorTest, RejectsMissingOutputFileValCommand) {
+  arg_count_ = 4;
+  char *arg_v_[arg_count_] = {path, in_file, correct_cmd_red, float_val};
+  cmd_processor_.ProcessCommandLine(arg_count_, arg_v_);
+  EXPECT_FALSE(cmd_processor_.is_valid_commands_());
+}
 
 TEST_F(CommandLineProcessorTest, RejectsIncorrectOutputFileValCommand) {
   arg_count_ = 5;

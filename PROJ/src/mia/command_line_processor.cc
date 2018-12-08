@@ -57,15 +57,22 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
       valid_cmds_ = false;
       std::cout << "\n File does not exist." << std::endl;
     }
-    // checking correct postfix on image files
-    std::string in_post_fix = in_file.substr((in_file.size()- 4), 4);
-    std::string out_post_fix = out_file.substr((out_file.size()- 4), 4);
-    if (((in_post_fix != ".png") && (in_post_fix != ".PNG")) ||
-        ((out_post_fix != ".png") && (out_post_fix != ".PNG"))) {
-          std::cout << "\nIncorrect file naming"
-                       " <files must have .png or .PNG as postfix>\n";
-          valid_cmds_ = false;
-        }
+    // checking correct filename length
+    if ((in_file.size() <= 4) || (out_file.size() <= 4)) {
+      valid_cmds_ = false;
+      std::cout << "\n File does not follow proper naming form"
+                   "<<filename>.png or <filename>.PNG>"<< std::endl;
+    } else {
+      std::string in_post_fix = in_file.substr((in_file.size()- 4), 4);
+      std::string out_post_fix = out_file.substr((out_file.size()- 4), 4);
+      // checking correct postfix on image files
+      if (((in_post_fix != ".png") && (in_post_fix != ".PNG")) ||
+          ((out_post_fix != ".png") && (out_post_fix != ".PNG"))) {
+            std::cout << "\nIncorrect file naming"
+                         " <files must have .png or .PNG as postfix>\n";
+            valid_cmds_ = false;
+      }
+    }
     cmd_v_.push_back(new LoadCommand(&image_edit_, in_file));
     // loop through commands in argv
     for (int i = 2; valid_cmds_ && i < (argc - 1); i++) {
