@@ -13,15 +13,17 @@ OriginaApplyToBufferl Author(s) of this File:
 #include "imagetools/filter.h"
 
 namespace image_tools {
-
+/**
+@brief This threshold filter adjusts the color values to either white or black
+based on the threshold value. */
 class FilterThreshold : public Filter {
  public:
   FilterThreshold();
 
   virtual ~FilterThreshold();
-
-  // calculates color by setting color to white or black if the average of the
-  // rgb is greater than the passed threshold value
+  /**
+  @brief Calculates color by setting color to white or black if the average of
+  the rgb is greater than the passed threshold value.*/
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 

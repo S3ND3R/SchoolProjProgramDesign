@@ -13,15 +13,18 @@ Original Author(s) of this File:
 #include "imagetools/filter.h"
 
 namespace image_tools {
-
+/**
+@brief This quantize filter restricts the number of color values in each channel
+based on the number of bins */
 class FilterQuantize : public Filter {
  public:
   FilterQuantize();
 
   virtual ~FilterQuantize();
 
-  // calculates the ColorData for a pixel by limiting excess colors to the
-  // amount of bins passed
+  /**
+  @brief Calculates the ColorData for a pixel by limiting excess colors to the
+  integer number of bins passed. */
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
                                   int y) override;
 

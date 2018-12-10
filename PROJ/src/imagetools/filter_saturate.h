@@ -13,14 +13,18 @@ OriginaApplyToBufferl Author(s) of this File:
 #include "imagetools/filter.h"
 
 namespace image_tools {
-
+/**
+@brief This saturation  filter uses a linear interpretation based on a
+saturation scale to filter the pixel values */
 class FilterSaturate : public Filter {
  public:
   FilterSaturate();
 
   virtual ~FilterSaturate();
 
-  // calculates the color by linear interpretation using a saturation scale
+  /**
+  @brief Calculates the color by linear interpretation using a saturation
+  scale */
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 

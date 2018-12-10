@@ -14,23 +14,31 @@ Original Author(s) of this File:
 #include "imagetools/filter.h"
 
 namespace image_tools {
-
+/**
+@brief The base filter class, it is an abstract class that provides the base
+CreateKernel method, which inheriting classes must overwrite, and the
+CalculateFilteredPixel method that all convolution filters will run. */
 class ConvolutionFilter: public Filter {
  public:
   ConvolutionFilter();
 
   virtual ~ConvolutionFilter();
 
-  // derived classes must define their version of CreateKernel
+  /**
+  @brief Derived classes must define their own version of CreateKernel. */
   virtual FloatMatrix *CreateKernel() = 0;
 
-  // Sets up the kernel used in CalculateFilteredPixel
+  /**
+  @brief Sets up the kernel used in CalculateFilteredPixel */
   void SetupFilter() override;
 
-  // Cleans up memory dynamically allocated for the kernel
+  /**
+  @brief Cleans up memory dynamically allocated for the kernel */
   void CleanupFilter() override;
 
-  // Calcultates the value of the new filtered color using the kernel.
+  /**
+  @brief Calcultates the value of the new filtered ColorData using the
+  kernel.*/
   ColorData CalculateFilteredPixel(const PixelBuffer &buffer,
                                    int x, int y) override;
 
@@ -39,7 +47,9 @@ class ConvolutionFilter: public Filter {
   inline void set_kernel_radius(int radius) {kernel_radius_ = radius;}
 
   inline int get_kernel_radius() {return kernel_radius_;}
-
+  /**
+  @brief Hook which is set to false to change how ApplyToBuffer for the filter
+  classes is run */
   inline bool can_calculate_in_place() override {return false;}
 
  private:
