@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<title>Imagetools API Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size: 16px;}
+img {margin-bottom: -8px;}
+.mySlides {display: none;}
+</style>
+<body class="w3-content w3-black" style="max-width:1500px;">
+
+<!-- Header with Slideshow -->
+<header class="w3-display-container w3-center">
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/flashphoot_img.png" alt="Image 1" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/skull_xray.png" alt="Image 2" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/skull_bin.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+  </div>
+  <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Powerful Image Editing <i class="fa fa-angle-right"></i></a>
+  <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Powerful Image Editing <i class="fa fa-angle-right"></i></a>
+</header>
+
+<!-- The API Section -->
+<div class="w3-padding-64 w3-white">
+  <div class="w3-row-padding">
+    <div class="w3-col l8 m6">
+      <h1 class="w3-jumbo"><b>The Imagetools API</b></h1>
+      <h1 class="w3-xxxlarge w3-text-green"><b>What is it?</b></h1>
+      <p><span class="w3-xlarge">The Imagetools API offers a versitile set of tools for creating diverse image editing applications.</span>
+      The imagetools API supports digital painting and image editing applications. It comes with two fully functional applications that demonstrate the power and range of expression that
+    this API is capable of.</p>
+    </div>
+    <div class="w3-col l4 m6">
+      <img src="./img/skull_xray.png" class="w3-image w3-right w3-hide-small" width="335" height="471">
+      <div class="w3-center w3-hide-large w3-hide-medium">
+        <img src="./img/flash_flower.png" class="w3-image w3-margin-top" width="335" height="471">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Use Section -->
+<div class="w3-padding-64 w3-light-grey">
+  <div class="w3-row-padding">
+    <div class="w3-col l4 m6">
+      <img class="w3-image w3-round-large w3-hide-small w3-grayscale" src="./img/flash_flower.png" alt="App" width="335" height="471">
+    </div>
+    <div class="w3-col l8 m6">
+      <h1 class="w3-xxxlarge w3-text-red"><b>How do I use it?</b></h1>
+      <p><span class="w3-xlarge">A tool for both users and developers.</span> Imagetools applications
+      are intuitive and quick to pick up and operate. Users looking to explore getting started with either mia
+      or flashphoto can explore the user tutorials below. Developers looking to harness the power of the
+      imagetools API for their own applications or expand on its functionality can look into the Developing
+      with Imagetolls link.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Guides Section -->
+<div class="w3-padding-64 w3-center w3-white">
+  <h1 class="w3-jumbo"><b>Imagetool Guides</b></h1>
+  <p class="w3-large">Guides for developers and users who want to either expand or explore Imagetools applications.</p>
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-half w3-section">
+      <ul class="w3-ul w3-card w3-hover-shadow">
+        <li class="w3-dark-grey w3-xlarge w3-padding-32">User Guide For Imagetool Applications</li>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./flashphoto.html'" > Getting Started with Flashphoto</button>
+	  <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./doxygen-html/index.html'" > Getting Started with Mia </button>
+        </li>
+      </ul>
+    </div>
+    <div class="w3-half w3-section">
+      <ul class="w3-ul w3-card w3-hover-shadow">
+        <li class="w3-red w3-xlarge w3-padding-32">Developer Guide for Imagetools API</li>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./doxygen-html/index.html'"> Developing with Imagetools</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center w3-xlarge">
+  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Slideshow
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+</body>
+</html>

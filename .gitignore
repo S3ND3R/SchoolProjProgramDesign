@@ -1,9 +1,8 @@
 *.o
 *.out
 *.a
-*.html
 index/
 latex/
 html/
-web/
+doxygen-html/
 point2_unittest

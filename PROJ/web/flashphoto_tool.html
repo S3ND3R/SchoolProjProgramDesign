@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<title>Using Flashphoto Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size: 16px;}
+img {margin-bottom: -8px;}
+.mySlides {display: none;}
+</style>
+<body class="w3-content w3-black" style="max-width:1500px;">
+
+  <!-- The Description Section -->
+  <div class="w3-padding-64 w3-white">
+    <div class="w3-row-padding">
+      <div class="w3-col l8 m6">
+        <h1 class="w3-xxxlarge w3-text-green"><b>Flashphoto Tools</b></h1>
+        <p><span class="w3-xlarge">Tools allow you to directly apply paint to the canvas.</span>
+        Flashphoto has six seperate tools for painting on the canvas along with an eraser tool.
+        Each tool provides its own unique brush stroke when applied to the canvas.
+        All tools can easily be selected from the menu.  <br><br>
+        The 7 design tools are:
+          <ul class="w3-ul w3-card w3-hover-shadow">
+            <li class="w3-dark-grey w3-padding-24">Pen Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">Designed to be like a
+                pen. It completely covers any area of the canvas with the
+              color it has been set to.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Calligraphy Pen Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">Designed almost exactly
+                  like the pen, except that to simulate a calligraphy pen the
+                  brush stroke is tilted.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Chalk Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">Designed to feel
+                  like a piece of chalk. The tool does not completely cover the
+                canvas, instead it randomly leaves some area exposed.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Highlighter Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">Designed to
+                  represent a highlighter. The tool has a high level of transparancy,
+                  so the colors on the canvas underneath are visible.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Spray Can Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">Designed to work like a
+                  spray can. The tool gradually applies paint to the canvas if it
+                  is held in place. The amount of paint applied decreases the farther
+                  you are from the center.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Blur Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">This special tool blurs
+                  the colors that are already on the canvas. It has the feel of
+                  smudging the paint on the canvas with your thumb.</li>
+              </ul>
+            <li class="w3-dark-grey w3-padding-24">Eraser Tool</li>
+              <ul class="w3-ul">
+                <li class="w3-light-grey w3-padding-10">This tool functions like
+                  an eraser. It removes all paint that has been applied to the
+                  canvas, and returns it to the original background color.</li>
+              </ul>
+          </ul>
+      </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color and Size Selection -->
+  <div class="w3-padding-64 w3-light-grey">
+    <div class="w3-row-padding">
+      <div class="w3-col l4 m6">
+        <img class="w3-image w3-round-large w3-hide-small w3-grayscale" src="./img/color.png" alt="App" width="335" height="471">
+      </div>
+      <div class="w3-col l8 m6">
+        <h1 class="w3-xxxlarge w3-text-red"><b>Color and tool size Selection</b></h1>
+        <p><span class="w3-xlarge">The menu in flashphoto has options for selecting both the size and color of the tools.
+        Tool color can be selected from a simple color graphic. Tool size can be adjusted using the Tool Size slider.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Example Slideshow -->
+<div class="w3-display-container w3-center">
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/pen.png" alt="Image 1" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Pen Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Pen Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/Calligraphy.png" alt="Image 2" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Calligraphy Pen Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Calligraphy Pen Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/chalk.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Chalk Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Chalk Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/highlighter.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Highlighter Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Highlighter Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/spraycan.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Spray Can Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Spray Can Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/blur.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Blur Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Blur Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="./img/eraser.png" alt="Image 3" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+    </div>
+    <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Eraser Tool <i class="fa fa-angle-right"></i></a>
+    <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Eraser Tool <i class="fa fa-angle-right"></i></a>
+  </div>
+  </div>
+  <!-- <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Powerful Image Editing <i class="fa fa-angle-right"></i></a>
+  <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">Powerful Image Editing <i class="fa fa-angle-right"></i></a> -->
+</div>
+
+<!-- Further links Section -->
+<div class="w3-padding-64 w3-center w3-white">
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-section">
+      <ul class="w3-ul w3-card w3-hover-shadow">
+        <li class="w3-dark-grey w3-xlarge w3-padding-32">Next Topic: Using Filters</li>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./flashphoto.html'" > previous </button>
+	        <button class="w3-button w3-red w3-padding-large" onclick="window.location.href='./index.html'" > home </button>
+          <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./flashphoto_filter.html'" > next </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center w3-xlarge">
+  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Slideshow
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+</body>
+</html>
