@@ -5,8 +5,10 @@ Original Author(s) of this File:
   Warren Weber, 10/26/18, University of Minnesota
 */
 
+#include <cmath>
 #include "imagetools/float_matrix.h"
 #include "imagetools/convolution_filter_sharpen.h"
+#include "imagetools/image_tools_math.h"
 
 namespace image_tools {
 
@@ -14,16 +16,31 @@ ConvolutionFilterSharpen::ConvolutionFilterSharpen() {}
 
 ConvolutionFilterSharpen::~ConvolutionFilterSharpen() {}
 
-FloatMatrix *ConvolutionFilterSharpen::CreateKernel() {
+FloatMatrix* ConvolutionFilterSharpen::CreateKernel() {
   int radius = get_kernel_radius();
-  FloatMatrix *sharp_kernel = new FloatMatrix(radius);
-  for (int x = 0; x < sharp_kernel->height(); x++) {
-    for (int y = 0; y < sharp_kernel->width(); y++) {
-     sharp_kernel->set_value(x, y, -1.0);
+  FloatMatrix* kernel =
+      new FloatMatrix(round(radius * 2.0) + 1, round(radius * 2.0) + 1);
+
+  for (int j = 0; j < kernel->height(); j++) {
+    for (int i = 0; i < kernel->width(); i++) {
+      int x = i - kernel->width() / 2;
+      int y = j - kernel->height() / 2;
+      float dist = sqrt(x * x + y * y);
+      float intensity = ImageToolsMath::Gaussian(dist, radius);
+      kernel->set_value(i, j, intensity);
     }
   }
-  float center = sharp_kernel->width() * sharp_kernel->width();
-  sharp_kernel->set_value(radius, radius, center);
-  return sharp_kernel;
+  kernel->Normalize();
+
+  // Negate all the values
+  kernel->Scale(-1.0);
+
+  // Add two to the middle
+  float middle_value = kernel->value(kernel->width() / 2, kernel->height() / 2);
+  kernel->set_value(kernel->width() / 2, kernel->height() / 2,
+                    middle_value + 2.0);
+
+  return kernel;
 }
+
 }  // namespace image_tools
