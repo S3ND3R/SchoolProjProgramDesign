@@ -1,11 +1,11 @@
 ### Feedback for Project Iteration 02
 
-Run on December 11, 11:09:15 AM.
+Run on December 11, 22:42:32 PM.
 
 
 #### System Files and PROJ Directory Structure
 
-+ Pass: Check that directory "/lhome/gitbot/umn-csci-3081-F18/grading-scripts/_proj_materials" exists.
++ Pass: Check that directory "/project/keefe01/vis/sw/user-checkouts/dtorban/TA/csci3081-test-env/grading-scripts/_proj_materials" exists.
 
 + Pass: Check that directory "PROJ" exists.
 
@@ -26,10 +26,6 @@ Run on December 11, 11:09:15 AM.
 
 
 #### Set up Project
-
-+ Pass: Setup grading environment.
-
-
 
 + Pass: Change into directory "PROJ".
 
@@ -57,12 +53,6 @@ Run on December 11, 11:09:15 AM.
 
 
 
-+ Pass: Setup grading environment.
-
-
-
-+ Pass: Check that file "./src/mia/image_editor_commands.cc" exists.
-
 + Pass: Ensuring code follows style guide.
 
 
@@ -70,22 +60,6 @@ Run on December 11, 11:09:15 AM.
 + Pass: Check that make compiles.
 
 
-
-+ Pass: Check that file "./build/lib/libimagetools.a" exists.
-
-+ Pass: Check that file "./build/bin/flashphoto" exists.
-
-+ Pass: Check that file "./build/bin/mia" exists.
-
-+ Pass: Change into directory "src/tests/inst_tests".
-
-+ Pass: Check that make compiles.
-
-
-
-+ Pass: Change into directory "../../..".
-
-+ Pass: Check that file "./build/test/inst_tests" exists.
 
 
 #### Run Student Tests
