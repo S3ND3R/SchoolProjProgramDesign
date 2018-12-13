@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<title>Working with Command Line</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size: 16px;}
+img {margin-bottom: -8px;}
+.mySlides {display: none;}
+</style>
+<body class="w3-content w3-black" style="max-width:1500px;">
+
+  <!-- The Undo/Redo Section -->
+  <div class="w3-padding-64 w3-white">
+    <div class="w3-row-padding">
+      <div class="w3-col l8 m6">
+        <h1 class="w3-xxxlarge w3-text-green"><b>Mia Command Line</b></h1>
+        <p><span class="w3-xlarge">Mia has the extra functionality of running commands
+          in the terminal through the command line. By simply typing -h, Mia will bring up a
+          help message that explains all the commands that can be entered. This is a great way to
+          load, edit, and save images quickly with Mia.
+       </p>
+      </div>
+      <!-- <img src="./img/mark.png" class="w3-image w3-right w3-hide-small" width="335" height="471"> -->
+    </div>
+  </div>
+
+  <!-- Example Slideshow -->
+  <div class="w3-display-container w3-center">
+    <div class="mySlides w3-animate-opacity">
+      <img class="w3-image" src="./img/ekitty.png" alt="Image 1" style="min-width:500px" width="1500" height="1000">
+      <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+      </div>
+      <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Here is an image we will edit through the terminal. <i class="fa fa-angle-right"></i></a>
+    </div>
+    <div class="mySlides w3-animate-opacity">
+      <img class="w3-image" src="./img/term1.png" alt="Image 2" style="min-width:500px" width="1500" height="1000">
+      <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+      </div>
+      <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">After typing -h, you can see the range of commands available to us. <i class="fa fa-angle-right"></i></a>
+    </div>
+    <div class="mySlides w3-animate-opacity">
+      <img class="w3-image" src="./img/term2.png" alt="Image 2" style="min-width:500px" width="1500" height="1000">
+      <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+      </div>
+      <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Here is the proper format <i class="fa fa-angle-right"></i></a>
+    </div>
+    <div class="mySlides w3-animate-opacity">
+      <img class="w3-image" src="./img/term3.png" alt="Image 2" style="min-width:500px" width="1500" height="1000">
+      <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+      </div>
+      <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">Here is the image after saturating by 5.0 and altering the red channel by 2.0. <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+
+  <!-- Further links Section -->
+  <div class="w3-padding-64 w3-center w3-white">
+    <div class="w3-row-padding" style="margin-top:64px">
+      <div class="w3-section">
+        <ul class="w3-ul w3-card w3-hover-shadow">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Tutorial Complete</li>
+          </li>
+          <li class="w3-light-grey w3-padding-24">
+            <button class="w3-button w3-black w3-padding-large" onclick="window.location.href='./mia_tutorial.html'" > previous </button>
+  	        <button class="w3-button w3-red w3-padding-large" onclick="window.location.href='./index.html'" > home </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br>
+  </div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center w3-xlarge">
+  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Slideshow
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+</body>
+</html>
