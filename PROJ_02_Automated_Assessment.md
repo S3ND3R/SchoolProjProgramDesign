@@ -1,8 +1,8 @@
 ### Assessment for Project Iteration 02 - Automated (Graded By: Dan Orban)
 
-#### Total score: _74.3_ / _85_
+#### Total score: _75.3_ / _85_
 
-Run on December 13, 09:24:14 AM.
+Run on December 14, 13:16:20 PM.
 
 
 #### System Files and PROJ Directory Structure
@@ -84,15 +84,8 @@ Run on December 13, 09:24:14 AM.
 
 
 
-+  _0_ / _1_ : Fail: Check that a GoogleTest test passes.
-    fails the test: Iteration2Test.DisplayHelpMessage.
-<pre>
-[ RUN      ] Iteration2Test.DisplayHelpMessage
-iter2_test.cc:102: Failure
-Value of: hasHelpMessage(output)
-  Actual: false
-Expected: true
-mia -h should return the help message.</pre>
++  _1_ / _1_ : Pass: Check that a GoogleTest test passes.
+    passes the test: Iteration2Test.DisplayHelpMessage.
 
 
 
@@ -109,27 +102,7 @@ iter2_test.cc:95: Failure
 Value of: hasHelpMessage(getStdOutOrErr())
   Actual: false
 Expected: true
-./build/bin/mia -blur 5 should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png edgedetect output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -edgedetect 5 output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -blur abc output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -edgedetect -blur 1 -blur 2 -motionblur-n-s abc -edgedetect output.png should return the help message.</pre>
+./build/bin/mia -blur 5 should return the help message.</pre>
 
 
 
@@ -162,43 +135,43 @@ Expected: true
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: FilterQuantizeRegressionTest.ImageRegressionEquality.
+    passes the test: ToolErasureRegressionTest.ImageRegressionEquality.
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: FilterBlurRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = FilterBlurRegressionTest.ImageRegressionEquality
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from FilterBlurRegressionTest
 [ RUN      ] FilterBlurRegressionTest.ImageRegressionEquality
-
+</pre>
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: CommandLineProcessorTest.AcceptsSingleCorrectCommand.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = CommandLineProcessorTest.AcceptsSingleCorrectCommand
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from CommandLineProcessorTest
 [ RUN      ] CommandLineProcessorTest.AcceptsSingleCorrectCommand
-
+</pre>
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: CommandLineProcessorTest.AcceptsMultipleCorrectCommands.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectCommands
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from CommandLineProcessorTest
 [ RUN      ] CommandLineProcessorTest.AcceptsMultipleCorrectCommands
-
+</pre>
 
 
 
@@ -252,8 +225,15 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 
 
-+ Pass: Check that a GoogleTest test passes.
-    passes the test: ToolHighlighterRegressionTest.ImageRegressionEquality.
++ Fail: Check that a GoogleTest test passes.
+    timeout occured: FilterMotionBlurRegressionTest.ImageRegressionEquality.
+<pre>Running main() from gtest_main.cc
+Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEquality
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from FilterMotionBlurRegressionTest
+[ RUN      ] FilterMotionBlurRegressionTest.ImageRegressionEquality
+</pre>
 
 
 
@@ -293,6 +273,11 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 
 + Pass: Check that a GoogleTest test passes.
+    passes the test: ToolHighlighterRegressionTest.ImageRegressionEquality.
+
+
+
++ Pass: Check that a GoogleTest test passes.
     passes the test: ToolBlurTest.HasCorrectName.
 
 
@@ -318,7 +303,7 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: ToolErasureRegressionTest.ImageRegressionEquality.
+    passes the test: FilterChannelsRegressionTest.ImageRegressionEquality.
 
 
 
@@ -334,30 +319,18 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: FilterSharpenRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from FilterSharpenRegressionTest
 [ RUN      ] FilterSharpenRegressionTest.ImageRegressionEquality
-
+</pre>
 
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: FilterChannelsRegressionTest.ImageRegressionEquality.
-
-
-
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: FilterMotionBlurRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
-Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEquality
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from FilterMotionBlurRegressionTest
-[ RUN      ] FilterMotionBlurRegressionTest.ImageRegressionEquality
-
+    passes the test: FilterQuantizeRegressionTest.ImageRegressionEquality.
 
 
 
@@ -404,5 +377,5 @@ Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEqualit
 
 +  _9.38_ / _15_ : Fail: 50.0% of the tests passed, but the target is 80.0%.
 
-#### Total score: _74.3_ / _85_
+#### Total score: _75.3_ / _85_
 
