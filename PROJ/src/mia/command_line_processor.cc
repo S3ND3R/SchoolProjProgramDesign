@@ -23,6 +23,8 @@ CommandLineProcessor::CommandLineProcessor() {
   blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_N_S;
   valid_cmds_ = true;
   help_message_ = "\n<Help Message for Mia>\n\n"
+                "usage: mia infile.png [image processing commands ...] "
+                "outfile.png\n\n"
                 "Image Processing Commands:\n"
                 "-blur r             <apply a gaussian blur of radius r>\n"
                 "-edgedetect         <apply an edge detection filter>\n"
@@ -38,10 +40,7 @@ CommandLineProcessor::CommandLineProcessor() {
                 "-motionblur-ne-sw r <northeast-southwest motion blur "
                                      "with radius r>\n"
                 "-motionblur-nw-se r <northwest-southeast motion blur "
-                                     "with radius r>\n\n"
-                "Valid Command Format:\n"
-                "<application> <input filename> <-commands...> "
-                "<output filename>\n";
+                                     "with radius r>\n\n";
 }
 
 void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
@@ -55,13 +54,13 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
     std::string out_file = std::string(argv[argc - 1]);
     if (!(mingfx::Platform::FileExists(in_file))) {
       valid_cmds_ = false;
-      std::cout << "\n File does not exist." << std::endl;
+      help_message_ += "\nERROR:File does not exist.";
     }
     // checking correct filename length
     if ((in_file.size() <= 4) || (out_file.size() <= 4)) {
       valid_cmds_ = false;
-      std::cout << "\n File does not follow proper naming form"
-                   "<<filename>.png or <filename>.PNG>"<< std::endl;
+      help_message_ += "\nERROR:File does not follow proper naming form"
+                   "[<filename>.png or <filename>.PNG]";
     } else {
       std::string in_post_fix = in_file.substr((in_file.size()- 4), 4);
       std::string out_post_fix = out_file.substr((out_file.size()- 4), 4);
