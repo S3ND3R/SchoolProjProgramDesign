@@ -99,10 +99,60 @@ understanding which type of filter you are implementing. <br>
 \page page_filter_in Implementing an In Place Filter
 Step 2
 ------
-To create an in-place filter you will need to build the subclass so it implements the CalculateFilteredPixel method. Filter is an abstract class, so that method is declared but not implemented, so you will not able to inherit it from Filter. All filters are applied through the ApplyToBuffer method that they inherit from Filter, so they should not be designed to apply a change to the PixelBuffer within the subclass.
+```
+1. #include "imagetools/pixel_buffer.h"
+2. #include "imagetools/color_data.h"
+3. #include "imagetools/filter.h"
+4.
+5. namespace image_tools {
+6. /**
+7. explain class...*/
+8. class FilterChannels : public Filter {
+9.  public:
+10.  FilterChannels();
+11.
+12.  virtual ~FilterChannels();
+13.
+14.  /**
+15.  calculates the color data for a pixel on each individual RGB
+16.  channel by a scale value*/
+17.  ColorData CalculateFilteredPixel(const PixelBuffer &buffer, int x,
+18.                                  int y) override;
+19.
+20.  }
+21.
+22.  private:
+23.  // add needed data members...
+24. };
+25. } // namespace image_tools
+```
+To create an in-place filter you will need to build the subclass so it inherits from Filter, this is done on  line 8 by adding public Filter, and by including the Filter header file. The new subclass must implement the CalculateFilteredPixel method. Filter is an abstract class, so that method is declared but not implemented, which means you will not be able to inherit it from Filter. All filters are applied through the ApplyToBuffer method that they inherit from Filter, so they should not be designed to apply a change to the PixelBuffer from within the subclass. The new filter should be in the namespace image_tools.
 
 <!--convolution filters-->
 \page page_filter_out Implementing a Convolution Filter
 Step 2
 ------
-To create a convolution filter the subclass must inherit from the Abstract ConvolutionFilter class. It must include an implementation of the abstract CreateKernel method in the parent class that is currently declared but not implemented. CreateKernel will build a Floatmatrix that is used to apply the filter. By inheriting from ConvolutionFilter the Filter class will automatically handle creating a PixelBuffer copy of the current buffer, and  calling SetupFilter and CleanupFilter methods, which are already defined in ConvolutionFilter. CalculateFilteredPixel is already defined and implemented by ConvolutionFilter, so all the created filter needs to do is properly build the kernel that will be needed.
+```
+1. #include "imagetools/float_matrix.h"
+2. #include "imagetools/convolution_filter.h"
+3.
+4. namespace image_tools {
+5. /**
+6. This convolution blur filter applies a gaussina blur filter to the
+7. current PixelBuffer .*/
+8. class ConvolutionFilterBlur : public ConvolutionFilter {
+9.  public:
+10.  ConvolutionFilterBlur();
+11.
+12.  virtual ~ConvolutionFilterBlur();
+13.
+14.  /**
+15.  Convolution Filter Blur kernel applies gaussian equation for each
+16.  value in the kernel.*/
+17.  FloatMatrix *CreateKernel() override;
+18. };
+19.
+20. } // namespace image_tools
+
+```
+To create a convolution filter the subclass must inherit from the Abstract ConvolutionFilter class, this is done by including the ConvolutionBlur header file, and adding public ConvolutionFilter, as seen on line 8. It must include an implementation of the abstract CreateKernel method in the parent class that is currently declared but not implemented. CreateKernel will build a Floatmatrix that is used to apply the filter. By inheriting from ConvolutionFilter the Filter class will automatically handle creating a PixelBuffer copy of the current buffer, and  calling SetupFilter and CleanupFilter methods, which are already defined in ConvolutionFilter. CalculateFilteredPixel is already defined and implemented by ConvolutionFilter, so all the created filter needs to do is properly build the kernel that will be needed. Filters should be within the namespace image_tools.
