@@ -1,6 +1,6 @@
 ### Assessment for Project Iteration 01 - ConvFilters (Graded By: Nikki Kyllonen)
 
-#### Total score: _13_ / _15_
+#### Total score: _14_ / _15_
 
 Run on November 25, 00:48:37 AM.
 
@@ -75,10 +75,10 @@ Run on November 25, 00:48:37 AM.
 
 
 
-+  _1_ / _2_ : Fail: Sharpen Filter
++  _2_ / _2_ : Pass: Sharpen Filter
 <pre>
 <b>Comments: 
-</b>Black outline is incorrect.</b></pre>
+</b>1 point back for: black outline is incorrect.</b></pre>
 
 
 
@@ -90,5 +90,5 @@ Run on November 25, 00:48:37 AM.
 
 
 
-#### Total score: _13_ / _15_
+#### Total score: _14_ / _15_
 

@@ -1,6 +1,8 @@
-### Feedback for Project Iteration 02
+### Assessment for Project Iteration 02 - Automated (Graded By: Dan Orban)
 
-Run on December 12, 16:10:03 PM.
+#### Total score: _75.3_ / _85_
+
+Run on December 14, 13:16:20 PM.
 
 
 #### System Files and PROJ Directory Structure
@@ -11,13 +13,13 @@ Run on December 12, 16:10:03 PM.
 
 
 
-+ Pass: Check that directory "PROJ" exists.
++  _3_ / _3_ : Pass: Check that directory "PROJ" exists.
 
-+ Pass: Check that directory "PROJ/src/imagetools" exists.
++  _2_ / _2_ : Pass: Check that directory "PROJ/src/imagetools" exists.
 
-+ Pass: Check that file "PROJ/src/imagetools/color_data.h" exists.
++  _2_ / _2_ : Pass: Check that file "PROJ/src/imagetools/color_data.h" exists.
 
-+ Pass: Check that file "PROJ/src/imagetools/Makefile" exists.
++  _2_ / _2_ : Pass: Check that file "PROJ/src/imagetools/Makefile" exists.
 
 
 #### Set up cpplint
@@ -37,21 +39,21 @@ Run on December 12, 16:10:03 PM.
 
 
 
-+ Pass: Ensuring code follows style guide.
++  _1_ / _1_ : Pass: Ensuring code follows style guide.
 
 
 
-+ Pass: Check that make compiles.
++  _25_ / _25_ : Pass: Check that make compiles.
 
 
 
-+ Pass: Check that file "./build/lib/libimagetools.a" exists.
++  _3_ / _3_ : Pass: Check that file "./build/lib/libimagetools.a" exists.
 
-+ Pass: Check that file "./build/bin/flashphoto" exists.
++  _3_ / _3_ : Pass: Check that file "./build/bin/flashphoto" exists.
 
-+ Pass: Check that file "./build/bin/mia" exists.
++  _3_ / _3_ : Pass: Check that file "./build/bin/mia" exists.
 
-+ Pass: Check that file "./build/test/gtests" exists.
++  _3_ / _3_ : Pass: Check that file "./build/test/gtests" exists.
 
 
 ### Instructor Tests
@@ -69,7 +71,7 @@ Run on December 12, 16:10:03 PM.
 
 #### Testing ImageIO Implementation
 
-+ Pass: Check that a GoogleTest test passes.
++  _2_ / _2_ : Pass: Check that a GoogleTest test passes.
     passes the test: Iteration2Test.ImageLoadingAndSaving.
 
 
@@ -77,29 +79,22 @@ Run on December 12, 16:10:03 PM.
 
 #### Testing MIA Application
 
-+ Pass: Check that a GoogleTest test passes.
++  _1_ / _1_ : Pass: Check that a GoogleTest test passes.
     passes the test: Iteration2Test.StampToolAdded.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    fails the test: Iteration2Test.DisplayHelpMessage.
-<pre>
-[ RUN      ] Iteration2Test.DisplayHelpMessage
-iter2_test.cc:102: Failure
-Value of: hasHelpMessage(output)
-  Actual: false
-Expected: true
-mia -h should return the help message.</pre>
++  _1_ / _1_ : Pass: Check that a GoogleTest test passes.
+    passes the test: Iteration2Test.DisplayHelpMessage.
 
 
 
-+ Pass: Check that a GoogleTest test passes.
++  _2_ / _2_ : Pass: Check that a GoogleTest test passes.
     passes the test: Iteration2Test.MiaCommandLineCorrect.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
++  _0_ / _2_ : Fail: Check that a GoogleTest test passes.
     fails the test: Iteration2Test.MiaCommandLineBadInput.
 <pre>
 [ RUN      ] Iteration2Test.MiaCommandLineBadInput
@@ -107,27 +102,7 @@ iter2_test.cc:95: Failure
 Value of: hasHelpMessage(getStdOutOrErr())
   Actual: false
 Expected: true
-./build/bin/mia -blur 5 should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png edgedetect output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -edgedetect 5 output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -blur abc output.png should return the help message.
-iter2_test.cc:95: Failure
-Value of: hasHelpMessage(getStdOutOrErr())
-  Actual: false
-Expected: true
-./build/bin/mia src/tests/inst_tests/input.png -edgedetect -blur 1 -blur 2 -motionblur-n-s abc -edgedetect output.png should return the help message.</pre>
+./build/bin/mia -blur 5 should return the help message.</pre>
 
 
 
@@ -160,43 +135,43 @@ Expected: true
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: FilterQuantizeRegressionTest.ImageRegressionEquality.
+    passes the test: ToolErasureRegressionTest.ImageRegressionEquality.
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: FilterBlurRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = FilterBlurRegressionTest.ImageRegressionEquality
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from FilterBlurRegressionTest
 [ RUN      ] FilterBlurRegressionTest.ImageRegressionEquality
-
+</pre>
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: CommandLineProcessorTest.AcceptsSingleCorrectCommand.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = CommandLineProcessorTest.AcceptsSingleCorrectCommand
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from CommandLineProcessorTest
 [ RUN      ] CommandLineProcessorTest.AcceptsSingleCorrectCommand
-
+</pre>
 
 
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: CommandLineProcessorTest.AcceptsMultipleCorrectCommands.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectCommands
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from CommandLineProcessorTest
 [ RUN      ] CommandLineProcessorTest.AcceptsMultipleCorrectCommands
-
+</pre>
 
 
 
@@ -252,13 +227,13 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: FilterMotionBlurRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEquality
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from FilterMotionBlurRegressionTest
 [ RUN      ] FilterMotionBlurRegressionTest.ImageRegressionEquality
-
+</pre>
 
 
 
@@ -328,7 +303,7 @@ Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEqualit
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: ToolErasureRegressionTest.ImageRegressionEquality.
+    passes the test: FilterChannelsRegressionTest.ImageRegressionEquality.
 
 
 
@@ -344,20 +319,63 @@ Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEqualit
 
 + Fail: Check that a GoogleTest test passes.
     timeout occured: FilterSharpenRegressionTest.ImageRegressionEquality.
-Running main() from gtest_main.cc
+<pre>Running main() from gtest_main.cc
 Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from FilterSharpenRegressionTest
 [ RUN      ] FilterSharpenRegressionTest.ImageRegressionEquality
-
+</pre>
 
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: FilterChannelsRegressionTest.ImageRegressionEquality.
+    passes the test: FilterQuantizeRegressionTest.ImageRegressionEquality.
 
 
 
-+ Fail: 86.11% of the tests passed, but the target is 100%.
++  _12.92_ / _15_ : Fail: 86.11% of the tests passed, but the target is 100%.
+
+
+### Testing Mutants
+
+
+#### Testing Pen Tool for failure
+
++ Pass: At least one test failed for Pen Tool
+
+
+#### Testing Eraser Tool for failure
+
++ Pass: At least one test failed for Eraser Tool
+
+
+#### Testing Stamp Tool for failure
+
++ Fail: There is no test case for this mutant (since all tests pass).
+   - Reason - The stamp tool does not stamp, it slides.
+
+
+#### Testing Blur Filter for failure
+
++ Fail: There is no test case for this mutant (since all tests pass).
+   - Reason - In Mutant: The radius is 2 less than it is supposed to be.
+
+
+#### Testing Edge Detector Filter for failure
+
++ Pass: At least one test failed for Edge Detector Filter
+
+
+#### Testing Image IO Implementaiton for failure
+
++ Fail: There is no test case for this mutant (since all tests pass).
+   - Reason - In Mutant: Image saving and loading is not working.
+
+
+#### Results
+
++  _9.38_ / _15_ : Fail: 50.0% of the tests passed, but the target is 80.0%.
+
+#### Total score: _75.3_ / _85_
 
