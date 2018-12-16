@@ -67,9 +67,9 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
       // checking correct postfix on image files
       if (((in_post_fix != ".png") && (in_post_fix != ".PNG")) ||
           ((out_post_fix != ".png") && (out_post_fix != ".PNG"))) {
-            std::cout << "\nIncorrect file naming"
-                         " <files must have .png or .PNG as postfix>\n";
             valid_cmds_ = false;
+            help_message_ +="Error:Incorrect file naming"
+                            " <files must have .png or .PNG as postfix>\n";
       }
     }
     cmd_v_.push_back(new LoadCommand(&image_edit_, in_file));
@@ -84,15 +84,15 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ +="Error:Radius value is out-of bounds "
+                              "<values should be between 1 and 10>\n";
             }
             cmd_v_.push_back(new BlurFilterCommand(&image_edit_, radius));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // edge detect case
@@ -104,15 +104,15 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ +="Error:Radius value is out-of bounds "
+                              "<values should be between 1 and 10>\n";
             }
             cmd_v_.push_back(new SharpenFilterCommand(&image_edit_, radius));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // red case
@@ -121,16 +121,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
-              std::cout << "\nScale value is out-of bounds "
-                           "<scale should be greater than 0 "
-                           "and less than or equal to 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Scale value is out-of bounds "
+                               "<scale should be greater than 0 "
+                               "and less than or equal to 10>\n";
             }
             red_chan_ = color_scale;
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // green case
@@ -139,16 +139,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
-              std::cout << "\nScale value is out-of bounds "
-                           "<scale should be greater than 0 "
-                           "and less than or equal to 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Scale value is out-of bounds "
+                               "<scale should be greater than 0 "
+                               "and less than or equal to 10>\n";
             }
             green_chan_ = color_scale;
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // blue case
@@ -157,16 +157,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float color_scale = std::stof(argv[i + 1]);
             if (color_scale <= 0.0 || color_scale > 10.0) {
-              std::cout << "\nScale value is out-of bounds "
-                           "<scale should be greater than 0 "
-                           "and less than or equal to 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Scale value is out-of bounds "
+                               "<scale should be greater than 0 "
+                               "and less than or equal to 10>\n";
             }
             blue_chan_ = color_scale;
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // quantize case
@@ -175,15 +175,15 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             int bins = std::stoi(argv[i + 1]);
             if (bins < 1 || bins > 256) {
-              std::cout << "\nNumber of bins is out-of bounds "
-                           "<bins should be between 1 and 256>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Number of bins is out-of bounds "
+                               "<bins should be between 1 and 256>\n";
             }
             cmd_v_.push_back(new QuantizeFilterCommand(&image_edit_, bins));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // saturate case
@@ -192,16 +192,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float scale = std::stof(argv[i + 1]);
             if (scale <= 0.0 || scale > 10.0) {
-              std::cout << "\nScale value is out-of bounds "
-                           "<scale should be greater than 0 "
-                           "and less than or equal to 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Scale value is out-of bounds "
+                               "<scale should be greater than 0 "
+                               "and less than or equal to 10>\n";
             }
             cmd_v_.push_back(new SaturateFilterCommand(&image_edit_, scale));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // threshold case
@@ -210,16 +210,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float cutoff = std::stof(argv[i + 1]);
             if (cutoff <= 0.0 || cutoff > 1.0) {
-              std::cout << "\nCutoff value is out-of bounds "
-                           "<cutoff should be greater than 0 "
-                           "and less than or equal to 1>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Cutoff value is out-of bounds "
+                               "<cutoff should be greater than 0 "
+                               "and less than or equal to 1>\n";
             }
             cmd_v_.push_back(new ThresholdFilterCommand(&image_edit_, cutoff));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // motionblur-n-s case
@@ -228,16 +228,16 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Radius value is out-of bounds "
+                               "<values should be between 1 and 10>\n";
             }
             cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
                                                          blur_dir_));
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // motionblur-e-w case
@@ -246,9 +246,9 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
               valid_cmds_ = false;
+              help_message_ += "Error:Radius value is out-of bounds "
+                               "<values should be between 1 and 10>\n";
             }
             blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_E_W;
             cmd_v_.push_back(new MotionBlurFilterCommand(&image_edit_, radius,
@@ -256,7 +256,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // motionblur-ne-sw case
@@ -265,8 +265,8 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
+              help_message_ += "Error:Radius value is out-of bounds "
+                               "<values should be between 1 and 10>\n";
               valid_cmds_ = false;
             }
             blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NE_SW;
@@ -275,7 +275,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
         // motionblur-ne-sw case
@@ -284,8 +284,8 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
           try {
             float radius = std::stof(argv[i + 1]);
             if (radius < 1.0 || radius > 10.0) {
-              std::cout << "\nRadius value is out-of bounds "
-                           "<values should be between 1 and 10>" << std::endl;
+              help_message_ += "Error:Radius value is out-of bounds "
+                               "<values should be between 1 and 10>\n";
               valid_cmds_ = false;
             }
             blur_dir_ = ConvolutionFilterMotionBlur::BlurDir::BLUR_DIR_NW_SE;
@@ -294,7 +294,7 @@ void CommandLineProcessor::ProcessCommandLine(int argc, char* argv[]) {
             i++;
           } catch (const std::exception& e) {
               valid_cmds_ = false;
-              std::cout << e.what() << std::endl;
+              help_message_ +=  e.what();
           }
         } else {valid_cmds_ = false;}
       } else {
