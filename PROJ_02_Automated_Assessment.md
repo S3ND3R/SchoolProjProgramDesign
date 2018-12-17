@@ -1,8 +1,8 @@
 ### Assessment for Project Iteration 02 - Automated (Graded By: Dan Orban)
 
-#### Total score: _75.3_ / _85_
+#### Total score: _80.5_ / _85_
 
-Run on December 14, 13:16:20 PM.
+Run on December 17, 02:02:26 AM.
 
 
 #### System Files and PROJ Directory Structure
@@ -139,39 +139,18 @@ Expected: true
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: FilterBlurRegressionTest.ImageRegressionEquality.
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = FilterBlurRegressionTest.ImageRegressionEquality
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from FilterBlurRegressionTest
-[ RUN      ] FilterBlurRegressionTest.ImageRegressionEquality
-</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: FilterBlurRegressionTest.ImageRegressionEquality.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: CommandLineProcessorTest.AcceptsSingleCorrectCommand.
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = CommandLineProcessorTest.AcceptsSingleCorrectCommand
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from CommandLineProcessorTest
-[ RUN      ] CommandLineProcessorTest.AcceptsSingleCorrectCommand
-</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: CommandLineProcessorTest.AcceptsSingleCorrectCommand.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: CommandLineProcessorTest.AcceptsMultipleCorrectCommands.
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectCommands
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from CommandLineProcessorTest
-[ RUN      ] CommandLineProcessorTest.AcceptsMultipleCorrectCommands
-</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: CommandLineProcessorTest.AcceptsMultipleCorrectCommands.
 
 
 
@@ -225,15 +204,8 @@ Note: Google Test filter = CommandLineProcessorTest.AcceptsMultipleCorrectComman
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: FilterMotionBlurRegressionTest.ImageRegressionEquality.
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEquality
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from FilterMotionBlurRegressionTest
-[ RUN      ] FilterMotionBlurRegressionTest.ImageRegressionEquality
-</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: FilterMotionBlurRegressionTest.ImageRegressionEquality.
 
 
 
@@ -317,15 +289,8 @@ Note: Google Test filter = FilterMotionBlurRegressionTest.ImageRegressionEqualit
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    timeout occured: FilterSharpenRegressionTest.ImageRegressionEquality.
-<pre>Running main() from gtest_main.cc
-Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from FilterSharpenRegressionTest
-[ RUN      ] FilterSharpenRegressionTest.ImageRegressionEquality
-</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: FilterSharpenRegressionTest.ImageRegressionEquality.
 
 
 
@@ -334,7 +299,7 @@ Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
 
 
 
-+  _12.92_ / _15_ : Fail: 86.11% of the tests passed, but the target is 100%.
++  _15_ / _15_ : Pass: 100% of the tests passed.
 
 
 ### Testing Mutants
@@ -358,8 +323,7 @@ Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
 
 #### Testing Blur Filter for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - In Mutant: The radius is 2 less than it is supposed to be.
++ Pass: At least one test failed for Blur Filter
 
 
 #### Testing Edge Detector Filter for failure
@@ -375,7 +339,7 @@ Note: Google Test filter = FilterSharpenRegressionTest.ImageRegressionEquality
 
 #### Results
 
-+  _9.38_ / _15_ : Fail: 50.0% of the tests passed, but the target is 80.0%.
++  _12.5_ / _15_ : Fail: 66.67% of the tests passed, but the target is 80.0%.
 
-#### Total score: _75.3_ / _85_
+#### Total score: _80.5_ / _85_
 
