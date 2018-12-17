@@ -15,8 +15,9 @@ Mia Command Line Processor: \ref image_tools::CommandLineProcessor <br>
 
 High-Level Design
 -----------------
-\ref page_filter_template <br>
 \ref page_imgeditor_mvc <br>
+\ref page_filter_template <br>
+\ref page_tool_ <br>
 <br>
 
 Coding style
@@ -79,6 +80,30 @@ The ImageEditor class provides the methods that power the imagetools API when us
 How to Use ImageEditor
 ----------------------
 ImageEditor provides the methods that an application calls to apply changes to the PixelBuffer. As you can see in the UML above, Mia has a declared ImageEditor data member. Mia can set, save, load, draw, and filter entirely through that instance of Image Editor.
+
+<!-- tool design -->
+\page page_tool_ Design of the Tools
+![](../img/tool_uml.png)
+Factory method
+--------------
+Tool in ImageTools relies on the factory method when constructing tool objects. All subclasses of Tool use the method CreateMask to create the FloatMatrix that controls how they affect the canvas. This method functions in the factory design method, which is a method that allows the base class to not have to specify the specific type of object being created. Instead the subclass passes their own specification to the MaskFactory that returns the appropriate mask for that subclass.
+
+```
+/** This factory is used to create masks used by image editing tools.  Some of
+ the masks are used by more than one tool. */
+class MaskFactory {
+ public:
+  static FloatMatrix* CreateConstantMask(float radius);
+
+  static FloatMatrix* CreateOvalMask(float radius, float angle_in_deg,
+                                     float ratio);
+
+  static FloatMatrix* CreateLinearFalloffMask(float radius);
+
+  static FloatMatrix* CreateBullseyeMask(float radius, float linewidth);
+};
+
+```
 
 <!--adding a filter-->
 \page page_filter Adding A Filter
